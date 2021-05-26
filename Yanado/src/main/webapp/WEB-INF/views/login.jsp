@@ -14,7 +14,7 @@
 	<input type="submit" value="login"><br>
 
 	<input type="button" value="Use Kakao Id">
-	<p>New around here?</p><a href="join">Sign up</a><br>
+	<p>New around here?</p><a href="joinForm">Sign up</a><br>
 	<a href="find">Forgot Id / password</a> 
 </form>
 

@@ -22,5 +22,10 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		update MEMINFO SET pw=#{pw} WHERE id=#{id}
 	</update>
 	
+	<select id="checkId" parameterType="String" resultType="String">
+		select 	id from MEMINFO WHERE id=#{id}
+	
+	</select>
+	
 	
 </mapper>

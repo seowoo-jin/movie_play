@@ -11,4 +11,7 @@ public interface MemberService {
 	public void join(meminfo newMember);
 	public String findId(String email);
 	public int findPw(String id, String pw);
+	public String checkId(String id);
+	
+	
 }

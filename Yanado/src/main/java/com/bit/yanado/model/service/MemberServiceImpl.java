@@ -15,10 +15,8 @@ import com.bit.yanado.model.dto.meminfo;
 @Service
 public class MemberServiceImpl implements MemberService {
 	
-	
 	@Autowired
 	public MemberMapper memberMapper;
-	
 	
 	@Override
 	public meminfo login(String id, String pw) {
@@ -26,13 +24,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.login(id, pw);
 	}
 
-
 	@Override
 	public void join(meminfo newMember) {
 		// TODO Auto-generated method stub
 		memberMapper.join(newMember);
 	}
-
 
 	@Override
 	public String findId(String email) {
@@ -40,12 +36,17 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.findId(email);
 	}
 
-
 	@Override
 	public int findPw(String id, String pw) {
 		// TODO Auto-generated method stub
 		memberMapper.findPw(id, pw);
 		return 1;
+	}
+
+	@Override
+	public String checkId(String id) {
+		// TODO Auto-generated method stub
+		return memberMapper.checkId(id);
 	}
 	
 

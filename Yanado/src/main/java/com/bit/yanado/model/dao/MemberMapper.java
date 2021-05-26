@@ -15,4 +15,5 @@ public interface MemberMapper {
 	public void join(meminfo newMember);
 	public String findId(String email);
 	public void findPw(@Param("id") String id,@Param("pw") String pw);
+	public String checkId(String id);
 }

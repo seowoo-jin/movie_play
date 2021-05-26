@@ -2,6 +2,7 @@ package com.bit.yanado.controller;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 import java.util.Map;
 
@@ -23,6 +24,10 @@ import com.bit.yanado.model.dto.EmailDTO;
 import com.bit.yanado.model.dto.meminfo;
 import com.bit.yanado.model.service.EmailService;
 import com.bit.yanado.model.service.MemberService;
+
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
+import com.twilio.type.PhoneNumber;
 
 @Controller
 @RequestMapping(value="/")
@@ -56,22 +61,54 @@ public class MainController {
 	}
 	
 	
-	@RequestMapping(value="joinFrom")
-	public String joinFrom() {
-		
-		
+	// 회원가입 
+	@RequestMapping(value="joinForm")
+	public String joinForm() {
 		return "join";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="checkId")
+	public String checkId(String id) {
+		String isId = memberService.checkId(id);
+		
+		return isId;
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String join( Model model, meminfo newMember) {
-		
 		memberService.join(newMember);
-		
-		return "main";
+		return "redirect:/";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="checkPhone")
+	public String checkPhone(String phoneNum) {
+		// id : swjin0203@gmail.com pw:qlalfqjsghspwkfl(비밀번호네자리) 
+		// sid : ACd61c341ed4e22090247d3577a1ca91e3
+		// tocken : 03848ab1a1bb7d1dc7cc60d7b79f098f
+		//휴대폰 인증번호 생성 
+		
+		int authNum = (int) ((Math.random() * (999999 - 100000 + 1)) + 100000);
+		    //전송 메시지 
+		String authMsg = "The authentication number is [" + authNum + "]" ;
+		
+		
+		Twilio.init("ACd61c341ed4e22090247d3577a1ca91e3", "03848ab1a1bb7d1dc7cc60d7b79f098f");
+		
+		phoneNum = "+82" + phoneNum.substring(1, phoneNum.length());
+		System.out.println(phoneNum);
+		Message message = Message
+		        .creator(new PhoneNumber(phoneNum), // to
+		                new PhoneNumber("+12542790923"), // from (가입하고발급받은 번호) 
+		                authMsg) //보낼 내용 
+		        .create();
+		
+		System.out.println(message.getSid());
+		return Integer.toString(authNum);
+	}
 	
+	// 아이디 비밀번호 찾기  
 	@RequestMapping(value="find")
 	public String find() {
 		return "find";
