@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.yanado.model.dao.MemberMapper">
+		
+	<select id="login"	parameterType="map"  resultType="com.bit.yanado.model.dto.meminfo"	>
+		select * from MEMINFO where id=#{id} and pw=#{pw}
+	</select>
+	
+	<insert id="join"	parameterType="meminfo"	>
+		INSERT INTO MEMINFO(id, pw, name, tel, email, joindate, lastlogindate,phAuthNum) 
+		VALUES(#{id},#{pw},#{name},#{tel},#{email},SYSDATE,SYSDATE,1234)
+	</insert>
+	
+	<select id="findId" parameterType="String" resultType="String">
+		select id from MEMINFO WHERE email=#{email}
+	</select>
+	
+	<update id="findPw" parameterType="map" >
+		update MEMINFO SET pw=#{pw} WHERE id=#{id}
+	</update>
+	
+	
+</mapper>
