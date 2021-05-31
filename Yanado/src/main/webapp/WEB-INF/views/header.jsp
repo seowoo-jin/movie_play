@@ -1,29 +1,41 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false"%>
 <html>
 <head>
-	<title>Header</title>
+<title>Header</title>
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form action="login" method="post">
-<table style="border: 1px solid">
+	<form action="${pageContext.request.contextPath}/login" method="post">
+		<table class="headerClass">
+			<tr>
+				<td>
+					<img src="${pageContext.request.contextPath}/resources/ci/yanado_brand.png" align="left">
+				</td>
+				<td class="innerTable">
+					<input class="headSearch" type="text"> 
+					<input class="headBtn" type="button" value="Search">
+				</td>
+				<td class="innerTable">
+					<c:if test="${isLogin eq 'N' }">
+						<input class="headBtn" type="submit" value="Login"">
+					</c:if> 
+					<c:if test="${isLogin eq 'Y' }">
+						<input class="headBtn" type="submit" value="myPage" formaction="${pageContext.request.contextPath}/member/mypage" />
+						<input class="headBtn" type="submit" value="log out" formaction="${pageContext.request.contextPath}/logout" />
+					</c:if>
+					<c:if test="${isLogin eq 'A' }">
+						<input class="headBtn" type="submit" value="admin" formaction="${pageContext.request.contextPath}/admin/adminpage" />
+						<input class="headBtn" type="submit" value="log out" formaction="${pageContext.request.contextPath}/logout" />
+					</c:if>
+				</td>
+			</tr>
+		</table>
+	</form>
 
-<tr style="border: 1px solid">
-	<td style="border: 1px solid">
-	<img src="resources/ci/yanado_brand.png" align="left">
-	</td>
-	<td>
-	<input type="text">
-	<input type="button" value="Search">
-	</td>
-	<td style="border: 1px solid">
-	<input type="submit" value="Login">
-	</td>
-</tr>
-
-</table>
-</form>
-
+	<script type="text/javascript">
+		
+	</script>
 
 </body>
 </html>

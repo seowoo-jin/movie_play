@@ -27,5 +27,10 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	
 	</select>
 	
+	<update id="updateMember" parameterType="meminfo">
+		update MEMINFO SET pw=#{pw},isPay=#{isPay},tel=#{tel},email=#{email},emailAuthNum=#{emailAuthNum},
+		defaultCap=#{defaultCap},phAuthNum=#{phAuthNum}  WHERE id=#{id}
+	</update>
+	
 	
 </mapper>

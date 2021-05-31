@@ -39,7 +39,12 @@
 		    <version>4.4.10</version>
 		</dependency>	
 		
-		
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.11.901</version>
+        </dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

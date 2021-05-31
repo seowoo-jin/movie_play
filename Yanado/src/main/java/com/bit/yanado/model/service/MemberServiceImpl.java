@@ -48,6 +48,12 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberMapper.checkId(id);
 	}
+
+	@Override
+	public void updateMember(meminfo Member) {
+		// TODO Auto-generated method stub
+		memberMapper.updateMember(Member);
+	}
 	
 
 }

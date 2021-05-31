@@ -4,5 +4,10 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bit.yanado.model.dao.AdminMapper">
-
+	
+	<select id="login" parameterType="map" resultType="com.bit.yanado.model.dto.admininfo">
+		select * from ADMININFO where adminid=#{id} and adminpw=#{pw}
+	</select>
+	
+	
 </mapper>

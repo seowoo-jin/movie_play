@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.yanado.model.dao.MemberMapper;
 import com.bit.yanado.model.dto.EmailDTO;
+import com.bit.yanado.model.dto.admininfo;
 import com.bit.yanado.model.dto.meminfo;
+import com.bit.yanado.model.service.AdminService;
 import com.bit.yanado.model.service.EmailService;
 import com.bit.yanado.model.service.MemberService;
 
@@ -33,35 +36,80 @@ import com.twilio.type.PhoneNumber;
 @RequestMapping(value="/")
 public class MainController {
 
-	
-	
-	
 	@Autowired
 	public MemberService memberService;
 	
 	@Autowired
     private EmailService mailSender;
 	
-	@RequestMapping(value="/")
-	public String main() {
-		return "main";
-	}
+	@Autowired
+	private AdminService adminService;
 	
+	@RequestMapping(value="/")
+	public String main(HttpSession session,Model model) {
+		meminfo member = (meminfo) session.getAttribute("member");
+		admininfo admin = (admininfo) session.getAttribute("admin");
+		if(member != null) {
+			System.out.println(member.getIsPay());
+			model.addAttribute("isLogin","Y");
+			return (member.getIsPay().equals("Y"))?"main":"redirect:pay";
+		}else {
+			if(admin != null) {
+				model.addAttribute("isLogin","A");
+				return "main";
+				
+			}else {
+				model.addAttribute("isLogin","N");
+				return "main";
+			}
+			
+		}
+		
+	}
+	// 로그인  --------------------------------------------------------------------
 	@RequestMapping(value="login")
 	public String login() {
 		return "login";
 	}
 	
+	@SuppressWarnings("unused")
 	@RequestMapping(value="CheckLogin", method=RequestMethod.POST)
-	public String CheckLogin(meminfo newMember, Model model) {
-		
+	public String CheckLogin(meminfo newMember, Model model, HttpSession session) {
 		meminfo member = (meminfo) memberService.login(newMember.getId(), newMember.getPw());
-		System.out.println(member);
-		return "redirect:login";
+		admininfo admin = adminService.login(newMember.getId(),newMember.getPw());
+		
+		System.out.println(admin);
+		
+	
+		if(admin != null) {
+			session.setAttribute("admin", admin);
+			model.addAttribute("admin",admin);
+			return "redirect:/";
+		}else {
+			if(member != null) {
+				session.setAttribute("member", member);
+				return member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
+			}else {
+				model.addAttribute("message","Check your ID or Password.");
+				return "login";
+				}
+		}
+		
+		
+		
+	}
+	
+	@RequestMapping(value="logout", method=RequestMethod.POST)
+	public String logout(HttpSession session) {
+		System.out.println("logout");
+		System.out.println(session.getAttribute("member"));
+		session.removeAttribute("member");
+		
+		return "redirect:/";
 	}
 	
 	
-	// 회원가입 
+	// 회원가입 --------------------------------------------------------------------
 	@RequestMapping(value="joinForm")
 	public String joinForm() {
 		return "join";
@@ -78,7 +126,7 @@ public class MainController {
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String join( Model model, meminfo newMember) {
 		memberService.join(newMember);
-		return "redirect:/";
+		return "redirect:pay";
 	}
 	
 	@ResponseBody
@@ -107,8 +155,27 @@ public class MainController {
 		System.out.println(message.getSid());
 		return Integer.toString(authNum);
 	}
+	// 결제 ------------------------------------------------------------------------------------
+	@RequestMapping(value="pay")
+	public String pay() {
+		return "pay";
+	}
 	
-	// 아이디 비밀번호 찾기  
+	@RequestMapping(value="successPay")
+	public String successPay(HttpSession session) {
+		
+		meminfo member = (meminfo) session.getAttribute("member");
+		if(member!=null) {
+			member.setIsPay("Y");
+			memberService.updateMember(member);
+		}
+		
+		
+		return "redirect:/";
+	}
+	
+	
+	// 아이디 비밀번호 찾기  -----------------------------------------------------------------------
 	@RequestMapping(value="find")
 	public String find() {
 		return "find";

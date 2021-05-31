@@ -17,6 +17,7 @@
 	<p>New around here?</p><a href="joinForm">Sign up</a><br>
 	<a href="find">Forgot Id / password</a> 
 </form>
+	<p>${message }</p>
 
 </body>
 </html>

@@ -11,34 +11,34 @@
 	
 	<br>
 	<form action="join" method="post">
-	<label for="id" >ID : </label>					
-	<input type="text" id = "id" name="id">
-	<input type="button" id="idCheck" name="idCheck" value="ID check">
-	<div id="message"></div><br>       
+	  <label for="id" >ID : </label>					
+	  <input type="text" id = "id" name="id">
+	  <input type="button" id="idCheck" name="idCheck" value="ID check">
+	  <div id="message"></div><br>       
 	
-	<label for="name" >Name : </label>				
-	<input type="text" id = "name" name="name"><br>
+	  <label for="name" >Name : </label>				
+	  <input type="text" id = "name" name="name"><br>
 	
-	<label for="pw" >Password : </label>			
-	<input type="text" id = "pw" name = "pw"><br>
+	  <label for="pw" >Password : </label>			
+	  <input type="text" id = "pw" name = "pw"><br>
 	
-	<label for="checkPw" >Check PW : </label>		
-	<input type="text" id = "checkPw" name = "checkPw"><br>
-	<div id="checkPwMsg"></div>
+	  <label for="checkPw" >Check PW : </label>		
+	  <input type="text" id = "checkPw" name = "checkPw"><br>
+	  <div id="checkPwMsg"></div>
 	
-	<label for="email" >E-mail : </label>			
-	<input type="text" id = "email" name = "email"> <br>
+  	  <label for="email" >E-mail : </label>			
+	  <input type="text" id = "email" name = "email"> <br>
 	
-	<label for="phoneNum" >Tel. : </label>			
-	<input type="text" id = "tel" name = "tel">
-	<input type="button" id="phoneCheck" name="phoneCheck" value="Send Number"><br>
-	<div id="phoneMessage"></div>
+	  <label for="phoneNum" >Tel. : </label>			
+	  <input type="text" id = "tel" name = "tel">
+	  <input type="button" id="phoneCheck" name="phoneCheck" value="Send Number"><br>
+	  <div id="phoneMessage"></div>
 	
-	<label for="checkNum" >Check Tel. : </label>	<input type="text" id = "checkNum" name = "checkNum">
-	<input type="button" id="numberCheck" name="numberCheck" value="check Number"><br>
-	<div id="checkMessage"></div>
+	  <label for="checkNum" >Check Tel. : </label>	<input type="text" id = "checkNum" name = "checkNum">
+	  <input type="button" id="numberCheck" name="numberCheck" value="check Number"><br>
+	  <div id="checkMessage"></div>
 	
-	<input type="submit" value="join" id="finalBtn" name="finalBtn" disabled="disabled">
+	  <input type="submit" value="join" id="finalBtn" name="finalBtn" disabled="disabled">
 	</form>
 	
 	<script>
@@ -51,7 +51,7 @@
 		
 		function checkInput(){
 			console.log(isPossible);
-			if(isPossible>=19){
+			if(isPossible>=10){
 				console.log("running");
 				const target = document.getElementById("finalBtn");
 				target.disabled = false;
