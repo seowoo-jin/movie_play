@@ -9,5 +9,46 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		select * from ADMININFO where adminid=#{id} and adminpw=#{pw}
 	</select>
 	
+	<select id="getTag" resultType="com.bit.yanado.model.dto.tagName">
+		select * from TAGNAME
+	</select>
 	
+	<select id="getTitle" resultType="com.bit.yanado.model.dto.videotitle">
+		select * from VIDEOTITLE
+	</select>
+	
+	<insert id="insertNewTitle" parameterType="String">
+		insert into VIDEOTITLE (titleSeq, title) values (TITLE_SEQ.nextval,#{title })
+	</insert>
+	
+	<select id="newTitleSeq" parameterType="String" resultType="int">
+		select titleSeq from VIDEOTITLE where title=#{title}
+	</select>
+	
+	
+	<insert id="setTagSeq" parameterType="String">
+		insert into TAGNAME (tagnameSeq, tagName, tagCount) values (TAGNAME_SEQ.nextval, #{tag }, '0')
+	</insert>
+	
+	<select id="getTagSeq" parameterType="String" resultType="String">
+		select tagnameSeq from TAGNAME where tagName=#{tag}
+	</select>
+	
+	<insert id="setTag" parameterType="com.bit.yanado.model.dto.tag">
+		insert into TAG (tagSeq, uniqueNo, tagNameSeq) values (TAG_SEQ.nextval, #{uniqueNo}, #{tagNameSeq})
+	</insert>
+	
+	<insert id="setPost" parameterType="com.bit.yanado.model.dto.Poster">
+		insert into POSTER (posterSeq, poster, titleSeq, season) values (POSTER_SEQ.nextval, #{poster}, #{titleSeq}, #{season})
+	</insert>
+	
+	<insert id="setVideo" parameterType="com.bit.yanado.model.dto.videoinfo">
+		insert into videoinfo (uniqueNo, title, link, uploadDate, people, synop, subEng, subKor, subMix) 
+		values (#{uniqueNo},#{title},#{link} ,SYSDATE,#{people},#{synop},#{subEng},#{subKor},#{subMix})
+	</insert>
+	
+	<insert id="setTeaser" parameterType="com.bit.yanado.model.dto.Teaser">
+		insert into TEASER (teaserseq, titleseq, teaserlink, uploadDate)
+		values (TEASER_SEQ.nextval, #{titleSeq}, #{teaserLink},SYSDATE)
+	</insert>
 </mapper>

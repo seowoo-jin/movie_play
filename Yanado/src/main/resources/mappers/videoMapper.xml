@@ -4,5 +4,13 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bit.yanado.model.dao.VideoMapper">
-
+	
+	<select id="getPost" resultType="com.bit.yanado.model.dto.Poster">
+		select * from POSTER
+	</select>
+	
+	<select id="getTeaserVid" resultType="com.bit.yanado.model.dto.Teaser">
+		select * from TEASER
+	</select>
+	
 </mapper>

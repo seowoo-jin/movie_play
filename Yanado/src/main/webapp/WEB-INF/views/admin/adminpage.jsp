@@ -65,7 +65,7 @@
 			xhttp.send();
 		}
 		
-		
+		/* 파일을 선택하면 비동기 방식으로 filePath 메소드를 실행시켜 선택된 파일의 경로를 가져온다. */
 		function FilePath(event){
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
@@ -76,9 +76,34 @@
 			
 		}
 
-
-
+		/* 제목을 선택했을때 실행되는 함수  */
+		function selectedTitle(){
+			var title = document.getElementById("selectTitle");    // 드롭박스에서 선택했을때 드롭박스 정보를 가져온다.
+			var text= title.options[title.selectedIndex].text;		// 선택된 아이템의 이름을 가져온다. 
+			var value= title.options[title.selectedIndex].value;	// 선택된 아이템의 고유번호를 가져온다. 
+			
+			document.getElementById("title").value=text;   			// title란에 선택된 이름을 넣는다.
+			document.getElementById("titleSeq").value=value;		// 히든 란에 고유번호를 넣는다.
+		}
+		
+		/* 새로운 타이틀을 넣기위해 체크박스를 선택하면 실행된다. */
+		function newTitleAval(){
+			document.getElementById("title").value="";			// 타이틀란에 새로 적을 수 있게 빈칸으로 만들어 준다.
+			document.getElementById("titleSeq").value = 0;		// 고유번호는 0으로 넘겨줘서 새로운 타이틀이라는 것을 알려준다.
+		}
 		 
+		/* 테그를 선택할 때마다 실행시킨다. */
+		function selectedTag(){
+			var tag = document.getElementById("selectTag");		// 드롭박스 정보를 가져온다.
+			var text= tag.options[tag.selectedIndex].text;		// 선택된 아이템의 텍스트 정보를 가져온다.
+			var value= tag.options[tag.selectedIndex].value;	// 선택된 아이템의 값을 가져온다.
+			
+			if(value != 99999){			// value가 99999면 새로운 값을 넣어 주는 것이다. 그렇지 않은 경우는 기존의 값을 '&'다음에 적어준다.
+				var temp = document.getElementById("tag").value;
+				document.getElementById("tag").value = temp + '&' + text;
+			}
+			
+		}
 
 		
 	</script>

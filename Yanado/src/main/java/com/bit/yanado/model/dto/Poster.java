@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Poster {
 	
 	private int posterSeq;
-	private  byte[] poster;
+	private String poster;
 	private int titleSeq;
 	private int season;
 	public int getPosterSeq() {
@@ -14,10 +14,10 @@ public class Poster {
 	public void setPosterSeq(int posterSeq) {
 		this.posterSeq = posterSeq;
 	}
-	public byte[] getPoster() {
+	public String getPoster() {
 		return poster;
 	}
-	public void setPoster(byte[] poster) {
+	public void setPoster(String poster) {
 		this.poster = poster;
 	}
 	public int getTitleSeq() {
@@ -34,7 +34,7 @@ public class Poster {
 	}
 	@Override
 	public String toString() {
-		return "Poster [posterSeq=" + posterSeq + ", poster=" + Arrays.toString(poster) + ", titleSeq=" + titleSeq
+		return "Poster [posterSeq=" + posterSeq + ", poster=" +poster + ", titleSeq=" + titleSeq
 				+ ", season=" + season + "]";
 	}
 	

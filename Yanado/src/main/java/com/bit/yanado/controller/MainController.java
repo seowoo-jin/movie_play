@@ -4,6 +4,8 @@ import java.io.IOException;
 
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -22,12 +24,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.yanado.model.dao.MemberMapper;
 import com.bit.yanado.model.dto.EmailDTO;
+import com.bit.yanado.model.dto.Poster;
+import com.bit.yanado.model.dto.Teaser;
 import com.bit.yanado.model.dto.admininfo;
 import com.bit.yanado.model.dto.meminfo;
 import com.bit.yanado.model.service.AdminService;
 import com.bit.yanado.model.service.EmailService;
 import com.bit.yanado.model.service.MemberService;
-
+import com.bit.yanado.model.service.VideoService;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
@@ -45,6 +49,9 @@ public class MainController {
 	@Autowired
 	private AdminService adminService;
 	
+	@Autowired
+	private VideoService videoService;
+	
 	@RequestMapping(value="/")
 	public String main(HttpSession session,Model model) {
 		meminfo member = (meminfo) session.getAttribute("member");
@@ -52,6 +59,22 @@ public class MainController {
 		if(member != null) {
 			System.out.println(member.getIsPay());
 			model.addAttribute("isLogin","Y");
+			
+			List<Poster> posters = videoService.getPost();
+			List<String> temp = new ArrayList<String>();
+			String tempSeason;
+			for(int i=0;i<posters.size();i++) {
+				tempSeason = posters.get(i).getTitleSeq()+String.format("%02d", posters.get(i).getSeason());
+				temp.add(tempSeason); 
+			}
+			model.addAttribute("vidSeason",temp);
+			model.addAttribute("posters", posters);
+			
+			
+			Teaser teaserVid = videoService.getTeaserVid();
+			model.addAttribute("teaserVid", teaserVid);
+			
+			
 			return (member.getIsPay().equals("Y"))?"main":"redirect:pay";
 		}else {
 			if(admin != null) {
@@ -104,7 +127,7 @@ public class MainController {
 		System.out.println("logout");
 		System.out.println(session.getAttribute("member"));
 		session.removeAttribute("member");
-		
+		session.removeAttribute("admin");
 		return "redirect:/";
 	}
 	

@@ -14,33 +14,63 @@
 
 <form action="${pageContext.request.contextPath}/admin/videoUpload" method="get">
 
-	<label for="title">Name : </label><input type="text" id="title" name="title"><br>
+	<label for="title">Title : </label><input type="text" id="title" name="title">
+	<select id="selectTitle" name="selectTitle" onchange="selectedTitle()">
+		<option value=0>제목 선택</option>
+		<c:forEach items="${movieTitle }" var="movieTitle">
+			<option value="${movieTitle.titleSeq }">${movieTitle.title }</option>
+		</c:forEach>
+	</select>
+	<input type='checkbox' id="titleManual" name="titleManual" onClick="newTitleAval()" >영상 제목을 직접 입력
+	<input type='hidden' id="titleSeq" name="titleSeq" >
+	<br>
+	
+	<label for="season">season : </label><input type="text" id="season" name="season" value="00">
+	<label for="episode">episode : </label><input type="text" id="episode" name="episode" value="00">
+	<br>
+	
 	<label for="link">File : </label>
-	<input type="text" id="link" name="link">
+	<input type="text" id="link" name="link" readonly="readonly">
 	<input type="button" id="linkFile" value="Files" onClick="FilePath('link');return false;"> 
 	<br>
 	
+	
+	<label for="tag">Tag : </label><input type="text" id="tag" name="tag">
+	<select id="selectTag" name="selectTag" onchange="selectedTag()">
+		<option value=0>테그 입력</option>
+		<c:forEach items="${tagName }" var="tag">
+			<option value="${tag.tagNameSeq }">${tag.tagName }</option>
+		</c:forEach>
+		<option value=99999>직접 입력</option>
+	</select>
+	<br>
+	
 	<label for="myPoster">Poster : </label>
-	<input type="text" id="posterLink" name="posterLink">
-	<input type="button" id="posterLinkFile" value="Files" onClick="FilePath('posterLink');return false;">
+	<input type="text" id="poster" name="poster">
+	<input type="button" id="posterFile" value="Files" onClick="FilePath('poster');return false;">
+	<br>
+	
+	<label for="teaser">Teaser : </label>
+	<input type="text" id="teaserLink" name="teaserLink">
+	<input type="button" id="teaserLinkFile" value="Files" onClick="FilePath('teaserLink');return false;">
 	<br>
 	
 	<label for="people">People : </label><input type="text" id="people" name="people"><br>
 	<label for="synop">Synop : </label><textarea id="synop" name="synop"></textarea><br>
 	
-	<label for="subEng">English Subtitle File :</label><input type="text" id="subEng" name="subEng">
+	<label for="subEng">English Subtitle File :</label><input type="text" id="subEng" name="subEng" readonly="readonly">
 	<input type="button" id="subEngFile" onchange="FilePath('subEng')" value="Files" onClick="FilePath('subEng');return false;">
 	<br>
 	
-	<label for="subKor">Korean Subtitle File :</label><input type="text" id="subKor" name="subKor">
+	<label for="subKor">Korean Subtitle File :</label><input type="text" id="subKor" name="subKor" readonly="readonly">
 	<input type="button" id="subKorFile" onchange="FilePath('subKor')" value="Files" onClick="FilePath('subKor');return false;">
 	<br>
 	
-	<label for="subMix">Mix Subtitle File :</label><input type="text" id="subMix" name="subMix">
+	<label for="subMix">Mix Subtitle File :</label><input type="text" id="subMix" name="subMix" readonly="readonly">
 	<input type="button" id="subMixFile" onchange="FilePath('subMix')" value="Files" onClick="FilePath('subMix');return false;">
 	<br>
 	
-	<input type="text" value="${pageContext.request.contextPath}">
+	
 	<input type="submit" value="Upload">
 	
 </form>

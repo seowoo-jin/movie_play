@@ -7,12 +7,28 @@ public class videoinfo {
 	private int uniqueNo;
 	private  String title;
 	private  String link;
+	private  int season;
+	private  int episode;
 	private  Date uploadDate;
 	private  String people;
 	private  String synop;
 	private  String subEng;
 	private  String subKor;
 	private  String subMix;
+	
+	
+	public int getSeason() {
+		return season;
+	}
+	public void setSeason(int season) {
+		this.season = season;
+	}
+	public int getEpisode() {
+		return episode;
+	}
+	public void setEpisode(int episode) {
+		this.episode = episode;
+	}
 	public int getUniqueNo() {
 		return uniqueNo;
 	}
