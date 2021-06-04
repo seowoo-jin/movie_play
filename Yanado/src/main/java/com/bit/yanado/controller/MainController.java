@@ -17,10 +17,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.bit.yanado.model.dao.MemberMapper;
 import com.bit.yanado.model.dto.EmailDTO;
@@ -71,6 +73,7 @@ public class MainController {
 			model.addAttribute("posters", posters);
 			
 			
+			
 			Teaser teaserVid = videoService.getTeaserVid();
 			model.addAttribute("teaserVid", teaserVid);
 			
@@ -85,10 +88,16 @@ public class MainController {
 				model.addAttribute("isLogin","N");
 				return "main";
 			}
-			
 		}
-		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="getEpisode", method=RequestMethod.POST)
+	public List<String> getEpisode(Model model, String titleSeason) {
+		return videoService.getEpisode(titleSeason);
+	}
+	
+	
 	// 로그인  --------------------------------------------------------------------
 	@RequestMapping(value="login")
 	public String login() {
@@ -180,7 +189,7 @@ public class MainController {
 	}
 	// 결제 ------------------------------------------------------------------------------------
 	@RequestMapping(value="pay")
-	public String pay() {
+	public String pay(HttpSession session) {
 		return "pay";
 	}
 	
@@ -188,6 +197,7 @@ public class MainController {
 	public String successPay(HttpSession session) {
 		
 		meminfo member = (meminfo) session.getAttribute("member");
+		System.out.println(member);
 		if(member!=null) {
 			member.setIsPay("Y");
 			memberService.updateMember(member);

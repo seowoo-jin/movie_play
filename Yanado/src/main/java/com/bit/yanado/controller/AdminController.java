@@ -82,6 +82,7 @@ public class AdminController {
 			*/
 			
 			int titleSeq = videotitle.getTitleSeq();
+			
 			if(videotitle.getTitleSeq() == 0) {				// 타이틀이 없는 새로운 타이틀이면 번호를 만들어 줘야한다.
 				titleSeq = adminService.newTitleSeq(videotitle.getTitle());
 			}
@@ -94,7 +95,7 @@ public class AdminController {
 			/*
 			 * 포스터 파일을 처리하는 구간.
 			 */
-			if(poster.getPoster() != null) {
+			if(!poster.getPoster().isEmpty()) {
 				File newPoster = new File(poster.getPoster());			// 불러온 포스터 링크를 참고해 파일을 만든다.
 				String posterName = getFileName(poster.getPoster()).toString();	// 링크에서 포스터 파일 이름만따로 뺴낸다.
 				awsS3.upload(newPoster, posterName);							// 포스터 파일을 포스터 이름으로 S3에 올린다.
@@ -166,6 +167,7 @@ public class AdminController {
 		 * Teaser가 있으면 올려준다.
 		 */
 		
+		System.out.println(teaser.getTeaserLink().isEmpty());
 		if(!teaser.getTeaserLink().isEmpty()) {
 			teaser.setTitleSeq(videotitle.getTitleSeq());
 			File newTeaser = new File(teaser.getTeaserLink());

@@ -8,4 +8,5 @@ import com.bit.yanado.model.dto.Teaser;
 public interface VideoService {
 	public List<Poster> getPost();
 	public Teaser getTeaserVid();
+	public List<String> getEpisode(String titleSession);
 }

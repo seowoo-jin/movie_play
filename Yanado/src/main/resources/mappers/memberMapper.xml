@@ -27,9 +27,9 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	
 	</select>
 	
-	<update id="updateMember" parameterType="meminfo">
-		update MEMINFO SET pw=#{pw},isPay=#{isPay},tel=#{tel},email=#{email},emailAuthNum=#{emailAuthNum},
-		defaultCap=#{defaultCap},phAuthNum=#{phAuthNum}  WHERE id=#{id}
+	<update id="updateMember" parameterType="com.bit.yanado.model.dto.meminfo">
+		update MEMINFO SET pw=#{pw},isPay=#{isPay},tel=#{tel},email=#{email},
+		defaultCap=#{defaultCap}  WHERE id=#{id}
 	</update>
 	
 	

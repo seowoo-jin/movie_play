@@ -27,4 +27,11 @@ public class VideoServiceImpl implements VideoService {
 		return videoMapper.getTeaserVid();
 	}
 
+	@Override
+	public List<String> getEpisode(String titleSession) {
+		// TODO Auto-generated method stub
+		System.out.println(titleSession);
+		return videoMapper.getEpisode(titleSession);
+	}
+
 }
