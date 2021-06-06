@@ -22,11 +22,11 @@ public class AwsS3 {
 
     //Amazon-s3-sdk 
     private AmazonS3 s3Client;
-    final private String accessKey = "AKIA23QA56KEBV7YPNXE";
+    final private String accessKey = "Your Key";
 		//IAM management console에 들어가면 새 액세스 키 만들기하면 access key,비밀 액세스키 나와요
-    final private String secretKey = "8ZGjsrEb7b1+OppIskAzQ1ehggeXhCOXrwRlLPJc";
+    final private String secretKey = "Your Key";
     private Regions clientRegion = Regions.AP_NORTHEAST_2;
-    private String bucket = "swjinbucket"; //본인이 생성한 버킷 이름 
+    private String bucket = "Your name"; //본인이 생성한 버킷 이름 
 
     private AwsS3() {
         createS3Client();
