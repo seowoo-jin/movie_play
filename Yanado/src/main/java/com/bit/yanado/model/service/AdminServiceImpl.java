@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import com.bit.yanado.model.dao.AdminMapper;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Teaser;
-import com.bit.yanado.model.dto.admininfo;
-import com.bit.yanado.model.dto.tag;
-import com.bit.yanado.model.dto.tagName;
-import com.bit.yanado.model.dto.videoinfo;
-import com.bit.yanado.model.dto.videotitle;
+import com.bit.yanado.model.dto.AdminInfo;
+import com.bit.yanado.model.dto.Tag;
+import com.bit.yanado.model.dto.TagName;
+import com.bit.yanado.model.dto.VideoInfo;
+import com.bit.yanado.model.dto.VideoTitle;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -22,19 +22,19 @@ public class AdminServiceImpl implements AdminService {
 	public AdminMapper adminMapper;
 	
 	@Override
-	public admininfo login(String id, String pw) {
+	public AdminInfo login(String id, String pw) {
 		// TODO Auto-generated method stub
 		return adminMapper.login(id, pw);
 	}
 
 	@Override
-	public List<tagName> getTag() {
+	public List<TagName> getTag() {
 		// TODO Auto-generated method stub
 		return adminMapper.getTag();
 	}
 
 	@Override
-	public List<videotitle> getTitle() {
+	public List<VideoTitle> getTitle() {
 		// TODO Auto-generated method stub
 		return adminMapper.getTitle();
 	}
@@ -59,7 +59,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void setTag(tag newTeg) {
+	public void setTag(Tag newTeg) {
 		// TODO Auto-generated method stub
 		adminMapper.setTag(newTeg);
 	}
@@ -71,7 +71,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void setVideo(videoinfo video) {
+	public void setVideo(VideoInfo video) {
 		// TODO Auto-generated method stub
 		adminMapper.setVideo(video);
 	}
@@ -80,6 +80,12 @@ public class AdminServiceImpl implements AdminService {
 	public void setTeaser(Teaser teaser) {
 		// TODO Auto-generated method stub
 		adminMapper.setTeaser(teaser);
+	}
+
+	@Override
+	public void setReply(int qnaSeq, String reply, String adminWriter) {
+		// TODO Auto-generated method stub
+		adminMapper.setReply(qnaSeq, reply, adminWriter);
 	}
 
 }

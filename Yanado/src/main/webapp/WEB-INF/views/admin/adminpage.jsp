@@ -5,8 +5,8 @@
 <html>
 <head>
 
-<link href="${pageContext.request.contextPath}/resources/css/header.css"
-	rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/board.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <title>admin page</title>
 </head>
@@ -56,10 +56,13 @@
 	
 	/* ajax를 javascript로 나타낸 것 */
 		function loadDoc(event) {
-			console.log(event);
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
-					document.getElementById("article").innerHTML = this.responseText;
+				if(xhttp.readyState == 4 && xhttp.status == 200){
+					if (xhttp.responseText){
+						document.getElementById("article").innerHTML = this.responseText;
+					}
+				}
 			};
 			xhttp.open("GET", "${pageContext.request.contextPath}/admin/"+event, true);
 			xhttp.send();
@@ -102,9 +105,25 @@
 				var temp = document.getElementById("tag").value;
 				document.getElementById("tag").value = temp + '&' + text;
 			}
-			
 		}
-
+		
+		// Q&A board 
+		function accordion(event){
+			console.log("click");
+			var panel = document.getElementById("panel_"+event); //현재 아코디언의 다음노트를 가져온다. panel이 옴 
+			if (panel.style.display === "block") { //출력모드가 블럭인지 none인지 체크한다. 
+				panel.style.display = "none";
+			} else {
+				panel.style.display = "block";
+			} 
+		}
+		
+		function reply(qnaSeq){
+			var reply = document.getElementById("replyString_"+qnaSeq).value;
+			console.log(reply);
+			loadDoc("reply?qnaSeq="+qnaSeq+"&reply="+reply);  //
+		}
+		
 		
 	</script>
 </body>

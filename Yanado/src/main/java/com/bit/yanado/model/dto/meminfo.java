@@ -2,7 +2,7 @@ package com.bit.yanado.model.dto;
 
 import java.util.Date;
 
-public class meminfo {
+public class MemInfo {
 	
 	private String id;
 	private String pw;

@@ -1,6 +1,6 @@
 package com.bit.yanado.model.dto;
 
-public class bookmark {
+public class BookMark2 {
 	
 	private int bookmarkSeq;
 	private  String id;

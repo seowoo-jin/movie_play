@@ -2,7 +2,7 @@ package com.bit.yanado.model.dto;
 
 import java.util.Date;
 
-public class admininfo {
+public class AdminInfo {
 	private  int adminSeq;
 	private  String adminId;
 	private  String adminPw;

@@ -2,7 +2,7 @@ package com.bit.yanado.model.dto;
 
 import java.util.Date;
 
-public class videoinfo {
+public class VideoInfo {
 	
 	private int uniqueNo;
 	private  String title;
@@ -17,18 +17,6 @@ public class videoinfo {
 	private  String subMix;
 	
 	
-	public int getSeason() {
-		return season;
-	}
-	public void setSeason(int season) {
-		this.season = season;
-	}
-	public int getEpisode() {
-		return episode;
-	}
-	public void setEpisode(int episode) {
-		this.episode = episode;
-	}
 	public int getUniqueNo() {
 		return uniqueNo;
 	}
@@ -40,6 +28,18 @@ public class videoinfo {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public int getSeason() {
+		return season;
+	}
+	public void setSeason(int season) {
+		this.season = season;
+	}
+	public int getEpisode() {
+		return episode;
+	}
+	public void setEpisode(int episode) {
+		this.episode = episode;
 	}
 	public String getLink() {
 		return link;

@@ -5,11 +5,11 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 
 <mapper namespace="com.bit.yanado.model.dao.MemberMapper">
 		
-	<select id="login"	parameterType="map"  resultType="com.bit.yanado.model.dto.meminfo"	>
+	<select id="login"	parameterType="map"  resultType="com.bit.yanado.model.dto.MemInfo"	>
 		select * from MEMINFO where id=#{id} and pw=#{pw}
 	</select>
 	
-	<insert id="join"	parameterType="meminfo"	>
+	<insert id="join"	parameterType="com.bit.yanado.model.dto.MemInfo"	>
 		INSERT INTO MEMINFO(id, pw, name, tel, email, joindate, lastlogindate,phAuthNum) 
 		VALUES(#{id},#{pw},#{name},#{tel},#{email},SYSDATE,SYSDATE,1234)
 	</insert>
@@ -27,10 +27,38 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	
 	</select>
 	
-	<update id="updateMember" parameterType="com.bit.yanado.model.dto.meminfo">
+	<update id="updateMember" parameterType="com.bit.yanado.model.dto.MemInfo">
 		update MEMINFO SET pw=#{pw},isPay=#{isPay},tel=#{tel},email=#{email},
 		defaultCap=#{defaultCap}  WHERE id=#{id}
 	</update>
 	
+	<insert id="writeQuestion" parameterType="com.bit.yanado.model.dto.Qna">
+		insert into qna(qnaseq, title, writeDate, cont, id) 
+		values(qna_seq.nextval, #{title}, SYSDATE, #{cont}, #{id})
+	</insert>
+	
+	<select id="getAllQna" resultType="com.bit.yanado.model.dto.Qna">
+		select * from Qna
+	</select>
+	
+	<select id="getQna" parameterType="Integer" resultType="com.bit.yanado.model.dto.Qna">
+		select * from Qna where qnaseq=#{qnaSeq}
+	</select>
+	
+	<update id="updateQna" parameterType="com.bit.yanado.model.dto.Qna">
+		update Qna SET title=#{title}, cont=#{cont}, writeDate=SYSDATE where qnaSeq=#{qnaSeq}
+	</update>
+	
+	<delete id="deleteQna" parameterType="Integer">
+		delete from Qna where qnaseq=#{qnaSeq}
+	</delete>
+	
+	<select id="getQnaById" parameterType="String" resultType="com.bit.yanado.model.dto.Qna">
+		select * from Qna where id=#{id}
+	</select>
+	
+	<update id="deleteMember" parameterType="String">
+		update meminfo set isOut='1' where id=#{id}
+	</update>
 	
 </mapper>

@@ -12,6 +12,9 @@ public class Qna {
 	private  String isReply;
 	private Date replyDate;
 	private String replyAdmin;
+	private String id;
+	
+	
 	public int getQnaSeq() {
 		return qnaSeq;
 	}
@@ -60,6 +63,14 @@ public class Qna {
 	public void setReplyAdmin(String replyAdmin) {
 		this.replyAdmin = replyAdmin;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Qna [qnaSeq=" + qnaSeq + ", title=" + title + ", writeDate=" + writeDate + ", cont=" + cont + ", reply="

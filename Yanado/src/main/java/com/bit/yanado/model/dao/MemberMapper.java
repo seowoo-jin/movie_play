@@ -7,14 +7,22 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
-import com.bit.yanado.model.dto.meminfo;
+import com.bit.yanado.model.dto.MemInfo;
+import com.bit.yanado.model.dto.Qna;
 
 public interface MemberMapper {
 	
-	public meminfo login(@Param("id") String id,@Param("pw") String pw);
-	public void join(meminfo newMember);
+	public MemInfo login(@Param("id") String id,@Param("pw") String pw);
+	public void join(MemInfo newMember);
 	public String findId(String email);
 	public void findPw(@Param("id") String id,@Param("pw") String pw);
 	public String checkId(String id);
-	public void updateMember(meminfo Member);
+	public void updateMember(MemInfo Member);
+	public void writeQuestion(Qna qna);
+	public List<Qna> getAllQna();
+	public Qna getQna(int qnaSeq);
+	public void updateQna(Qna qna);
+	public void deleteQna(int qnaSeq);
+	public List<Qna> getQnaById(String id);
+	public void deleteMember(String id);
 }

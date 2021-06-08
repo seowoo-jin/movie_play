@@ -1,11 +1,13 @@
 package com.bit.yanado.controller;
 
 import java.io.File;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.swing.JFileChooser;
 
 import org.apache.ibatis.annotations.Param;
@@ -16,14 +18,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bit.yanado.model.dto.AdminInfo;
+import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.dto.Poster;
+import com.bit.yanado.model.dto.Qna;
 import com.bit.yanado.model.dto.Teaser;
-import com.bit.yanado.model.dto.tagName;
-import com.bit.yanado.model.dto.videoinfo;
-import com.bit.yanado.model.dto.videotitle;
+import com.bit.yanado.model.dto.TagName;
+import com.bit.yanado.model.dto.VideoInfo;
+import com.bit.yanado.model.dto.VideoTitle;
 import com.bit.yanado.model.service.AdminService;
 import com.bit.yanado.model.service.AwsS3;
-import com.bit.yanado.model.dto.tag;
+import com.bit.yanado.model.service.MemberService;
+import com.bit.yanado.model.dto.Tag;
 
 @Controller
 @RequestMapping(value="admin/")
@@ -34,6 +40,9 @@ public class AdminController {
 	
 	@Autowired
 	AdminService adminService;
+	
+	@Autowired
+	MemberService memberService;
 
 	@RequestMapping(value="stat")
 	public String stat() {
@@ -73,24 +82,20 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="videoUpload", method=RequestMethod.GET)
-	public String videoUpload(videoinfo videoinfo,videotitle videotitle, Poster poster, 
+	public String videoUpload(VideoInfo videoinfo,VideoTitle videotitle, Poster poster, 
 			@Param("tag") String tag, Teaser teaser) {
 		
 		if(!videoinfo.getPeople().isEmpty()) {
 			/*
 			  영상 고유(유니크) 번호를 만드는 구간.
 			*/
-			
 			int titleSeq = videotitle.getTitleSeq();
-			
 			if(videotitle.getTitleSeq() == 0) {				// 타이틀이 없는 새로운 타이틀이면 번호를 만들어 줘야한다.
 				titleSeq = adminService.newTitleSeq(videotitle.getTitle());
 			}
 			String uniqueNoStr = "" + titleSeq + String.format("%02d", videoinfo.getSeason())
 			+ String.format("%02d",videoinfo.getEpisode());				// 시즌과 에피소드를 합쳐서 유니크 넘버를 만들어준다.
 			int uniqueNo = Integer.parseInt(uniqueNoStr);				// 유니크 넘버를 숫자인 int 형으로 바꿔준다.
-			
-			
 			
 			/*
 			 * 포스터 파일을 처리하는 구간.
@@ -101,20 +106,19 @@ public class AdminController {
 				awsS3.upload(newPoster, posterName);							// 포스터 파일을 포스터 이름으로 S3에 올린다.
 		//		https://swjinbucket.s3.ap-northeast-2.amazonaws.com/
 				posterName.replace(" ", "+");						// 파일이름에 빈칸이 들어가 있으면 +로 치환해준다. -> S3에서 이런식으로 파일이 저장된다.
-				poster.setPoster("https://swjinbucket.s3.ap-northeast-2.amazonaws.com/"+posterName);	// 파일이름 앞에 버킷 주소를 적어준 다음에 넣어준다.
+				poster.setPoster("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+posterName);	// 파일이름 앞에 버킷 주소를 적어준 다음에 넣어준다.
 				poster.setTitleSeq(titleSeq);							// 영상 타이틀 시퀀스를 적어준다.
 				adminService.setPost(poster);							// 만들어진 포스터를 포스터 테이블에 넣어준다.
 			}
 			/*
 			 * 비디오 파일을 처리하는 구간.
 			 */
-			
 			File video = new File(videoinfo.getLink());				// 불러온 비디오 링크를 참고해 파일을 만든다.
 			String fileName = getFileName(videoinfo.getLink()).toString();	// 링크에서 비디오 파일 이름만 따로 뺴낸다.
 			awsS3.upload(video, fileName);									// 비디오 파일을 비디오 이름으로 S3에 올린다.
 			videoinfo.setUniqueNo(uniqueNo);
 			fileName.replace(" ", "+");	
-			videoinfo.setLink("https://swjinbucket.s3.ap-northeast-2.amazonaws.com/"+fileName);
+			videoinfo.setLink("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+fileName);
 			
 			/*
 			 * 자막 처리하는 구간.
@@ -123,7 +127,7 @@ public class AdminController {
 				File subTitle = new File(videoinfo.getSubEng());
 				String tempName = getFileName(videoinfo.getSubEng()).toString();
 				tempName.replace(" ", "+");	
-				videoinfo.setSubEng("https://swjinbucket.s3.ap-northeast-2.amazonaws.com/"+tempName);
+				videoinfo.setSubEng("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+tempName);
 				awsS3.upload(subTitle, tempName);	
 			}
 			
@@ -131,7 +135,7 @@ public class AdminController {
 				File subTitle = new File(videoinfo.getSubEng());
 				String tempName = getFileName(videoinfo.getSubKor()).toString();
 				tempName.replace(" ", "+");	
-				videoinfo.setSubEng("https://swjinbucket.s3.ap-northeast-2.amazonaws.com/"+tempName);
+				videoinfo.setSubEng("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+tempName);
 				awsS3.upload(subTitle, tempName);
 			}
 			
@@ -139,7 +143,7 @@ public class AdminController {
 				File subTitle = new File(videoinfo.getSubEng());
 				String tempName = getFileName(videoinfo.getSubMix()).toString();
 				tempName.replace(" ", "+");	
-				videoinfo.setSubEng("https://swjinbucket.s3.ap-northeast-2.amazonaws.com/"+tempName);
+				videoinfo.setSubEng("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+tempName);
 				awsS3.upload(subTitle, tempName);
 			}
 			System.out.println(videoinfo);
@@ -156,7 +160,7 @@ public class AdminController {
 			}
 			
 			for(int i=0; i<tempTag.size();i++) {				// 테그를 리스트로 옮긴뒤 빈 테그를 생성해서 영상 고유번호와 테그번호를 지정해서 테그 테이블에 삽입한다.
-				tag newTag = new tag();
+				Tag newTag = new Tag();
 				newTag.setUniqueNo(uniqueNo);					// 테그에 영상 고유번호를 넣는다.
 				newTag.setTagNameSeq(adminService.getTagSeq(tempTag.get(i)));	// 테그에 테그고유번호를 넣는다. 테그 고유번호가 없는 테그면 새로 생성해서 넣는다.
 				adminService.setTag(newTag);					// 입력된 테그를 테그 테이블에 넣어준다.
@@ -174,14 +178,9 @@ public class AdminController {
 			String tempName = "teaser"+getFileName(teaser.getTeaserLink()).toString();
 			System.out.println(tempName);
 			awsS3.upload(newTeaser, tempName);
-			teaser.setTeaserLink("https://swjinbucket.s3.ap-northeast-2.amazonaws.com/"+tempName);
+			teaser.setTeaserLink("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+tempName);
 			adminService.setTeaser(teaser);
 		}
-		
-		
-		
-		
-		
 		
 		
 		return "redirect: adminpage";
@@ -217,9 +216,30 @@ public class AdminController {
 		return "admin/member";
 	}
 	
+	// Q&A 글 보기   -------------------------------------------------------------------------
 	@RequestMapping(value="qna")
-	public String qna() {
+	public String qna(Model model, HttpSession session) {
+		List<Qna> allQna = memberService.getAllQna();
+		model.addAttribute("allQna",allQna);
+		return "admin/qna";
+	}
+	
+	// Q&A 글 삭제  -------------------------------------------------------------------------
+	@RequestMapping(value="qna/deleteQna")
+	public String deleteQna(int qnaSeq){
+		memberService.deleteQna(qnaSeq);
+		return "admin/qna";
+	}
 		
+	
+	// Q&A 답변 쓰기  -------------------------------------------------------------------------
+	@RequestMapping(value="reply")
+	public String reply(@Param("qnaSeq") int qnaSeq,@Param("reply")  String reply, HttpSession session) {
+		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
+		admin.getAdminName();
+		System.out.println(qnaSeq);
+		System.out.println(reply);
+		adminService.setReply(qnaSeq, reply, admin.getAdminName());;
 		return "admin/qna";
 	}
 }

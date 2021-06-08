@@ -2,7 +2,7 @@ package com.bit.yanado.model.dto;
 
 import java.util.Date;
 
-public class watchingreco {
+public class WatchingReco {
 	
 	private int historySeq;
 	private String id;

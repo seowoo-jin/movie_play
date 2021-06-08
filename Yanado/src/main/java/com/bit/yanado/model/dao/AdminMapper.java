@@ -6,24 +6,25 @@ import org.apache.ibatis.annotations.Param;
 
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Teaser;
-import com.bit.yanado.model.dto.admininfo;
-import com.bit.yanado.model.dto.tag;
-import com.bit.yanado.model.dto.tagName;
-import com.bit.yanado.model.dto.videoinfo;
-import com.bit.yanado.model.dto.videotitle;
+import com.bit.yanado.model.dto.AdminInfo;
+import com.bit.yanado.model.dto.Tag;
+import com.bit.yanado.model.dto.TagName;
+import com.bit.yanado.model.dto.VideoInfo;
+import com.bit.yanado.model.dto.VideoTitle;
 
 public interface AdminMapper {
 	
-	public admininfo login(@Param("id") String id,@Param("pw") String pw);
-	public List<tagName> getTag();
-	public List<videotitle> getTitle();
+	public AdminInfo login(@Param("id") String id,@Param("pw") String pw);
+	public List<TagName> getTag();
+	public List<VideoTitle> getTitle();
 	public void insertNewTitle(String title);
 	public int newTitleSeq(String title);
 	public String getTagSeq(String tag);
 	public void setTagSeq(String tag);
-	public void setTag(tag newTeg);
+	public void setTag(Tag newTeg);
 	public void setPost(Poster poster);
-	public void setVideo(videoinfo video);
+	public void setVideo(VideoInfo video);
 	public void setTeaser(Teaser teaser);
+	public void setReply(@Param("qnaSeq") int qnaSeq,@Param("reply")  String reply,@Param("adminWriter")  String adminWriter);
 	
 }

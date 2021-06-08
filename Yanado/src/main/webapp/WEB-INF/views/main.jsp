@@ -13,8 +13,7 @@
 	</style>
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon-16x16.png">
 
-<link href="resources/css/poster.css"
-	rel="stylesheet" type="text/css">
+<link href="resources/css/poster.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -48,6 +47,9 @@
 						<div class="posterItem" >
 							<img src="${posters.poster }" class="posterImg" id="posterClk" onclick="getEpsoideFcn('${posters.titleSeq}' + '${posters.season }')">
 							<div class="selectEpDiv" id='${posters.titleSeq}${posters.season }' ></div>
+							
+							<!-- <a href='http://localhost:8085/yanado/video/play?trackId=100000101' target="_blank">AAAA</a> -->
+							
 						</div>
 					</c:forEach>
 			</div>
@@ -71,13 +73,13 @@ var beforeDiv;
 			var temp = document.getElementById(beforeDiv);
 			document.getElementById(beforeDiv).removeChild(temp.firstChild);
 		}
-		var temp = event;					// 이벤트에 선택된 타이틀과 시즌이 들어온다.
-		if (temp.length<7){					// 시즌이 한자리인경우 시즌앞에 0을 붙혀준다.
-			var season = temp[5];
-			temp = temp.substring(0,5) + '0' + temp.substring(5+1);
-			temp = temp + season;
+		var tempSession = event;					// 이벤트에 선택된 타이틀과 시즌이 들어온다.
+		if (tempSession.length<7){					// 시즌이 한자리인경우 시즌앞에 0을 붙혀준다.
+			var season = tempSession[5];
+			tempSession = tempSession.substring(0,5) + '0' + tempSession.substring(5+1);
+			season = tempSession + season;
 		}
-		episodeFromCont(temp,event);		// 7자리를 맞춘 뒤 컨트롤러와 연결된 Ajax로 보내준다.
+		episodeFromCont(season,event);		// 7자리를 맞춘 뒤 컨트롤러와 연결된 Ajax로 보내준다.
 	}
 	
 	var episode;  /* episode를 가지고 있는 변수. */
@@ -100,44 +102,48 @@ var beforeDiv;
 	}
 	
 	function makeSelection(data,event,titleSeason){				// 에피소드를 받아서 셀렉트(드롭박스)를 만드는 함수.
-		var select = document.createElement("select");			// select 엘리먼트를 만든다.
-		
-		// 에피소드가 없는 영화인 경우에는 바로 재생 버튼이 보일수 있도록 한다.
-		/* var button = document.createElement("input");
-        
-		button.type = "button";
-		button.value = ""; // Really? You want the default value to be the type string?
-		button.name = "backToMainBtn"; // And the name too?
-		button.addEventListener('click', function() {
-        	document.getElementById("selectedVideo").style.display="none";
-        }, false); */
-        
-		select.name="episodeSelection";							// select 이름을 넣는다.
-		select.id="episodeSelection";							// select 아이디를 넣는다.
-		select.className="selectEp";							// 클래스 이름을 정해준다.
-		
-		select.style.width="100%";
-		select.addEventListener('change', function (event) { 
-			openVideo(this.value + this.options[this.selectedIndex].text)	// this.value는 지금 선택된 에피스드를 가져온다.;; this.selectedIndex로 선택된 인덱스위치의 options 텍스트를 구한다.
-		}, false);
-		
-		var firstOption = document.createElement("option");
-		firstOption.value="none";
-		firstOption.text="에피소트 선택";
-		select.appendChild(firstOption);				
-		for(var j=0; j<data.length; j++){						// 받아온 에피소드 수 만큼 반복해주면서 option을 생성한다.
-			var option = document.createElement("option");
-			option.value = titleSeason;								// option 값을 넣어준다.
-			option.text = data[j];								// 표시될 옵션 텍스트를 넣어준다.
-			select.appendChild(option);							// 만들어진 옵션을 셀렉트 밑에 넣어준다.
-		}
-		document.getElementById(event).appendChild(select);
+        if (data==0){
+        	// 에피소드가 없는 영화인 경우에는 바로 재생 버튼이 보일수 있도록 한다.
+    		var button = document.createElement("input");
+    		button.type = "button";
+    		button.value = "Play"; // Really? You want the default value to be the type string?
+    		button.name = "Play"; // And the name too?
+    		button.style.width="100%";
+    		button.style.height="60px";
+    		button.addEventListener('click', function() {
+    			openVideo(titleSeason+data);
+            }, false);
+    		document.getElementById(event).appendChild(button);
+    		
+        }else{
+        	var select = document.createElement("select");			// select 엘리먼트를 만든다.
+        	select.name="episodeSelection";							// select 이름을 넣는다.
+    		select.id="episodeSelection";							// select 아이디를 넣는다.
+    		select.className="selectEp";							// 클래스 이름을 정해준다.
+    		select.style.width="100%";
+    		select.addEventListener('change', function (event) { 
+    			openVideo(this.value + this.options[this.selectedIndex].text)	// this.value는 지금 선택된 에피스드를 가져온다.;; this.selectedIndex로 선택된 인덱스위치의 options 텍스트를 구한다.
+    		}, false);
+    		
+    		var firstOption = document.createElement("option");
+    		firstOption.value="none";
+    		firstOption.text="에피소트 선택";
+    		select.appendChild(firstOption);				
+    		for(var j=0; j<data.length; j++){						// 받아온 에피소드 수 만큼 반복해주면서 option을 생성한다.
+    			var option = document.createElement("option");
+    			option.value = titleSeason;								// option 값을 넣어준다.
+    			option.text = data[j];								// 표시될 옵션 텍스트를 넣어준다.
+    			select.appendChild(option);							// 만들어진 옵션을 셀렉트 밑에 넣어준다.
+    		}
+    		document.getElementById(event).appendChild(select);
+        }
 		beforeDiv=event;
 	} 
 	
-	
 	function openVideo(videoNo){					// 이 함수에서 비디오 플레이 화면으로 넘어간다.
-		alert(videoNo);
+		window.location.href="${pageContext.request.contextPath}/video/play?trackId="+videoNo;
+		/* windowObjectReference = window.open("${pageContext.request.contextPath}/video/play?trackId="+videoNo, 
+				"_blank"); */
 	}
 	
 </script>

@@ -2,7 +2,7 @@ package com.bit.yanado.model.dto;
 
 import java.util.Date;
 
-public class paymentinfo {
+public class PaymentInfo {
 
 	private String id;
 	private int cardNum;

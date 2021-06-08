@@ -1,6 +1,6 @@
 package com.bit.yanado.model.dto;
 
-public class videotitle {
+public class VideoTitle {
 	
 	private int titleSeq;
 	private  String title;

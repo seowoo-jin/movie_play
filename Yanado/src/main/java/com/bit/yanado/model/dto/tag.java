@@ -1,6 +1,6 @@
 package com.bit.yanado.model.dto;
 
-public class tag {
+public class Tag {
 	private  int tagSeq;
 	private int uniqueNo;
 	private  int tagNameSeq;

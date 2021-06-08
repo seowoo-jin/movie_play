@@ -16,4 +16,30 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	<select id="getEpisode" parameterType="String" resultType="String">
 		SELECT SUBSTR(UNIQUENO,'8','9') FROM VIDEOINFO WHERE SUBSTR(UNIQUENO,'0','7')=#{titleSession}
 	</select>
+	
+	<select id="getVideo" parameterType="Integer" resultType="com.bit.yanado.model.dto.VideoInfo">
+		SELECT * FROM VIDEOINFO WHERE UNIQUENO=#{uniqueNo}
+	</select>
+	
+	<insert id="setRecord" parameterType="map">
+		insert into watchingreco (historyseq, id, uniqueno, recentpo, iswatch, recenttime) 
+		values (history_seq.nextval, #{id}, #{uniqueNo}, #{record}, 'Y', SYSDATE)
+	</insert>
+	
+	<select id="getRecord" parameterType="map" resultType="com.bit.yanado.model.dto.WatchingReco">
+		SELECT * FROM WATCHINGRECO WHERE ID=#{id} and UNIQUENO=#{uniqueNo}
+	</select>
+	
+	<update id="modRecord" parameterType="map">
+		update watchingreco set recentpo=#{record}, recenttime=SYSDATE where historyseq = #{recoSeq}
+	</update>
+	
+	<select id="getAllRecord" parameterType="String" resultType="com.bit.yanado.model.dto.WatchingReco">
+		SELECT * FROM WATCHINGRECO WHERE ID=#{id}
+	</select>
+	
+	<select id="getPostByTitleSeason" parameterType="map" resultType="com.bit.yanado.model.dto.Poster">
+		SELECT * from POSTER where titleSeq=#{titleSeq} and Season=#{season}
+	</select>
+	
 </mapper>
