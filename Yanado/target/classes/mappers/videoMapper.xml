@@ -13,6 +13,10 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		select * from TEASER
 	</select>
 	
+	<select id="getAllVideo" resultType="com.bit.yanado.model.dto.VideoInfo">
+		select * from VIDEOINFO
+	</select>
+	
 	<select id="getEpisode" parameterType="String" resultType="String">
 		SELECT SUBSTR(UNIQUENO,'8','9') FROM VIDEOINFO WHERE SUBSTR(UNIQUENO,'0','7')=#{titleSession}
 	</select>

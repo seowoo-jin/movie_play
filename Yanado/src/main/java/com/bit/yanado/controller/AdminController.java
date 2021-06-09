@@ -2,10 +2,13 @@ package com.bit.yanado.controller;
 
 import java.io.File;
 
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.JFileChooser;
@@ -29,6 +32,7 @@ import com.bit.yanado.model.dto.VideoTitle;
 import com.bit.yanado.model.service.AdminService;
 import com.bit.yanado.model.service.AwsS3;
 import com.bit.yanado.model.service.MemberService;
+import com.bit.yanado.model.service.VideoService;
 import com.bit.yanado.model.dto.Tag;
 
 @Controller
@@ -43,6 +47,9 @@ public class AdminController {
 	
 	@Autowired
 	MemberService memberService;
+	
+	@Autowired
+	VideoService videoService;
 
 	@RequestMapping(value="stat")
 	public String stat() {
@@ -194,21 +201,34 @@ public class AdminController {
 	
 	@RequestMapping(value="video/board")
 	public String board() {
-		
 		return "admin/video/board";
 	}
 	
-	@RequestMapping(value="video/read")
-	public String read() {
-		
-		return "admin/video/read";
+	@ResponseBody
+	@RequestMapping(value="video/videoList")
+	public List<VideoInfo> videoList() {
+		List<VideoInfo> list = adminService.getAllVideo();
+		for(int i=0; i<list.size();i++) {
+			list.get(i).setSeason((list.get(i).getUniqueNo()%10000)/100);
+			list.get(i).setEpisode(list.get(i).getUniqueNo()%100);
+		}
+		return list;
 	}
 	
 	@RequestMapping(value="video/teaser")
 	public String teaser() {
-		
 		return "admin/video/teaser";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="video/teaserList")
+	public List<Teaser> teaserList() {
+		List<Teaser> list = videoService.getTeaserVid();
+		System.out.println(list.get(0).getUploadDate());
+		return list;
+	}
+	
+	
 	
 	@RequestMapping(value="member")
 	public String member() {

@@ -71,7 +71,8 @@ public class MainController {
 			}
 			model.addAttribute("vidSeason",videoSeason);
 			model.addAttribute("posters", posters);
-			Teaser teaserVid = videoService.getTeaserVid();
+			List<Teaser> teaserVids = videoService.getTeaserVid();
+			Teaser teaserVid = teaserVids.get(0);
 			model.addAttribute("teaserVid", teaserVid);
 			if(member != null) {
 				model.addAttribute("isLogin","Y");

@@ -21,4 +21,5 @@ public interface AdminService {
 	public void setVideo(VideoInfo video);
 	public void setTeaser(Teaser teaser);
 	public void setReply(int qnaSeq, String reply, String adminWriter);
+	public List<VideoInfo> getAllVideo();
 }

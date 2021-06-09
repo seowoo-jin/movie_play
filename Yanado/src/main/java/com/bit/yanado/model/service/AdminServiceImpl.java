@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.yanado.model.dao.AdminMapper;
+import com.bit.yanado.model.dao.VideoMapper;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Teaser;
 import com.bit.yanado.model.dto.AdminInfo;
@@ -20,6 +21,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired
 	public AdminMapper adminMapper;
+	
+	@Autowired
+	public VideoMapper videoMapper;
 	
 	@Override
 	public AdminInfo login(String id, String pw) {
@@ -86,6 +90,12 @@ public class AdminServiceImpl implements AdminService {
 	public void setReply(int qnaSeq, String reply, String adminWriter) {
 		// TODO Auto-generated method stub
 		adminMapper.setReply(qnaSeq, reply, adminWriter);
+	}
+
+	@Override
+	public List<VideoInfo> getAllVideo() {
+		// TODO Auto-generated method stub
+		return videoMapper.getAllVideo();
 	}
 
 }

@@ -13,7 +13,7 @@ import com.bit.yanado.model.dto.WatchingReco;
 public interface VideoMapper {
 	
 	public List<Poster> getPost();
-	public Teaser getTeaserVid();
+	public List<Teaser> getTeaserVid();
 	public List<String> getEpisode(@Param("titleSession") String titleSession);
 	public VideoInfo getVideo(@Param("uniqueNo") int uniqueNo);
 	public void setRecord(@Param("id") String id, @Param("uniqueNo") int uniqueNo,@Param("record") String record);
@@ -21,5 +21,5 @@ public interface VideoMapper {
 	public void modRecord(@Param("recoSeq") String recoSeq,@Param("record") String record);
 	public List<WatchingReco> getAllRecord(@Param("id") String id);
 	public Poster getPostByTitleSeason(@Param("titleSeq") int titleSeq, @Param("season") int season);
-	
+	public List<VideoInfo> getAllVideo();
 }

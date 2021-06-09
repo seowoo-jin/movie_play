@@ -8,8 +8,21 @@
 <link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/resources/css/board.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui-grid/latest/tui-grid.css" />
+<link rel="stylesheet"
+	href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+<script
+	src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script src="https://uicdn.toast.com/tui-tree/latest/tui-tree.js"></script>
+<link rel="stylesheet" type="text/css" href="https://uicdn.toast.com/tui-tree/latest/tui-tree.css" />
+
 <title>admin page</title>
 </head>
+
 
 <body>
 	<div id="head">
@@ -51,22 +64,43 @@
 
 
 
-	<script>
-		
-	
+	<script >
 	/* ajax를 javascript로 나타낸 것 */
 		function loadDoc(event) {
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 				if(xhttp.readyState == 4 && xhttp.status == 200){
 					if (xhttp.responseText){
-						document.getElementById("article").innerHTML = this.responseText;
+						if(event === "video/board" || event ==="video/teaser"){
+							document.getElementById('article').innerHTML = stripAndExecuteScript(this.responseText,event);
+						}else{
+							document.getElementById("article").innerHTML = this.responseText;
+						}
 					}
 				}
 			};
 			xhttp.open("GET", "${pageContext.request.contextPath}/admin/"+event, true);
 			xhttp.send();
 		}
+	
+		function stripAndExecuteScript(text,event){
+			var filename=event.replaceAll('/','');
+			var scripts = ''; 
+			var cleaned = text.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, 
+					function(){ scripts += arguments[1] + '\n'; return ''; }); 
+			if (window.execScript){ window.execScript(scripts); 
+			} else { 
+				var head = document.getElementsByTagName('head')[0]; 
+				var scriptElement = document.createElement('script'); 
+				scriptElement.setAttribute('src','${pageContext.request.contextPath}/resources/js/'+filename+'.js');
+				scriptElement.setAttribute('defer','');
+				scriptElement.innerText = scripts; 
+				console.log(scriptElement);
+				head.appendChild(scriptElement); 
+				head.removeChild(scriptElement); 
+			} return cleaned; 
+		}; 
+			
 		
 		/* 파일을 선택하면 비동기 방식으로 filePath 메소드를 실행시켜 선택된 파일의 경로를 가져온다. */
 		function FilePath(event){
@@ -123,6 +157,9 @@
 			console.log(reply);
 			loadDoc("reply?qnaSeq="+qnaSeq+"&reply="+reply);  //
 		}
+		
+		
+
 		
 		
 	</script>

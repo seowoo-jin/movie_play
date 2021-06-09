@@ -24,7 +24,7 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
-	public Teaser getTeaserVid() {
+	public List<Teaser> getTeaserVid(){
 		// TODO Auto-generated method stub
 		return videoMapper.getTeaserVid();
 	}
