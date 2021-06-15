@@ -32,7 +32,6 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public List<String> getEpisode(String titleSession) {
 		// TODO Auto-generated method stub
-		System.out.println(titleSession);
 		return videoMapper.getEpisode(titleSession);
 	}
 
@@ -70,6 +69,12 @@ public class VideoServiceImpl implements VideoService {
 	public Poster getPostByTitleSeason(int titleSeq, int season) {
 		// TODO Auto-generated method stub
 		return videoMapper.getPostByTitleSeason(titleSeq, season);
+	}
+
+	@Override
+	public String getTitleFromTitleSeq(int titleSeq) {
+		// TODO Auto-generated method stub
+		return videoMapper.getTitleFromTitleSeq(titleSeq);
 	}
 
 }

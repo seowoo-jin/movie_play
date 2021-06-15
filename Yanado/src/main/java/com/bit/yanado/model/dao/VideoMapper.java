@@ -14,6 +14,7 @@ public interface VideoMapper {
 	
 	public List<Poster> getPost();
 	public List<Teaser> getTeaserVid();
+	public String getTitleFromTitleSeq(@Param("titleSeq") int titleSeq);
 	public List<String> getEpisode(@Param("titleSession") String titleSession);
 	public VideoInfo getVideo(@Param("uniqueNo") int uniqueNo);
 	public void setRecord(@Param("id") String id, @Param("uniqueNo") int uniqueNo,@Param("record") String record);

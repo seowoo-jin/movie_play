@@ -16,6 +16,8 @@
 	
 	</div>
 	
+	<button id="deleteVideo" name="deleteVideo" > 선택 삭제 </button>
+	
 <script >
 </script>
 </body>

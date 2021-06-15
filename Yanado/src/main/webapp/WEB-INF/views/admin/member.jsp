@@ -1,15 +1,24 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false"%>
+
 <html>
 <head>
-	<title>Member</title>
+<title>Member</title>
 </head>
+
 <body>
-<h1>
-	member
+	<h1>Member </h1>
+
+
+	<div id="memberGrid">
 	
-</h1>
-
-
+	</div>
+	
+	<button id="deleteMembers" name="deleteMembers"> 선택된 멤버 삭제 </button>
+	
+<script >
+</script>
 </body>
 </html>

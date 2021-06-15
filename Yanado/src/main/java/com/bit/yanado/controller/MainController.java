@@ -90,6 +90,7 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value="getEpisode", method=RequestMethod.POST)
 	public List<String> getEpisode(Model model, String titleSeason) {
+		System.out.println(videoService.getEpisode(titleSeason));
 		return videoService.getEpisode(titleSeason);
 	}
 	

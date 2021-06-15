@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Teaser;
 import com.bit.yanado.model.dto.AdminInfo;
+import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.dto.Tag;
 import com.bit.yanado.model.dto.TagName;
 import com.bit.yanado.model.dto.VideoInfo;
@@ -26,5 +27,6 @@ public interface AdminMapper {
 	public void setVideo(VideoInfo video);
 	public void setTeaser(Teaser teaser);
 	public void setReply(@Param("qnaSeq") int qnaSeq,@Param("reply")  String reply,@Param("adminWriter")  String adminWriter);
-	
+	public List<MemInfo> getAllMember();
+	public void memberDelete(@Param("id") String id);
 }

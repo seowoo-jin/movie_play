@@ -9,8 +9,13 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		select * from POSTER
 	</select>
 	
+	
 	<select id="getTeaserVid" resultType="com.bit.yanado.model.dto.Teaser">
-		select * from TEASER
+		SELECT * FROM TEASER 
+	</select>
+	
+	<select id="getTitleFromTitleSeq" parameterType="Integer" resultType="String">
+		select title from videotitle where titleSeq=#{titleSeq}
 	</select>
 	
 	<select id="getAllVideo" resultType="com.bit.yanado.model.dto.VideoInfo">

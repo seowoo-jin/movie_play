@@ -31,9 +31,11 @@ public class VideoController {
 		if(member != null || admin!= null) {
 			VideoInfo newVid = videoService.getVideo(trackId);
 			model.addAttribute("newVid",newVid);
-			WatchingReco isRecord = videoService.getRecord(member.getId(), trackId);
-			if (isRecord != null)
-				model.addAttribute("record", isRecord);
+			if(member != null) {
+				WatchingReco isRecord = videoService.getRecord(member.getId(), trackId);
+				if (isRecord != null)
+					model.addAttribute("record", isRecord);
+			}
 			return "video/play";
 		}
 		
@@ -44,16 +46,25 @@ public class VideoController {
 	
 	@RequestMapping(value="backToMain")
 	public String backToMain(@Param("trackId") int trackId, @Param("record") String record, HttpSession session) {
+		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
 		MemInfo member = (MemInfo) session.getAttribute("member");
-		WatchingReco isRecord = videoService.getRecord(member.getId(), trackId);
-		System.out.println(isRecord);
-		if (isRecord != null) {
-			int seq = isRecord.getHistorySeq();
-			videoService.modRecord(String.valueOf(seq), record);
-		}else {
-			videoService.setRecord(member.getId(), trackId, record);
+		if(member != null) {
+			WatchingReco isRecord = videoService.getRecord(member.getId(), trackId);
+			System.out.println(isRecord);
+			if (isRecord != null) {
+				int seq = isRecord.getHistorySeq();
+				videoService.modRecord(String.valueOf(seq), record);
+			}else {
+				videoService.setRecord(member.getId(), trackId, record);
+			}
 		}
+		
+		
+		
+		
 		return "redirect:/";
+		
+		
 	}
 	
 	

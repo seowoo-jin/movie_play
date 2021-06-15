@@ -71,7 +71,8 @@
 			xhttp.onreadystatechange = function() {
 				if(xhttp.readyState == 4 && xhttp.status == 200){
 					if (xhttp.responseText){
-						if(event === "video/board" || event ==="video/teaser"){
+						if((event === "video/board" || event ==="video/teaser") || event ==="member"){
+							console.log(event);
 							document.getElementById('article').innerHTML = stripAndExecuteScript(this.responseText,event);
 						}else{
 							document.getElementById("article").innerHTML = this.responseText;
@@ -95,7 +96,6 @@
 				scriptElement.setAttribute('src','${pageContext.request.contextPath}/resources/js/'+filename+'.js');
 				scriptElement.setAttribute('defer','');
 				scriptElement.innerText = scripts; 
-				console.log(scriptElement);
 				head.appendChild(scriptElement); 
 				head.removeChild(scriptElement); 
 			} return cleaned; 

@@ -23,11 +23,8 @@ var grid = new tui.Grid({
 		llY : false,
 	columns : [ {
 		header : 'Title',
-		name : 'titleSeq'
-	}, {
-		header : 'Season',
-		name : 'season'
-	}, {
+		name : 'title'
+	},{
 		header : 'Upload Date',
 		name : 'uploadDate'
 		

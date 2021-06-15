@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.yanado.model.dto.AdminInfo;
@@ -198,43 +199,79 @@ public class AdminController {
 	}
 	
 	
-	
+	// 관리자 영상 관리 게시판으로 이동 --------------------------------------------------------------
 	@RequestMapping(value="video/board")
 	public String board() {
 		return "admin/video/board";
 	}
 	
+	
+	// 관리자 영상 관리 게시판에서 영상 정보 불러오기 -----------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value="video/videoList")
 	public List<VideoInfo> videoList() {
-		List<VideoInfo> list = adminService.getAllVideo();
+		List<VideoInfo> list = adminService.getAllVideo();					//영상 정보 다 불러오
 		for(int i=0; i<list.size();i++) {
-			list.get(i).setSeason((list.get(i).getUniqueNo()%10000)/100);
-			list.get(i).setEpisode(list.get(i).getUniqueNo()%100);
+			list.get(i).setSeason((list.get(i).getUniqueNo()%10000)/100);	// 영상에 고유번호에서 시즌 정보 불러오
+			list.get(i).setEpisode(list.get(i).getUniqueNo()%100);			// 영상 고유번호에서 에피소드 가져오
 		}
 		return list;
 	}
 	
+	// 관리자 예고편 관리 게시판으로 이동 --------------------------------------------------------------
 	@RequestMapping(value="video/teaser")
 	public String teaser() {
 		return "admin/video/teaser";
 	}
 	
+	// 관리자 예고편 정보 보내기 --------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value="video/teaserList")
-	public List<Teaser> teaserList() {
-		List<Teaser> list = videoService.getTeaserVid();
-		System.out.println(list.get(0).getUploadDate());
+	public List<Map<String,String>> teaserList() {
+		System.out.println("teaser fuck");
+		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+		List<Teaser> teaserVids = videoService.getTeaserVid();
+		Map<String,String> map = new HashMap<String,String>();
+		for(int i=0; i<teaserVids.size();i++) {
+			map.put("title",videoService.getTitleFromTitleSeq(teaserVids.get(i).getTeaserSeq()));
+			map.put("uploadDate", teaserVids.get(i).getUploadDate().toString());
+			list.add(map);
+			System.out.println(teaserVids.get(i).getTeaserSeq());
+			System.out.println(videoService.getTitleFromTitleSeq(teaserVids.get(i).getTeaserSeq()));
+		}
 		return list;
 	}
 	
 	
-	
+	// 멤버 게시판으로 이동 ----------------------------------------------------------------------
 	@RequestMapping(value="member")
 	public String member() {
-		
 		return "admin/member";
 	}
+	
+	// 멤버  정보 보내기 --------------------------------------------------------------
+	@ResponseBody
+	@RequestMapping(value="memberList")
+	public List<MemInfo> memberList() {
+		List<MemInfo> members = adminService.getAllMember();
+		return members;
+	}
+	
+	
+	// 멤버 삭제 메소드  --------------------------------------------------------------
+	
+	@RequestMapping(value="memberDelete")
+	public String memberDelete(
+			@RequestParam(value="members[]") List<String> id) {
+		System.out.println(id.get(0));
+		for(int i=0;i<id.size();i++)
+			adminService.memberDelete(id.get(i));
+		return "admin/member";
+	}
+	
+	
+	
+	
 	
 	// Q&A 글 보기   -------------------------------------------------------------------------
 	@RequestMapping(value="qna")
@@ -251,7 +288,6 @@ public class AdminController {
 		return "admin/qna";
 	}
 		
-	
 	// Q&A 답변 쓰기  -------------------------------------------------------------------------
 	@RequestMapping(value="reply")
 	public String reply(@Param("qnaSeq") int qnaSeq,@Param("reply")  String reply, HttpSession session) {
@@ -262,4 +298,14 @@ public class AdminController {
 		adminService.setReply(qnaSeq, reply, admin.getAdminName());;
 		return "admin/qna";
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

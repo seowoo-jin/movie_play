@@ -9,6 +9,7 @@ $.ajax({
 	
 })
 
+console.log("videoboard");
 var grid = new tui.Grid({
 	el : document.getElementById('grid'),
 			rowHeaders: ['checkbox'],
@@ -23,7 +24,8 @@ var grid = new tui.Grid({
 		llY : false,
 	columns : [ {
 		header : 'Title',
-		name : 'title'
+		name : 'title',
+		sortable: true
 	}, {
 		header : 'Season',
 		name : 'season'
@@ -32,7 +34,7 @@ var grid = new tui.Grid({
 		name : 'episode'
 	} ],
 	
-		 rowHeaders: ['rowNum'],
+		 rowHeaders: ['rowNum','checkbox'],
 		 pageOptions: {
 		 useClient: true,
 		 perPage: 10
@@ -44,3 +46,4 @@ grid.on('dblclick', (ev) => {
   console.log(ev.rowKey);
   console.log(ev);
 })
+

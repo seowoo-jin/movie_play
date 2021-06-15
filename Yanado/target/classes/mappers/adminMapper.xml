@@ -17,6 +17,10 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		select * from VIDEOTITLE
 	</select>
 	
+	<select id="getAllMember" resultType="com.bit.yanado.model.dto.MemInfo">
+		select * from MEMINFO
+	</select>
+	
 	<insert id="insertNewTitle" parameterType="String">
 		insert into VIDEOTITLE (titleSeq, title) values (TITLE_SEQ.nextval,#{title })
 	</insert>
@@ -55,4 +59,9 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	<update id="setReply" parameterType="map">
 		update qna set reply=#{reply}, isReply='Y', replyDate=SYSDATE, replyAdmin=#{adminWriter} where qnaseq=#{qnaSeq}
 	</update>
+
+	<delete id="memberDelete" parameterType="String">
+		delete from meminfo where id=#{id}
+	</delete>
+	
 </mapper>

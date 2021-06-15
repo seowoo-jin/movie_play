@@ -89,11 +89,13 @@ var beforeDiv;
 		xhttp.onreadystatechange = function() {
 			if(xhttp.readyState == 4 && xhttp.status == 200){		// 정상상태일때 한번만 실행시키게 해준다.
 				if (xhttp.responseText){							// 응답이 왔으면 실행한다. 이 두개의 if가 없으면 여러번 실행된다.
+					console.log("response" + this.responseText);
 					var temp = this.responseText;
-					temp = temp.replaceAll('"','');					// String로 불러오기 때문에 ",[,]를 없애주고 ,로 나눠서 array로 만든다.
-					temp = temp.replaceAll('[','');
-					temp = temp.replaceAll(']','');
+					temp = temp.replaceAll('<List><item>','');					// String로 불러오기 때문에 ",[,]를 없애주고 ,로 나눠서 array로 만든다.
+					temp = temp.replaceAll('</item><item>',',');
+					temp = temp.replaceAll('</item></List>','');
 					episode = temp.split(',');
+					console.log(episode);
 					makeSelection(episode,event,titleSeason);					// 만들어진 에피소드 array를 보내 select 함수를 만든다.
 				}
 			}
@@ -101,8 +103,9 @@ var beforeDiv;
 		xhttp.send();
 	}
 	
-	function makeSelection(data,event,titleSeason){				// 에피소드를 받아서 셀렉트(드롭박스)를 만드는 함수.
-        if (data==0){
+	function makeSelection(episode,event,titleSeason){				// 에피소드를 받아서 셀렉트(드롭박스)를 만드는 함수.
+		console.log(episode);
+        if (episode==0){
         	// 에피소드가 없는 영화인 경우에는 바로 재생 버튼이 보일수 있도록 한다.
     		var button = document.createElement("input");
     		button.type = "button";
@@ -111,7 +114,7 @@ var beforeDiv;
     		button.style.width="100%";
     		button.style.height="60px";
     		button.addEventListener('click', function() {
-    			openVideo(titleSeason+data);
+    			openVideo(titleSeason+episode);
             }, false);
     		document.getElementById(event).appendChild(button);
     		
@@ -129,10 +132,10 @@ var beforeDiv;
     		firstOption.value="none";
     		firstOption.text="에피소트 선택";
     		select.appendChild(firstOption);				
-    		for(var j=0; j<data.length; j++){						// 받아온 에피소드 수 만큼 반복해주면서 option을 생성한다.
+    		for(var j=0; j<episode.length; j++){						// 받아온 에피소드 수 만큼 반복해주면서 option을 생성한다.
     			var option = document.createElement("option");
     			option.value = titleSeason;								// option 값을 넣어준다.
-    			option.text = data[j];								// 표시될 옵션 텍스트를 넣어준다.
+    			option.text = episode[j];								// 표시될 옵션 텍스트를 넣어준다.
     			select.appendChild(option);							// 만들어진 옵션을 셀렉트 밑에 넣어준다.
     		}
     		document.getElementById(event).appendChild(select);

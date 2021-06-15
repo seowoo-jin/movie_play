@@ -11,6 +11,7 @@ import com.bit.yanado.model.dto.WatchingReco;
 public interface VideoService {
 	public List<Poster> getPost();
 	public List<Teaser> getTeaserVid();
+	public String getTitleFromTitleSeq(int titleSeq);
 	public List<String> getEpisode(String titleSession);
 	public VideoInfo getVideo(int uniqueNo);
 	public void setRecord(String id, int uniqueNo, String record);

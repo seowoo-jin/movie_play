@@ -11,6 +11,7 @@ import com.bit.yanado.model.dao.VideoMapper;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Teaser;
 import com.bit.yanado.model.dto.AdminInfo;
+import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.dto.Tag;
 import com.bit.yanado.model.dto.TagName;
 import com.bit.yanado.model.dto.VideoInfo;
@@ -96,6 +97,18 @@ public class AdminServiceImpl implements AdminService {
 	public List<VideoInfo> getAllVideo() {
 		// TODO Auto-generated method stub
 		return videoMapper.getAllVideo();
+	}
+
+	@Override
+	public List<MemInfo> getAllMember() {
+		// TODO Auto-generated method stub
+		return adminMapper.getAllMember();
+	}
+
+	@Override
+	public void memberDelete(String id) {
+		// TODO Auto-generated method stub
+		adminMapper.memberDelete(id);
 	}
 
 }
