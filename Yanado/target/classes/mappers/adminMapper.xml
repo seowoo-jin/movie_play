@@ -60,8 +60,15 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		update qna set reply=#{reply}, isReply='Y', replyDate=SYSDATE, replyAdmin=#{adminWriter} where qnaseq=#{qnaSeq}
 	</update>
 
-	<delete id="memberDelete" parameterType="String">
-		delete from meminfo where id=#{id}
+	
+	<update id="memberDelete" parameterType="String">
+		update memINFO set isOUT='1' where id=#{id}
+	</update>
+	
+	<delete id="videoDelete" parameterType="Integer">
+		delete from videoInfo where uniqueNo=#{uniqueNo}
 	</delete>
+	
+	
 	
 </mapper>

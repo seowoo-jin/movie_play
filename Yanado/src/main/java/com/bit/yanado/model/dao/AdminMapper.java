@@ -29,4 +29,5 @@ public interface AdminMapper {
 	public void setReply(@Param("qnaSeq") int qnaSeq,@Param("reply")  String reply,@Param("adminWriter")  String adminWriter);
 	public List<MemInfo> getAllMember();
 	public void memberDelete(@Param("id") String id);
+	public void videoDelete(@Param("uniqueNo") int uniqueNo);
 }

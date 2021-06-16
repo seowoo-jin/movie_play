@@ -144,8 +144,10 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join( Model model, MemInfo newMember) {
+	public String join( Model model, MemInfo newMember,HttpSession session) {
 		memberService.join(newMember);
+		MemInfo member = memberService.login(newMember.getId(), newMember.getPw());
+		session.setAttribute("member", member);
 		return "redirect:pay";
 	}
 	

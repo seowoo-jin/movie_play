@@ -70,7 +70,6 @@ public class AdminController {
 	public String write(Model model) {
 		// TAG NAME 가져와서 Model로 보내
 		model.addAttribute("tagName",adminService.getTag());
-		
 		// 영화제목 가져와서 모델로 보내기
 		model.addAttribute("movieTitle",adminService.getTitle());
 		
@@ -93,7 +92,8 @@ public class AdminController {
 	public String videoUpload(VideoInfo videoinfo,VideoTitle videotitle, Poster poster, 
 			@Param("tag") String tag, Teaser teaser) {
 		
-		if(!videoinfo.getPeople().isEmpty()) {
+		
+		if(!videoinfo.getPeople().isEmpty()) {    // 올릴 영상이 존재한다는 것을 사람을 입력했는지를 통해 알수 있다.
 			/*
 			  영상 고유(유니크) 번호를 만드는 구간.
 			*/
@@ -106,7 +106,7 @@ public class AdminController {
 			int uniqueNo = Integer.parseInt(uniqueNoStr);				// 유니크 넘버를 숫자인 int 형으로 바꿔준다.
 			
 			/*
-			 * 포스터 파일을 처리하는 구간.
+			 * 포스터 파일 업로드.
 			 */
 			if(!poster.getPoster().isEmpty()) {
 				File newPoster = new File(poster.getPoster());			// 불러온 포스터 링크를 참고해 파일을 만든다.
@@ -119,7 +119,7 @@ public class AdminController {
 				adminService.setPost(poster);							// 만들어진 포스터를 포스터 테이블에 넣어준다.
 			}
 			/*
-			 * 비디오 파일을 처리하는 구간.
+			 * 비디오 파일 업로드.
 			 */
 			File video = new File(videoinfo.getLink());				// 불러온 비디오 링크를 참고해 파일을 만든다.
 			String fileName = getFileName(videoinfo.getLink()).toString();	// 링크에서 비디오 파일 이름만 따로 뺴낸다.
@@ -129,7 +129,7 @@ public class AdminController {
 			videoinfo.setLink("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+fileName);
 			
 			/*
-			 * 자막 처리하는 구간.
+			 * 자막 업로드.
 			 */
 			if(!videoinfo.getSubEng().isEmpty()) {
 				File subTitle = new File(videoinfo.getSubEng());
@@ -180,7 +180,7 @@ public class AdminController {
 		 */
 		
 		System.out.println(teaser.getTeaserLink().isEmpty());
-		if(!teaser.getTeaserLink().isEmpty()) {
+		if(!teaser.getTeaserLink().isEmpty()) {							// 올릴 티저 영상이 있는지 확인한 후 영상이 있으면 실행.
 			teaser.setTitleSeq(videotitle.getTitleSeq());
 			File newTeaser = new File(teaser.getTeaserLink());
 			String tempName = "teaser"+getFileName(teaser.getTeaserLink()).toString();
@@ -189,8 +189,6 @@ public class AdminController {
 			teaser.setTeaserLink("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+tempName);
 			adminService.setTeaser(teaser);
 		}
-		
-		
 		return "redirect: adminpage";
 	}
 	
@@ -205,6 +203,17 @@ public class AdminController {
 		return "admin/video/board";
 	}
 	
+	// 관리자 영상 정보 보기 게시판으로 이동 --------------------------------------------------------------
+		@RequestMapping(value="video/videoRead")
+		public String videoRead(@Param("uniqueNo") int uniqueNo,Model model) {
+			System.out.println(uniqueNo);
+			VideoInfo selectedVideo=videoService.getVideo(uniqueNo);
+			selectedVideo.setSeason((selectedVideo.getUniqueNo()%10000)/100);	// 영상에 고유번호에서 시즌 정보 불러오
+			selectedVideo.setEpisode(selectedVideo.getUniqueNo()%100);
+			model.addAttribute("videoInfo",selectedVideo);
+			return "admin/video/read";
+		}
+	
 	
 	// 관리자 영상 관리 게시판에서 영상 정보 불러오기 -----------------------------------------------------------------
 	@ResponseBody
@@ -217,6 +226,51 @@ public class AdminController {
 		}
 		return list;
 	}
+	
+	// 관리자 영상 리스트로 삭제 ---------------------------------------------------------------------
+	@RequestMapping(value="videoDelete")
+	public String videoDelete(@RequestParam(value="videos[]") List<Integer> uniqueNo) {
+		System.out.println(uniqueNo);
+		for(int i=0;i<uniqueNo.size();i++) {
+			adminService.videoDelete(uniqueNo.get(i));
+		}
+		return "admin/adminpage";
+	}
+	
+	// 관리자 영상 하나 삭제 ---------------------------------------------------------------------
+		@RequestMapping(value="singleVideoDelete")
+		public String singleVideoDelete(@Param("uniqueNo") int uniqueNo) {
+			System.out.println(uniqueNo);
+			adminService.videoDelete(uniqueNo);
+			return "admin/adminpage";
+		}
+	
+	// 관리자 영상 수정 게시판 이동 ---------------------------------------------------------------------
+		@RequestMapping(value="videoModifyForm")
+		public String videoModifyForm(@Param("uniqueNo") int uniqueNo,Model model) {
+			System.out.println(uniqueNo);
+			// TAG NAME 가져와서 Model로 보내
+			model.addAttribute("tagName",adminService.getTag());
+			// 영화제목 가져와서 모델로 보내기
+			model.addAttribute("movieTitle",adminService.getTitle());
+			VideoInfo selectedVideo=videoService.getVideo(uniqueNo);
+			selectedVideo.setSeason((selectedVideo.getUniqueNo()%10000)/100);	// 영상에 고유번호에서 시즌 정보 불러오
+			selectedVideo.setEpisode(selectedVideo.getUniqueNo()%100);
+			model.addAttribute("videoInfo",selectedVideo);
+			
+			return "admin/video/write";
+		}
+		
+	// 관리자 영상 수정 --------------------------------------------------------------------
+		@RequestMapping(value="videoModify")
+		public String videoModify(VideoInfo videoInfo) {
+			System.out.println(videoInfo);
+			
+			
+			return "admin/adminpage";
+		}
+		
+		
 	
 	// 관리자 예고편 관리 게시판으로 이동 --------------------------------------------------------------
 	@RequestMapping(value="video/teaser")
@@ -268,9 +322,6 @@ public class AdminController {
 			adminService.memberDelete(id.get(i));
 		return "admin/member";
 	}
-	
-	
-	
 	
 	
 	// Q&A 글 보기   -------------------------------------------------------------------------

@@ -67,6 +67,7 @@
 	<script >
 	/* ajax를 javascript로 나타낸 것 */
 		function loadDoc(event) {
+		console.log(event);
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 				if(xhttp.readyState == 4 && xhttp.status == 200){
@@ -156,6 +157,11 @@
 			var reply = document.getElementById("replyString_"+qnaSeq).value;
 			console.log(reply);
 			loadDoc("reply?qnaSeq="+qnaSeq+"&reply="+reply);  //
+		}
+		
+		// modify 페이지로 이동.
+		document.getElementById("modify").onclick = function(){
+			console.log("ddd");
 		}
 		
 		

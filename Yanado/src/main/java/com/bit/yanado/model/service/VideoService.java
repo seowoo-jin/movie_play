@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.bit.yanado.model.dto.Poster;
+import com.bit.yanado.model.dto.TagName;
 import com.bit.yanado.model.dto.Teaser;
 import com.bit.yanado.model.dto.VideoInfo;
 import com.bit.yanado.model.dto.WatchingReco;
@@ -19,5 +20,4 @@ public interface VideoService {
 	public void modRecord(String recoSeq, String record);
 	public List<WatchingReco> getAllRecord(String id);
 	public Poster getPostByTitleSeason(int titleSeq, int season);
-	
 }

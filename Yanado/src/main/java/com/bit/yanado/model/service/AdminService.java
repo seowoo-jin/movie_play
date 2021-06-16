@@ -25,4 +25,5 @@ public interface AdminService {
 	public List<VideoInfo> getAllVideo();
 	public List<MemInfo> getAllMember();
 	public void memberDelete(String id);
+	public void videoDelete(int uniqueNo);
 }

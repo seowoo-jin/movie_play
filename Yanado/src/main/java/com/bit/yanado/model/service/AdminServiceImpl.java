@@ -111,4 +111,10 @@ public class AdminServiceImpl implements AdminService {
 		adminMapper.memberDelete(id);
 	}
 
+	@Override
+	public void videoDelete(int uniqueNo) {
+		// TODO Auto-generated method stub
+		adminMapper.videoDelete(uniqueNo);
+	}
+
 }

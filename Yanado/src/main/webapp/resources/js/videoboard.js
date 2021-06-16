@@ -11,7 +11,7 @@ $.ajax({
 
 console.log("videoboard");
 var grid = new tui.Grid({
-	el : document.getElementById('grid'),
+	el : document.getElementById('videoGrid'),
 			rowHeaders: ['checkbox'],
 		      bodyHeight: 500,
 		      treeColumnOptions: {
@@ -27,6 +27,10 @@ var grid = new tui.Grid({
 		name : 'title',
 		sortable: true
 	}, {
+		header : 'UniqueNo',
+		name : 'uniqueNo',
+		sortable: true
+	},{
 		header : 'Season',
 		name : 'season'
 	}, {
@@ -43,7 +47,47 @@ var grid = new tui.Grid({
 });
 
 grid.on('dblclick', (ev) => {
-  console.log(ev.rowKey);
-  console.log(ev);
+	 var uniqueNo = grid.getValue(ev.rowKey,"uniqueNo");
+	 console.log(uniqueNo);
+	 
+ 	 var xhttp = new XMLHttpRequest();
+	 xhttp.onreadystatechange = function() {
+		if(xhttp.readyState == 4 && xhttp.status == 200){
+			if (xhttp.responseText){
+				document.getElementById("article").innerHTML = this.responseText;
+			}
+		}
+	};
+	xhttp.open("GET", "video/videoRead?uniqueNo="+uniqueNo, true);
+	xhttp.send();
 })
 
+
+var deleteVideo=[];
+grid.on('check', (ev) => {
+  deleteVideo[deleteVideo.length] = grid.getValue(ev.rowKey,"uniqueNo");
+});
+
+grid.on('uncheck', (ev) => {
+   for(var i=0; i<deleteVideo.length;i++){
+		if(deleteVideo[i] === grid.getValue(ev.rowKey,"uniqueNo")){
+			deleteVideo.splice(i,1);
+		}
+	}
+});
+
+$("#deleteVideo").on('click', function(){
+	
+			$.ajax({
+				type : "GET",
+				url : "videoDelete",
+				data : {"videos" : deleteVideo},
+				success : function(returnData){
+					console.log("success");
+					document.getElementById('article').innerHTML = "admin/member";
+				},
+				error:function(){
+					console.log("fail");
+				}
+			})
+		})

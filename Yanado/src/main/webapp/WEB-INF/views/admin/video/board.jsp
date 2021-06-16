@@ -12,7 +12,7 @@
 	<h1>Video Board</h1>
 
 
-	<div id="grid">
+	<div id="videoGrid">
 	
 	</div>
 	
