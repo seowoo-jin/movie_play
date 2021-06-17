@@ -86,8 +86,8 @@ public class AdminController {
 	            System.out.println(file.getAbsolutePath());
 		return file.getAbsolutePath();
 	}
-	
-	
+
+
 	@RequestMapping(value="videoUpload", method=RequestMethod.GET)
 	public String videoUpload(VideoInfo videoinfo,VideoTitle videotitle, Poster poster, 
 			@Param("tag") String tag, Teaser teaser) {
@@ -160,12 +160,8 @@ public class AdminController {
 			/*
 			 * 테그를 처리해 주는 구간.
 			 */
-			List<String> tempTag = new ArrayList<String>();
-			String[] splTag = tag.split("&");					// 받아온 테그를 '&'를 기준으로 나눠준다.
-			for(int i = 0; i< splTag.length; i++) {				// 테그를 List로 옮겨준다. 
-				if(!splTag[i].isEmpty())						// 빈 테그가 있다면 스킵해준다.
-					tempTag.add(splTag[i]);
-			}
+			
+			List<String> tempTag = adminService.splitTag(tag);
 			
 			for(int i=0; i<tempTag.size();i++) {				// 테그를 리스트로 옮긴뒤 빈 테그를 생성해서 영상 고유번호와 테그번호를 지정해서 테그 테이블에 삽입한다.
 				Tag newTag = new Tag();
@@ -264,9 +260,7 @@ public class AdminController {
 	// 관리자 영상 수정 --------------------------------------------------------------------
 		@RequestMapping(value="videoModify")
 		public String videoModify(VideoInfo videoInfo) {
-			System.out.println(videoInfo);
-			
-			
+			adminService.videoUpdate(videoInfo);
 			return "admin/adminpage";
 		}
 		
@@ -290,8 +284,6 @@ public class AdminController {
 			map.put("title",videoService.getTitleFromTitleSeq(teaserVids.get(i).getTeaserSeq()));
 			map.put("uploadDate", teaserVids.get(i).getUploadDate().toString());
 			list.add(map);
-			System.out.println(teaserVids.get(i).getTeaserSeq());
-			System.out.println(videoService.getTitleFromTitleSeq(teaserVids.get(i).getTeaserSeq()));
 		}
 		return list;
 	}
@@ -313,7 +305,6 @@ public class AdminController {
 	
 	
 	// 멤버 삭제 메소드  --------------------------------------------------------------
-	
 	@RequestMapping(value="memberDelete")
 	public String memberDelete(
 			@RequestParam(value="members[]") List<String> id) {

@@ -1,5 +1,6 @@
 package com.bit.yanado.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -115,6 +116,24 @@ public class AdminServiceImpl implements AdminService {
 	public void videoDelete(int uniqueNo) {
 		// TODO Auto-generated method stub
 		adminMapper.videoDelete(uniqueNo);
+	}
+
+	@Override
+	public void videoUpdate(VideoInfo video) {
+		// TODO Auto-generated method stub
+		adminMapper.videoUpdate(video);
+	}
+
+	@Override
+	public List<String> splitTag(String tag) {
+		// TODO Auto-generated method stub
+		List<String> tempTag = new ArrayList<String>();
+		String[] splTag = tag.split("&");					// 받아온 테그를 '&'를 기준으로 나눠준다.
+		for(int i = 0; i< splTag.length; i++) {				// 테그를 List로 옮겨준다. 
+			if(!splTag[i].isEmpty())						// 빈 테그가 있다면 스킵해준다.
+				tempTag.add(splTag[i]);
+		}
+		return tempTag;
 	}
 
 }

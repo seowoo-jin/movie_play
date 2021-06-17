@@ -61,7 +61,6 @@ public class MainController {
 		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
 		
 		if(member != null || admin!= null ) {
-			
 			List<Poster> posters = videoService.getPost();
 			List<String> videoSeason = new ArrayList<String>();
 			String tempSeason;
@@ -71,9 +70,15 @@ public class MainController {
 			}
 			model.addAttribute("vidSeason",videoSeason);
 			model.addAttribute("posters", posters);
-			List<Teaser> teaserVids = videoService.getTeaserVid();
-			Teaser teaserVid = teaserVids.get(0);
-			model.addAttribute("teaserVid", teaserVid);
+			
+			
+			List<Teaser> teaserVids = videoService.getTeaserVid();		// 메인에 올릴 예고편 가져온다.
+			Teaser teaserVid = teaserVids.get(0);						// 일단 첫번째 예고편을 가져온다. 
+			model.addAttribute("teaserVid", teaserVid);					// 모델을 이용해서 뷰로 보낸다. 
+			
+			/*
+			  어떤 형식의 로그인을 했는지 확인.
+			 */
 			if(member != null) {
 				model.addAttribute("isLogin","Y");
 				return (member.getIsPay().equals("Y"))?(member.getIsOut()==1?"redirect:login":"main"):"redirect:pay";

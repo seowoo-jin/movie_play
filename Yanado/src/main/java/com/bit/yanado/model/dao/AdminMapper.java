@@ -30,4 +30,5 @@ public interface AdminMapper {
 	public List<MemInfo> getAllMember();
 	public void memberDelete(@Param("id") String id);
 	public void videoDelete(@Param("uniqueNo") int uniqueNo);
+	public void videoUpdate(VideoInfo video);
 }

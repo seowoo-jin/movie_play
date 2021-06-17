@@ -69,6 +69,10 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		delete from videoInfo where uniqueNo=#{uniqueNo}
 	</delete>
 	
+	<update id="videoUpdate" parameterType="com.bit.yanado.model.dto.VideoInfo">
+		update VIDEOINFO set people=#{people}, synop=#{synop} where uniqueNO=#{uniqueNo}
+	</update>
+	
 	
 	
 </mapper>
