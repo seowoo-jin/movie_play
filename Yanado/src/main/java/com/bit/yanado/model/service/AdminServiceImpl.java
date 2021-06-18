@@ -136,4 +136,38 @@ public class AdminServiceImpl implements AdminService {
 		return tempTag;
 	}
 
+	@Override
+	public List<String> getTagByUniqueNo(int uniqueNo) {
+		// TODO Auto-generated method stub
+		return adminMapper.getTagByUniqueNo(uniqueNo);
+	}
+
+	@Override
+	public String combineTag(List<String> tag) {
+		// TODO Auto-generated method stub
+		String result = "";
+		for(int i=0; i<tag.size();i++) {
+			result = result + "&"+ tag.get(i);
+		}
+		return result;
+	}
+
+	@Override
+	public void teaserDelete(List<Integer> teasers) {
+		// TODO Auto-generated method stub
+		for(int i=0; i<teasers.size();i++) {
+			adminMapper.teaserDelete(teasers.get(i));
+		}
+		
+	}
+
+	@Override
+	public void teaserToMain(List<Integer> teasers) {
+		// TODO Auto-generated method stub
+		adminMapper.teaserIsMainReset();
+		for(int i=0; i<teasers.size();i++) {
+			adminMapper.teaserToMain(teasers.get(i));
+		}
+	}
+
 }

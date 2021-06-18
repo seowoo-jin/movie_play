@@ -28,9 +28,15 @@ var grid = new tui.Grid({
 		header : 'Upload Date',
 		name : 'uploadDate'
 		
+	},{
+		header : 'Play on Main',
+		name : 'isMain'
+	},{
+		header : 'Teaser NO.',
+		name : 'teaserSeq'
 	} ],
 	
-		 rowHeaders: ['rowNum'],
+		 rowHeaders: ['rowNum','checkbox'],
 		 pageOptions: {
 		 useClient: true,
 		 perPage: 10
@@ -38,7 +44,52 @@ var grid = new tui.Grid({
 		      
 });
 
-grid.on('dblclick', (ev) => {
-  console.log(ev.rowKey);
-  console.log(ev.selectedData);
-})
+
+var selectedTeaser=[];
+grid.on('check', (ev) => {
+  selectedTeaser[selectedTeaser.length] = grid.getValue(ev.rowKey,"teaserSeq");
+});
+
+grid.on('uncheck', (ev) => {
+   for(var i=0; i<selectedTeaser.length;i++){
+		if(selectedTeaser[i] === grid.getValue(ev.rowKey,"teaserSeq")){
+			selectedTeaser.splice(i,1);
+		}
+	}
+});
+
+	$("#deleteTeaser").on('click', function(){
+	
+			$.ajax({
+				type : "GET",
+				url : "teaserDelete",
+				data : {"teasers" : selectedTeaser},
+				success : function(returnData){
+					console.log("success");
+					document.getElementById('article').innerHTML = "admin/member";
+				},
+				error:function(){
+					console.log("fail");
+				}
+			})
+		})
+		
+	$("#teaserToMain").on('click', function(){
+	
+			$.ajax({
+				type : "GET",
+				url : "teaserToMain",
+				data : {"teasers" : selectedTeaser},
+				success : function(returnData){
+					console.log("success");
+					document.getElementById('article').innerHTML = "admin/member";
+				},
+				error:function(){
+					console.log("fail");
+				}
+			})
+		})	
+		
+		
+		
+		

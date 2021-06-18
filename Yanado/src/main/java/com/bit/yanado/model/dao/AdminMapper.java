@@ -31,4 +31,8 @@ public interface AdminMapper {
 	public void memberDelete(@Param("id") String id);
 	public void videoDelete(@Param("uniqueNo") int uniqueNo);
 	public void videoUpdate(VideoInfo video);
+	public List<String> getTagByUniqueNo(@Param("uniqueNo") int uniqueNo);
+	public void teaserDelete(@Param("teaserSeq") int teasers);
+	public void teaserIsMainReset();
+	public void teaserToMain(@Param("teaserSeq") int teasers);
 }

@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		SELECT * FROM TEASER 
 	</select>
 	
-	<select id="getTitleFromTitleSeq" parameterType="Integer" resultType="String">
+	<select id="getTitleByTitleSeq" parameterType="Integer" resultType="String">
 		select title from videotitle where titleSeq=#{titleSeq}
 	</select>
 	

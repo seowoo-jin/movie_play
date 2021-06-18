@@ -8,6 +8,14 @@ public class Teaser {
 	private  int titleSeq;
 	private  String teaserLink;
 	private  Date uploadDate;
+	private String isMain;
+	
+	public String getIsMain() {
+		return isMain;
+	}
+	public void setIsMain(String isMain) {
+		this.isMain = isMain;
+	}
 	public int getTeaserSeq() {
 		return teaserSeq;
 	}

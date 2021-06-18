@@ -28,4 +28,8 @@ public interface AdminService {
 	public void videoDelete(int uniqueNo);
 	public void videoUpdate(VideoInfo video);
 	public List<String> splitTag(String tag);
+	public String combineTag(List<String> tag);
+	public List<String> getTagByUniqueNo(int uniqueNo);
+	public void teaserDelete(List<Integer> teasers);
+	public void teaserToMain(List<Integer> teasers);
 }

@@ -140,7 +140,7 @@ public class AdminController {
 			}
 			
 			if(!videoinfo.getSubKor().isEmpty()) {
-				File subTitle = new File(videoinfo.getSubEng());
+				File subTitle = new File(videoinfo.getSubKor());
 				String tempName = getFileName(videoinfo.getSubKor()).toString();
 				tempName.replace(" ", "+");	
 				videoinfo.setSubEng("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+tempName);
@@ -148,7 +148,7 @@ public class AdminController {
 			}
 			
 			if(!videoinfo.getSubMix().isEmpty()) {
-				File subTitle = new File(videoinfo.getSubEng());
+				File subTitle = new File(videoinfo.getSubMix());
 				String tempName = getFileName(videoinfo.getSubMix()).toString();
 				tempName.replace(" ", "+");	
 				videoinfo.setSubEng("https://swjin0203.s3.ap-northeast-2.amazonaws.com/"+tempName);
@@ -160,16 +160,13 @@ public class AdminController {
 			/*
 			 * 테그를 처리해 주는 구간.
 			 */
-			
 			List<String> tempTag = adminService.splitTag(tag);
-			
 			for(int i=0; i<tempTag.size();i++) {				// 테그를 리스트로 옮긴뒤 빈 테그를 생성해서 영상 고유번호와 테그번호를 지정해서 테그 테이블에 삽입한다.
 				Tag newTag = new Tag();
 				newTag.setUniqueNo(uniqueNo);					// 테그에 영상 고유번호를 넣는다.
 				newTag.setTagNameSeq(adminService.getTagSeq(tempTag.get(i)));	// 테그에 테그고유번호를 넣는다. 테그 고유번호가 없는 테그면 새로 생성해서 넣는다.
 				adminService.setTag(newTag);					// 입력된 테그를 테그 테이블에 넣어준다.
 			}
-			
 		}
 		/*
 		 * Teaser가 있으면 올려준다.
@@ -207,6 +204,11 @@ public class AdminController {
 			selectedVideo.setSeason((selectedVideo.getUniqueNo()%10000)/100);	// 영상에 고유번호에서 시즌 정보 불러오
 			selectedVideo.setEpisode(selectedVideo.getUniqueNo()%100);
 			model.addAttribute("videoInfo",selectedVideo);
+			/*
+			 * uniqueNo로 해당 테그 가져오기.
+			 */
+			String tag = adminService.combineTag(adminService.getTagByUniqueNo(uniqueNo));
+			model.addAttribute("tag",tag);
 			return "admin/video/read";
 		}
 	
@@ -253,13 +255,16 @@ public class AdminController {
 			selectedVideo.setSeason((selectedVideo.getUniqueNo()%10000)/100);	// 영상에 고유번호에서 시즌 정보 불러오
 			selectedVideo.setEpisode(selectedVideo.getUniqueNo()%100);
 			model.addAttribute("videoInfo",selectedVideo);
+			String tag = adminService.combineTag(adminService.getTagByUniqueNo(uniqueNo));
+			model.addAttribute("savedTagName",tag);
 			
 			return "admin/video/write";
 		}
 		
 	// 관리자 영상 수정 --------------------------------------------------------------------
 		@RequestMapping(value="videoModify")
-		public String videoModify(VideoInfo videoInfo) {
+		public String videoModify(VideoInfo videoInfo, @Param("tag") String tag) {
+			// 수정할 때 테그도 중복된걸 제외하고 수정해줘야함.
 			adminService.videoUpdate(videoInfo);
 			return "admin/adminpage";
 		}
@@ -276,18 +281,36 @@ public class AdminController {
 	@ResponseBody
 	@RequestMapping(value="video/teaserList")
 	public List<Map<String,String>> teaserList() {
-		System.out.println("teaser fuck");
 		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 		List<Teaser> teaserVids = videoService.getTeaserVid();
-		Map<String,String> map = new HashMap<String,String>();
+		
 		for(int i=0; i<teaserVids.size();i++) {
-			map.put("title",videoService.getTitleFromTitleSeq(teaserVids.get(i).getTeaserSeq()));
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("title",videoService.getTitleByTitleSeq(teaserVids.get(i).getTitleSeq()));
 			map.put("uploadDate", teaserVids.get(i).getUploadDate().toString());
-			list.add(map);
+			map.put("isMain", teaserVids.get(i).getIsMain());
+			map.put("teaserSeq",String.valueOf(teaserVids.get(i).getTeaserSeq()));
+			list.add(map); 
 		}
 		return list;
 	}
 	
+	// 메인 화면에 재생시킬 예고편 선택     --------------------------------------------------------------
+	@RequestMapping(value="teaserToMain")
+	public String teaserToMain(@RequestParam(value="teasers[]") List<Integer> teaserSeq) {
+		adminService.teaserToMain(teaserSeq);
+		return "admin/adminpage";
+	}
+	
+	
+	
+	
+	// 관리자 영상 리스트로 삭제 ---------------------------------------------------------------------
+		@RequestMapping(value="teaserDelete")
+		public String teaserDelete(@RequestParam(value="teasers[]") List<Integer> teaserSeq) {
+			adminService.teaserDelete(teaserSeq);
+			return "admin/adminpage";
+		}
 	
 	// 멤버 게시판으로 이동 ----------------------------------------------------------------------
 	@RequestMapping(value="member")
@@ -295,7 +318,7 @@ public class AdminController {
 		return "admin/member";
 	}
 	
-	// 멤버  정보 보내기 --------------------------------------------------------------
+	// 멤버 정보 보내기 --------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value="memberList")
 	public List<MemInfo> memberList() {

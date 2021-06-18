@@ -18,7 +18,7 @@
 	<label>season : </label>${videoInfo.season }<br>
 	<label>episode : </label>${videoInfo.episode }<br>
 	<label>File : </label>${videoInfo.link }<br>
-	<label>Tag : </label><br>
+	<label>Tag : </label>${tag }<br>
 	
 	<label for="people">People : </label>${videoInfo.people }<br>
 	<label for="synop">Synop : </label>${videoInfo.synop }<br>

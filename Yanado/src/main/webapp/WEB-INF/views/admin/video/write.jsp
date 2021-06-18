@@ -38,7 +38,7 @@
 	<br>
 	
 	
-	<label for="tag">Tag : </label><input type="text" id="tag" name="tag">
+	<label for="tag">Tag : </label><input type="text" id="tag" name="tag" value="${savedTagName }">
 	<select id="selectTag" name="selectTag" onchange="selectedTag()">
 		<option value=0>테그 입력</option>
 		<c:forEach items="${tagName }" var="tag">

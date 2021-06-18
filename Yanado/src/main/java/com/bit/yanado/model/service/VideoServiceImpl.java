@@ -72,9 +72,9 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
-	public String getTitleFromTitleSeq(int titleSeq) {
+	public String getTitleByTitleSeq(int titleSeq) {
 		// TODO Auto-generated method stub
-		return videoMapper.getTitleFromTitleSeq(titleSeq);
+		return videoMapper.getTitleByTitleSeq(titleSeq);
 	}
 
 }
