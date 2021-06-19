@@ -17,7 +17,7 @@ public interface AdminService {
 	public List<VideoTitle> getTitle();
 	public int newTitleSeq(String title);
 	public int getTagSeq(String tag);
-	public void setTag(Tag newTeg);
+	public void setTag(int uniqueNo, List<String> newTag);
 	public void setPost(Poster poster);
 	public void setVideo(VideoInfo video);
 	public void setTeaser(Teaser teaser);
@@ -32,4 +32,5 @@ public interface AdminService {
 	public List<String> getTagByUniqueNo(int uniqueNo);
 	public void teaserDelete(List<Integer> teasers);
 	public void teaserToMain(List<Integer> teasers);
+	public void deleteTag(int uniqueNo);
 }

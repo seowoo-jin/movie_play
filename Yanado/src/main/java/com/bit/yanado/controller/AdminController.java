@@ -161,12 +161,8 @@ public class AdminController {
 			 * 테그를 처리해 주는 구간.
 			 */
 			List<String> tempTag = adminService.splitTag(tag);
-			for(int i=0; i<tempTag.size();i++) {				// 테그를 리스트로 옮긴뒤 빈 테그를 생성해서 영상 고유번호와 테그번호를 지정해서 테그 테이블에 삽입한다.
-				Tag newTag = new Tag();
-				newTag.setUniqueNo(uniqueNo);					// 테그에 영상 고유번호를 넣는다.
-				newTag.setTagNameSeq(adminService.getTagSeq(tempTag.get(i)));	// 테그에 테그고유번호를 넣는다. 테그 고유번호가 없는 테그면 새로 생성해서 넣는다.
-				adminService.setTag(newTag);					// 입력된 테그를 테그 테이블에 넣어준다.
-			}
+			
+			adminService.setTag(uniqueNo, tempTag);
 		}
 		/*
 		 * Teaser가 있으면 올려준다.
@@ -265,7 +261,10 @@ public class AdminController {
 		@RequestMapping(value="videoModify")
 		public String videoModify(VideoInfo videoInfo, @Param("tag") String tag) {
 			// 수정할 때 테그도 중복된걸 제외하고 수정해줘야함.
+			adminService.deleteTag(videoInfo.getUniqueNo());
 			adminService.videoUpdate(videoInfo);
+			List<String> tempTag = adminService.splitTag(tag);
+			adminService.setTag(videoInfo.getUniqueNo(), tempTag);
 			return "admin/adminpage";
 		}
 		

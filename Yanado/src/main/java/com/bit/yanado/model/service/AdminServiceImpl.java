@@ -65,9 +65,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void setTag(Tag newTeg) {
+	public void setTag(int uniqueNo, List<String> newTag) {
 		// TODO Auto-generated method stub
-		adminMapper.setTag(newTeg);
+		
+		for(int i=0; i<newTag.size();i++) {				// 테그를 리스트로 옮긴뒤 빈 테그를 생성해서 영상 고유번호와 테그번호를 지정해서 테그 테이블에 삽입한다.
+			Tag tempNewTag = new Tag();
+			tempNewTag.setUniqueNo(uniqueNo);					// 테그에 영상 고유번호를 넣는다.
+			tempNewTag.setTagNameSeq(getTagSeq(newTag.get(i)));	// 테그에 테그고유번호를 넣는다. 테그 고유번호가 없는 테그면 새로 생성해서 넣는다.
+			adminMapper.setTag(tempNewTag);					// 입력된 테그를 테그 테이블에 넣어준다.
+		}
 	}
 
 	@Override
@@ -168,6 +174,12 @@ public class AdminServiceImpl implements AdminService {
 		for(int i=0; i<teasers.size();i++) {
 			adminMapper.teaserToMain(teasers.get(i));
 		}
+	}
+
+	@Override
+	public void deleteTag(int uniqueNo) {
+		// TODO Auto-generated method stub
+		adminMapper.deleteTag(uniqueNo);
 	}
 
 }

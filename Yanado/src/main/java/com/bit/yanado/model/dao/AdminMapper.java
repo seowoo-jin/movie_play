@@ -35,4 +35,5 @@ public interface AdminMapper {
 	public void teaserDelete(@Param("teaserSeq") int teasers);
 	public void teaserIsMainReset();
 	public void teaserToMain(@Param("teaserSeq") int teasers);
+	public void deleteTag(@Param("uniqueNo") int uniqueNo);
 }

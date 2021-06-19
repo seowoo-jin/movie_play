@@ -89,5 +89,9 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		update TEASER set isMain='Y' where teaserSeq=#{teaserSeq}
 	</update>
 	
+	<delete id="deleteTag" parameterType="Integer">
+		delete from tag where uniqueNo=#{uniqueNo}
+	</delete>
+	
 	
 </mapper>
