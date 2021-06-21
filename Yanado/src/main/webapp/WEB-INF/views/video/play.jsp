@@ -146,54 +146,57 @@
 	            var korSubHtmlR = '';
 	            var mixSubHtmlR = '';
 	            
-	        	for (var i=0; i<subtitleEng.cues.length; i++){				// 자막 길이만큼 반복실행하면서 자막과 이미지를 만든다.
-	        		var imgHtml = '<img id="bookmarkEngImg_'+subtitleEng.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px;"  onclick="bookmarks('+i+')" ></img>';
-	        		var parHtml = '<p role="button" id="subTitle_eng'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
-	        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
-	        		var parHtmlR = '<p role="button" id="subTitle_R_eng'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
-	        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
-	        		engSubHtml += parHtml;
-	        		engSubHtmlR = engSubHtmlR + imgHtml + parHtmlR;	// 오른쪽 자막 구간에는 북마크 이미지까지 더해준다.
-	        	}
-	        	engSubArea.innerHTML = engSubHtml;					// 동적으로 만든 자막들을 해당 위치에 넣는다.
-	        	engSubAreaR.innerHTML = engSubHtmlR;
-	        	
-				for (var i=0; i<subtitleKor.cues.length; i++){
-					var imgHtml = '<img id="bookmarkKorImg_'+subtitleKor.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px;"  onclick="bookmarks('+i+')" ></img>';
-	        		var parHtml = '<p role="button" id="subTitle_kor'+subtitleKor.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleKor.cues[i].startTime+
-	        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">' + subtitleKor.cues[i].text + '</p>';
-	        		var parHtmlR = '<p role="button" id="subTitle_R_kor'+subtitleKor.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleKor.cues[i].startTime+
-	        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">' + subtitleKor.cues[i].text + '</p>';
-	        		korSubHtml += parHtml;
-	        		korSubHtmlR = korSubHtmlR + imgHtml + parHtmlR;
-	        	}
-	        	korSubArea.innerHTML = korSubHtml;
-	        	korSubAreaR.innerHTML = korSubHtmlR;
-	        	
-				for (var i=0; i<subtitleMix.cues.length; i++){
-					var imgHtml = '<img id="bookmarkMixImg_'+subtitleMix.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px;"  onclick="bookmarks('+i+')" ></img>';
-	        		var parHtml = '<p role="button" id="subTitle_mix'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleMix.cues[i].startTime+
-	        		'" data-end-time="'+subtitleMix.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleMix.cues[i].startTime+')">' + subtitleMix.cues[i].text + '</p>';
-	        		var parHtmlR = '<p role="button" id="subTitle_R_mix'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
-	        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
-	        		mixSubHtml += parHtml;
-	        		mixSubHtmlR = mixSubHtmlR + imgHtml + parHtmlR;
-	        	}
-	        	mixSubArea.innerHTML = mixSubHtml;
-	        	mixSubAreaR.innerHTML = mixSubHtmlR;
+	            setTimeout(function(){
+		        	for (var i=0; i<subtitleEng.cues.length; i++){				// 자막 길이만큼 반복실행하면서 자막과 이미지를 만든다.
+		        		var imgHtml = '<img id="bookmarkEngImg_'+subtitleEng.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px;"  onclick="bookmarks('+i+')" ></img>';
+		        		var parHtml = '<p role="button" id="subTitle_eng'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
+		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
+		        		var parHtmlR = '<p role="button" id="subTitle_R_eng'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
+		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
+		        		engSubHtml += parHtml;
+		        		engSubHtmlR = engSubHtmlR + imgHtml + parHtmlR;	// 오른쪽 자막 구간에는 북마크 이미지까지 더해준다.
+		        	}
+		        	engSubArea.innerHTML = engSubHtml;					// 동적으로 만든 자막들을 해당 위치에 넣는다.
+		        	engSubAreaR.innerHTML = engSubHtmlR;
+		        	
+					for (var i=0; i<subtitleKor.cues.length; i++){
+						var imgHtml = '<img id="bookmarkKorImg_'+subtitleKor.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px;"  onclick="bookmarks('+i+')" ></img>';
+		        		var parHtml = '<p role="button" id="subTitle_kor'+subtitleKor.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleKor.cues[i].startTime+
+		        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">' + subtitleKor.cues[i].text + '</p>';
+		        		var parHtmlR = '<p role="button" id="subTitle_R_kor'+subtitleKor.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleKor.cues[i].startTime+
+		        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">' + subtitleKor.cues[i].text + '</p>';
+		        		korSubHtml += parHtml;
+		        		korSubHtmlR = korSubHtmlR + imgHtml + parHtmlR;
+		        	}
+		        	korSubArea.innerHTML = korSubHtml;
+		        	korSubAreaR.innerHTML = korSubHtmlR;
+		        	
+					for (var i=0; i<subtitleMix.cues.length; i++){
+						var imgHtml = '<img id="bookmarkMixImg_'+subtitleMix.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px;"  onclick="bookmarks('+i+')" ></img>';
+		        		var parHtml = '<p role="button" id="subTitle_mix'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleMix.cues[i].startTime+
+		        		'" data-end-time="'+subtitleMix.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleMix.cues[i].startTime+')">' + subtitleMix.cues[i].text + '</p>';
+		        		var parHtmlR = '<p role="button" id="subTitle_R_mix'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
+		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
+		        		mixSubHtml += parHtml;
+		        		mixSubHtmlR = mixSubHtmlR + imgHtml + parHtmlR;
+		        	}
+		        	mixSubArea.innerHTML = mixSubHtml;
+		        	mixSubAreaR.innerHTML = mixSubHtmlR;
 	           
+	        		for (var i=0;i<bookmarkArray.length;i++){						// 북마크가 있는경우 그 위치에 북마크 이미지를 변화시켜준다.
+				        document.getElementById("bookmarkEngImg_"+bookmarkArray[i]).src= afterBookImg;
+				        document.getElementById("bookmarkKorImg_"+bookmarkArray[i]).src= afterBookImg;
+				        document.getElementById("bookmarkMixImg_"+bookmarkArray[i]).src= afterBookImg;
+				    } 
+	        	}, 1000);
 	        	
-	        	for (var i=0;i<bookmarkArray.length;i++){						// 북마크가 있는경우 그 위치에 북마크 이미지를 변화시켜준다.
-			        document.getElementById("bookmarkEngImg_"+bookmarkArray[i]).src= afterBookImg;
-			        document.getElementById("bookmarkKorImg_"+bookmarkArray[i]).src= afterBookImg;
-			        document.getElementById("bookmarkMixImg_"+bookmarkArray[i]).src= afterBookImg;
-			    } 
 	        	
-	        	
+	            
 	        	// 자막이 변하는 이벤트. 자막이 변하면서 해당 자막의 offsetTop을 가져와서 scroll 위치를 그쪽으로 옮겨준다.
 	        	subtitleEng.oncuechange = function () {	
-	        		console.log(video.currentTime);
 	        		if(typeof subtitleKor.activeCues[0] !== "undefined"){
+	        			endTimeOfCurrentSubtitle = subtitleKor.activeCues[0].endTime;
+	        			console.log("endtime ==> " + endTimeOfCurrentSubtitle);
 	        			currentCue = subtitleKor.activeCues[0].startTime;
 		            	var pTag = document.getElementById('subTitle_'+currentSubtitle+currentCue).offsetTop;
 		            	var pTagR = document.getElementById('subTitle_R_'+currentSubtitle+currentCue).offsetTop;
@@ -202,7 +205,7 @@
 		            	document.getElementById(currentSubtitle + "SubAreaR").offsetHeight/2;
 	        		}else{
 	        			document.getElementById(currentSubtitle + "SubArea").scrollTop +=
-	        			document.getElementById(currentSubtitle + "SubAreaR").offsetHeight;
+	        			document.getElementById(currentSubtitle + "SubArea").offsetHeight;
 	        		}
 	            	
 	            }
@@ -234,7 +237,7 @@
 	    
 	   // 뒤로가기 버튼 눌렀을때 현재 시청기록 저장.
 	    document.getElementById("videoBack").addEventListener('click',function(){
-	    	var record = document.getElementById('videoArea').currentTime;
+	    	var record = video[0].currentTime;
 	    	console.log(record);
 	    	var uniqueNo = "${newVid.uniqueNo}";
 	    	window.location.href="${pageContext.request.contextPath}/video/backToMain?trackId="+uniqueNo+"&record="+record;
