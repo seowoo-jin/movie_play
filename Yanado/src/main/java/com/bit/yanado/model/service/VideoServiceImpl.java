@@ -96,4 +96,10 @@ public class VideoServiceImpl implements VideoService {
 		videoMapper.deleteBookmark(newBookmark);
 	}
 
+	@Override
+	public void setDefaultCap(String caption, String id) {
+		// TODO Auto-generated method stub
+		videoMapper.setDefaultCap(caption,id);
+	}
+
 }

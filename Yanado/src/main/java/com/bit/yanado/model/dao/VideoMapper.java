@@ -27,4 +27,5 @@ public interface VideoMapper {
 	public List<BookMark> getBookmarks(@Param("id") String id,@Param("uniqueNo")  int uniqueNo);
 	public void setBookmark(BookMark newBookmark);
 	public void deleteBookmark(BookMark newBookmark);
+	public void setDefaultCap(@Param("caption") String caption, @Param("id") String id);
 }

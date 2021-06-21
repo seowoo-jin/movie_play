@@ -23,4 +23,5 @@ public interface VideoService {
 	public List<BookMark> getBookmarks(String id, int uniqueNo);
 	public void setBookmark(BookMark newBookmark);
 	public void deleteBookmark(BookMark newBookmark);
+	public void setDefaultCap(String caption, String id);
 }

@@ -27,7 +27,7 @@ public class VideoController {
 	@Autowired
 	VideoService videoService;
 	
-	
+	// 재생화면 메소드. 여러가지 맴버 정보를 보내준다.
 	@RequestMapping(value="play")
 	public String play(int trackId, Model model, HttpSession session) {
 		MemInfo member = (MemInfo) session.getAttribute("member");
@@ -54,7 +54,7 @@ public class VideoController {
 		return "redirect:/";
 	}
 	
-	
+	// 메인으로 돌아가는 메소드 - 시청기록을 저장해준다.
 	@RequestMapping(value="backToMain")
 	public String backToMain(@Param("trackId") int trackId, @Param("record") String record, HttpSession session) {
 		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
@@ -72,6 +72,7 @@ public class VideoController {
 		return "redirect:/";
 	}
 	
+	// 북마크 생성 메소드.
 	@ResponseBody
 	@RequestMapping(value="setBookmark")
 	public String setBookmark(@Param("trackId") int trackId, @Param("startTime") String startTime,
@@ -86,6 +87,7 @@ public class VideoController {
 		return "success";
 	}
 	
+	// 북마크 삭제 메소드.
 	@ResponseBody
 	@RequestMapping(value="deleteBookmark")
 	public String deleteBookmark(@Param("trackId") int trackId, @Param("startTime") String startTime, HttpSession session) {
@@ -93,10 +95,32 @@ public class VideoController {
 		BookMark newBookmark = new BookMark(0, member.getId(), trackId, startTime, "");
 		System.out.println(newBookmark);
 		videoService.deleteBookmark(newBookmark);
-		
-		
-		
 		return "success";
 	}
+	
+	
+	// 기본 자막을 설정해주는 메소드.
+		@ResponseBody
+		@RequestMapping(value="setDefaultCaption")
+		public String setDefaultCaption(@Param("caption") String caption, HttpSession session) {
+			MemInfo member = (MemInfo) session.getAttribute("member");
+			videoService.setDefaultCap(caption, member.getId());
+			return "success";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
