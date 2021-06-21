@@ -51,4 +51,18 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		SELECT * from POSTER where titleSeq=#{titleSeq} and Season=#{season}
 	</select>
 	
+	<select id="getBookmarks" parameterType="map" resultType="com.bit.yanado.model.dto.BookMark">
+		SELECT * FROM BOOKMARK where id=#{id} and uniqueNo=#{uniqueNo}
+	</select>
+	
+	<insert id="setBookmark" parameterType="com.bit.yanado.model.dto.BookMark">
+		insert into bookmark (bookmarkSeq, id, uniqueNo, subTimeStamp, subtitle) 
+		values (bookmark_seq.nextval, #{id}, #{uniqueNo}, #{subTimestamp}, #{subtitle})
+	</insert>
+	
+	<delete id="deleteBookmark" parameterType="com.bit.yanado.model.dto.BookMark">
+		delete from bookmark where id=#{id} and uniqueNo=#{uniqueNo} and subTimeStamp=#{subTimestamp}
+	</delete>
+	
+	
 </mapper>

@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bit.yanado.model.dto.BookMark;
 import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Qna;
@@ -45,7 +46,11 @@ public class MemberController {
 	}
 	// 북마크  ------------------------------------------------------------
 	@RequestMapping(value="bookmark")
-	public String bookmark() {
+	public String bookmark(Model model, HttpSession session) {
+		MemInfo member = (MemInfo) session.getAttribute("member");
+		
+		List<BookMark> allBookmarks = memberService.getAllBookmarks(member.getId());
+		model.addAttribute("allBookmarks",allBookmarks);
 		
 		return "member/bookmark";
 	}

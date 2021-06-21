@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.yanado.model.dao.VideoMapper;
+import com.bit.yanado.model.dto.BookMark;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Teaser;
 import com.bit.yanado.model.dto.VideoInfo;
@@ -75,6 +76,24 @@ public class VideoServiceImpl implements VideoService {
 	public String getTitleByTitleSeq(int titleSeq) {
 		// TODO Auto-generated method stub
 		return videoMapper.getTitleByTitleSeq(titleSeq);
+	}
+
+	@Override
+	public List<BookMark> getBookmarks(String id, int uniqueNo) {
+		// TODO Auto-generated method stub
+		return videoMapper.getBookmarks(id, uniqueNo);
+	}
+
+	@Override
+	public void setBookmark(BookMark newBookmark) {
+		// TODO Auto-generated method stub
+		videoMapper.setBookmark(newBookmark);
+	}
+
+	@Override
+	public void deleteBookmark(BookMark newBookmark) {
+		// TODO Auto-generated method stub
+		videoMapper.deleteBookmark(newBookmark);
 	}
 
 }

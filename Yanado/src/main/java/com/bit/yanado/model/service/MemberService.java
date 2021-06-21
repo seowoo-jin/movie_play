@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-
+import com.bit.yanado.model.dto.BookMark;
 import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.dto.Qna;
 
@@ -24,6 +24,7 @@ public interface MemberService {
 	public void deleteQna(int qnaSeq);
 	public List<Qna> getQnaById(String id);
 	public void deleteMember(String id);
+	public List<BookMark> getAllBookmarks(String id);
 	
 	
 }

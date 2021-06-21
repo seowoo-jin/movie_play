@@ -61,4 +61,9 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		update meminfo set isOut='1' where id=#{id}
 	</update>
 	
+	<select id="getAllBookmarks" parameterType="String" resultType="com.bit.yanado.model.dto.BookMark">
+		select * from bookmark where id=#{id}
+	</select>
+	
+	
 </mapper>

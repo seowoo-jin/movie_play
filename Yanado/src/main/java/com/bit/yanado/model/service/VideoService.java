@@ -2,7 +2,7 @@ package com.bit.yanado.model.service;
 
 import java.util.List;
 
-
+import com.bit.yanado.model.dto.BookMark;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.TagName;
 import com.bit.yanado.model.dto.Teaser;
@@ -20,4 +20,7 @@ public interface VideoService {
 	public void modRecord(String recoSeq, String record);
 	public List<WatchingReco> getAllRecord(String id);
 	public Poster getPostByTitleSeason(int titleSeq, int season);
+	public List<BookMark> getBookmarks(String id, int uniqueNo);
+	public void setBookmark(BookMark newBookmark);
+	public void deleteBookmark(BookMark newBookmark);
 }

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import com.bit.yanado.model.dto.BookMark;
 import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.dto.Qna;
 
@@ -25,4 +26,5 @@ public interface MemberMapper {
 	public void deleteQna(int qnaSeq);
 	public List<Qna> getQnaById(String id);
 	public void deleteMember(String id);
+	public List<BookMark> getAllBookmarks(@Param("id") String id);
 }

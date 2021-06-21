@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.bit.yanado.model.dao.AdminMapper;
 import com.bit.yanado.model.dao.MemberMapper;
+import com.bit.yanado.model.dao.VideoMapper;
+import com.bit.yanado.model.dto.BookMark;
 import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.dto.Qna;
 
@@ -20,6 +22,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	public MemberMapper memberMapper;
+	
+	@Autowired
+	public VideoMapper videoMapper;
+	
 	
 	@Override
 	public MemInfo login(String id, String pw) {
@@ -97,6 +103,21 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteMember(String id) {
 		// TODO Auto-generated method stub
 		memberMapper.deleteMember(id);
+	}
+
+	@Override
+	public List<BookMark> getAllBookmarks(String id) {
+		// TODO Auto-generated method stub
+		List<BookMark> allBookMarks = memberMapper.getAllBookmarks(id);
+		allBookMarks.get(0).getUniqueNo();
+		int uniqueNo;
+		for(int i=0; i<allBookMarks.size();i++) {
+			uniqueNo = allBookMarks.get(i).getUniqueNo();	// 시청기록의 고유번호를 가져온다.
+			allBookMarks.get(i).setTitle(videoMapper.getTitleByTitleSeq(uniqueNo/10000));				// 고유번호 중앞 5자리(영상제목)을 가져온다.
+			allBookMarks.get(i).setSeason(((uniqueNo%10000)/100));
+			allBookMarks.get(i).setEpisode(uniqueNo%100);
+		}
+		return allBookMarks;
 	}
 	
 
