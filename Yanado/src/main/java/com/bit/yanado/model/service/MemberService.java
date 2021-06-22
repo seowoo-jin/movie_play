@@ -25,6 +25,7 @@ public interface MemberService {
 	public List<Qna> getQnaById(String id);
 	public void deleteMember(String id);
 	public List<BookMark> getAllBookmarks(String id);
+	public void updateLoginDate(String id);
 	
 	
 }

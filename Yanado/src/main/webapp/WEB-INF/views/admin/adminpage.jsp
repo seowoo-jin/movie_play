@@ -159,10 +159,7 @@
 			loadDoc("reply?qnaSeq="+qnaSeq+"&reply="+reply);  //
 		}
 		
-		// modify 페이지로 이동.
-		document.getElementById("modify").onclick = function(){
-			console.log("ddd");
-		}
+		
 		
 		
 

@@ -25,6 +25,7 @@ public interface MemberMapper {
 	public void updateQna(Qna qna);
 	public void deleteQna(int qnaSeq);
 	public List<Qna> getQnaById(String id);
-	public void deleteMember(String id);
+	public void deleteMember(@Param("id") String id);
 	public List<BookMark> getAllBookmarks(@Param("id") String id);
+	public void updateLoginDate(@Param("id") String id);
 }

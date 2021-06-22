@@ -58,12 +58,16 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	</select>
 	
 	<update id="deleteMember" parameterType="String">
-		update meminfo set isOut='1' where id=#{id}
+		update meminfo set isOut='1',OUTDATE=SYSDATE where id=#{id}
 	</update>
 	
 	<select id="getAllBookmarks" parameterType="String" resultType="com.bit.yanado.model.dto.BookMark">
 		select * from bookmark where id=#{id}
 	</select>
+	
+	<update id="updateLoginDate" parameterType="String">
+		update MEMINFO set LASTLOGINDATE=SYSDATE where id=#{id}
+	</update>
 	
 	
 </mapper>

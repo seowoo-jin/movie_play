@@ -119,6 +119,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return allBookMarks;
 	}
+
+	@Override
+	public void updateLoginDate(String id) {
+		// TODO Auto-generated method stub
+		memberMapper.updateLoginDate(id);
+	}
 	
 
 }

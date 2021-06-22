@@ -15,12 +15,10 @@
 			<img src="${posters.poster }" class="posterImg" id="posterClk">
 			
 			${videoInfo[status.index].title } 
-			${videoInfo[status.index].season }
-			${videoInfo[status.index].episode }
-			<%-- <c:if test="${season[status.index] ne 0}" >
-				season : ${season[status.index] } 
-				episode : ${episode[status.index] }
-			</c:if> --%>
+			<c:if test="${videoInfo[status.index].season  ne 0}" >
+				season : ${videoInfo[status.index].season }
+				episode : ${videoInfo[status.index].episode }
+			</c:if>
 			
 		</a>
 		

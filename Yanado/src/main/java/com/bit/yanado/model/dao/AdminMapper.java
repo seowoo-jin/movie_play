@@ -36,4 +36,5 @@ public interface AdminMapper {
 	public void teaserIsMainReset();
 	public void teaserToMain(@Param("teaserSeq") int teasers);
 	public void deleteTag(@Param("uniqueNo") int uniqueNo);
+	public void deletePoster(@Param("titleSeq") int titleSeq, @Param("season") int season);
 }

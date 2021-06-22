@@ -118,6 +118,7 @@ public class MainController {
 		}else {
 			if(member != null ) {
 				session.setAttribute("member", member);
+				memberService.updateLoginDate(member.getId());
 				return member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
 			}else {
 				model.addAttribute("message","Check your ID or Password.");

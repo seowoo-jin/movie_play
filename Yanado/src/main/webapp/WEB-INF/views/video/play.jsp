@@ -73,46 +73,48 @@
 	var afterBookImg =  "../resources/image/after_bookmark.png";
 	var currentCue;			// 현재 진행되고 있는 장면의 자막 
 	var existBookmarks = document.getElementsByClassName("bookmarks");  		// 기존에 가지고 있었던 북마크.
-	var bookmarkArray = [];
+	var bookmarkArray = [];													// 기존에 북마크를 행렬을 이용해서 사용.
 	for(var i=0;i<existBookmarks.length;i++){
 		bookmarkArray.push(existBookmarks[i].dataset.timestamp);
 	}
-	var currentSubtitle = "${defaultSubtitle }";
-	var isRightSubtitle = false;
-	var mScrollHeight;
-	var rScrollHeight;
+	var currentSubtitle = "${defaultSubtitle }";							// 기본 자막.
+	console.log(currentSubtitle);
+	var isRightSubtitle = false;											// 오른쪽 스크립트를 사용하는지.
+	var mScrollHeight;														// 영상위에 스크롤 높이.
+	var rScrollHeight;														// 오른쪽 스크립트 스크롤 높이.
 	
 	
 	/* 좌우키 클릭 이벤트 */
-	window.addEventListener("keydown", function(e){
+/* 	window.addEventListener("keydown", function(e){
 		if(e.keyCode == 37){
 			// left
-			console.log(cues.length);
-			for(var j=0;j<cues.length; j++){
-				if (video[0].currentTime > cues[j].startTime && video[0].currentTime <= cues[j].endTime){
-					video[0].currentTime = cues[j-1].startTime; 
-				}else if( video[0].currentTime > cues[j].endTime && video[0].currentTime <= cues[j+1].startTime){
-					video[0].currentTime = cues[j].startTime; 
+			console.log(subtitleKor.length);
+			for(var j=0;j<subtitleKor.length; j++){
+				if (video[0].currentTime > subtitleKor[j].startTime && video[0].currentTime <= subtitleKor[j].endTime){
+					video[0].currentTime = subtitleKor[j-1].startTime; 
+				}else if( video[0].currentTime > subtitleKor[j].endTime && video[0].currentTime <= subtitleKor[j+1].startTime){
+					video[0].currentTime = subtitleKor[j].startTime; 
 				}
 			} 
 		}else if(e.keyCode == 39){
 			// right
-			for(var j=0;j<cues.length; j++){
-				if (video[0].currentTime > cues[j].startTime && video[0].currentTime <= cues[j].endTime){
-					video[0].currentTime = cues[j+1].startTime; 
-				}else if( video[0].currentTime > cues[j].endTime && video[0].currentTime <= cues[j+1].startTime){
-					video[0].currentTime = cues[j+1].startTime; 
+			for(var j=0;j<subtitleKor.length; j++){
+				if (video[0].currentTime > subtitleKor[j].startTime && video[0].currentTime <= subtitleKor[j].endTime){
+					video[0].currentTime = subtitleKor[j+1].startTime; 
+				}else if( video[0].currentTime > subtitleKor[j].endTime && video[0].currentTime <= subtitleKor[j+1].startTime){
+					video[0].currentTime = subtitleKor[j+1].startTime; 
 				}
 			} 
 		} 
-	})
+	}) */
 	
+
 	
 	$(function() {
 	    var videoWrapper = $('.video-wrapper');
 	    
 	    // 마지막 시청기록 부터 시작.
-	    document.getElementById('videoArea').currentTime="${record.recentPo}";				// 기존에 있던 재생 구간으로 이동한다.
+	    document.getElementById('videoArea').currentTime="${record}";				// 기존에 있던 재생 구간으로 이동한다.
 	    
 	    videoWrapper.each(function() {
 	        video = $(this).find('video');    /* 비디오 재생 */
@@ -124,9 +126,6 @@
 	        korSubAreaR = document.getElementById("korSubAreaR");
 	        mixSubArea = document.getElementById("mixSubArea");
 	        mixSubAreaR = document.getElementById("mixSubAreaR");
-	        
-	        changeSub();		// 저장된 자막 종류로 시작.
-	        
 	        
 	        document.getElementById("trackTagEng").track.mode="hidden";							// 테그들을 안보이게 다 숨긴다.
 	        document.getElementById("trackTagKor").track.mode="hidden";
@@ -191,12 +190,9 @@
 	        	}, 1000);
 	        	
 	        	
-	            
-	        	// 자막이 변하는 이벤트. 자막이 변하면서 해당 자막의 offsetTop을 가져와서 scroll 위치를 그쪽으로 옮겨준다.
+	        	 // 자막이 변하는 이벤트. 자막이 변하면서 해당 자막의 offsetTop을 가져와서 scroll 위치를 그쪽으로 옮겨준다.
 	        	subtitleEng.oncuechange = function () {	
 	        		if(typeof subtitleKor.activeCues[0] !== "undefined"){
-	        			endTimeOfCurrentSubtitle = subtitleKor.activeCues[0].endTime;
-	        			console.log("endtime ==> " + endTimeOfCurrentSubtitle);
 	        			currentCue = subtitleKor.activeCues[0].startTime;
 		            	var pTag = document.getElementById('subTitle_'+currentSubtitle+currentCue).offsetTop;
 		            	var pTagR = document.getElementById('subTitle_R_'+currentSubtitle+currentCue).offsetTop;
@@ -210,40 +206,31 @@
 	            	
 	            }
 	        	
-	        	
-	        	////////////////////////////
-	            var isScrolling = 0;
-	            var beforeSelectedCue = 0;    /* 이전에 선택된 자막 id */
-	            function myFunction(event){
-	            	if (event == 0){
-		            	for( var i=0; i<cues.length; i++){
-		            		/* 현재 시간이 자막의 시작시간과 끝 시간 사이에 있으면 해당 자막을 표시한다. */
-		                	if (videoProperty.currentTime >= cues[i].startTime && videoProperty.currentTime <= cues[i].endTime){
-		                		/* 자막이 이전과 변했는지 변하지 않았는지 확인한다. 자박이 변화 했으면 다음 자막으로 스크롤 한다. */
-		                		if (beforeSelectedCue != cues[i].id){
-		                			$('p[data-id='+beforeSelectedCue+']').css({'font-weight':'normal' , 'color' : '#ececed'});
-		                			beforeSelectedCue = cues[i].id;
-		                			/* p tag의 offsetTop 프로퍼티를 받아와서 스크롤을 그쪽으로 바로 보내도록 하는 코 */
-		                			$('.tranScript').animate({scrollTop : $('p[data-id='+cues[i].id+']').prop('offsetTop')},0);
-		                			/* $tranScript.html(transcriptHtml); */
-		                			$('p[data-id='+cues[i].id+']').css({'font-weight':'bold' , 'color' : 'white'});
-		                		}
-		                	}
-		            	}
-	            	}
-	            }
+	            
+	        	changeSub();		// 저장된 자막 종류로 시작.
 	      	});
 	    });
 	    
+	    window.onpopstate = function() {
+	    	  if (window.history.length == lastHistoryLength)
+	    	      console.log("User used back button");
+	    	  lastHistoryLength = window.history.length;
+	    };
+	    
 	   // 뒤로가기 버튼 눌렀을때 현재 시청기록 저장.
-	    document.getElementById("videoBack").addEventListener('click',function(){
-	    	var record = video[0].currentTime;
+	   document.getElementById("videoBack").addEventListener('click',function(){
+		   window.history.back();
+		   /* var record = video[0].currentTime;
 	    	console.log(record);
 	    	var uniqueNo = "${newVid.uniqueNo}";
-	    	window.location.href="${pageContext.request.contextPath}/video/backToMain?trackId="+uniqueNo+"&record="+record;
+	    	window.location.href="${pageContext.request.contextPath}/video/backToMain?trackId="+uniqueNo+"&record="+record; */
 	    })
+	    
+	    
 	});
 	
+	 
+
 	// 북마크 클릭했을 때 해당 북마크를 없애거나 북마크를 지정하는 함수.
 	function bookmarks(index) {
 		var isChangeBookMark = true;						// 북마크가 변했는지 확인한다. 기존에 있던 북마크는 북마크를 삭제시키기 위해 확인한다.
@@ -308,7 +295,7 @@
 	});
 	document.getElementById("mixSubArea").addEventListener('scroll',function(){
 		mScrollHeight=document.getElementById("mixSubArea").scrollTop;
-	})
+	});
 	
 	// 자막을 클랙했을 때 해당 자막으로 영상이 이동하는 함수.
 	function subtitleClkEvnt(startTime) {

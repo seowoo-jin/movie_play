@@ -93,5 +93,9 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		delete from tag where uniqueNo=#{uniqueNo}
 	</delete>
 	
+	<delete id="deletePoster" parameterType="map">
+		delete from Poster where titleseq=#{titleSeq} and season=#{season}
+	</delete>
+	
 	
 </mapper>

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bit.yanado.model.dto.AdminInfo;
@@ -29,7 +30,8 @@ public class VideoController {
 	
 	// 재생화면 메소드. 여러가지 맴버 정보를 보내준다.
 	@RequestMapping(value="play")
-	public String play(int trackId, Model model, HttpSession session) {
+	public String play(@Param("trackId") int trackId,
+			@RequestParam(value="bookmarkTime", defaultValue="") String bookmarkTime , Model model, HttpSession session) {
 		MemInfo member = (MemInfo) session.getAttribute("member");
 		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
 		
@@ -38,11 +40,12 @@ public class VideoController {
 			model.addAttribute("newVid",newVid);
 			if(member != null) {
 				WatchingReco isRecord = videoService.getRecord(member.getId(), trackId);
-				if (isRecord != null)
-					model.addAttribute("record", isRecord);
+				String Record = (bookmarkTime.isEmpty())?((isRecord != null)?isRecord.getRecentPo():""):bookmarkTime;
+				model.addAttribute("record", Record);
 				// get Bookmarks
 				List<BookMark> bookmarks = videoService.getBookmarks(member.getId(), trackId);
 				String defaultSubtitle = member.getDefaultCap();
+				System.out.println(defaultSubtitle);
 				model.addAttribute("defaultSubtitle", defaultSubtitle);
 				model.addAttribute("bookmarks",bookmarks);
 				
@@ -79,7 +82,6 @@ public class VideoController {
 			@Param("subtitle") String subtitle, HttpSession session) {
 		MemInfo member = (MemInfo) session.getAttribute("member");
 		BookMark newBookmark = new BookMark(0, member.getId(), trackId, startTime, subtitle);
-		System.out.println(newBookmark);
 		videoService.setBookmark(newBookmark);
 		
 		
@@ -93,7 +95,6 @@ public class VideoController {
 	public String deleteBookmark(@Param("trackId") int trackId, @Param("startTime") String startTime, HttpSession session) {
 		MemInfo member = (MemInfo) session.getAttribute("member");
 		BookMark newBookmark = new BookMark(0, member.getId(), trackId, startTime, "");
-		System.out.println(newBookmark);
 		videoService.deleteBookmark(newBookmark);
 		return "success";
 	}
@@ -104,7 +105,9 @@ public class VideoController {
 		@RequestMapping(value="setDefaultCaption")
 		public String setDefaultCaption(@Param("caption") String caption, HttpSession session) {
 			MemInfo member = (MemInfo) session.getAttribute("member");
+			member.setDefaultCap(caption);
 			videoService.setDefaultCap(caption, member.getId());
+			
 			return "success";
 		}
 	

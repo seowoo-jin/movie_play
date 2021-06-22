@@ -121,7 +121,14 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void videoDelete(int uniqueNo) {
 		// TODO Auto-generated method stub
+		
+		// videoMapper.getPostByTitleSeason(uniqueNo, uniqueNo);
 		adminMapper.videoDelete(uniqueNo);
+		List<String> episode = videoMapper.getEpisode(String.valueOf(uniqueNo/100));
+		if(episode.size()==0) {
+			adminMapper.deletePoster((uniqueNo/10000), ((uniqueNo%10000)/100));
+		}
+		// 삭제한 뒤 시즌으로 찾아서 에피소드가 하나도 없으면 포스터도 삭제해 준다.
 	}
 
 	@Override

@@ -14,7 +14,7 @@
 	<c:forEach items="${allBookmarks }" var="allBookmarks">
 		<div class="eachBookMarks" style="white-space: pre; float: left; text-align: left; 
 		width: 400px; height: 200px; border: 1px solid; position: relative; margin: 10px;">
-			<a  href="${pageContext.request.contextPath}/video/play?trackId=${allBookmarks.uniqueNo }">
+			<a  href="${pageContext.request.contextPath}/video/play?trackId=${allBookmarks.uniqueNo }&bookmarkTime=${allBookmarks.subTimestamp}">
 				${allBookmarks.title}<br>
 				<c:if test="${allBookmarks.season ne 00 }">
 				<span>시즌 : </span>${allBookmarks.season}<br>

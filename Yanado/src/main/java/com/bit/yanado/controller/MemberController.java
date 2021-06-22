@@ -62,18 +62,12 @@ public class MemberController {
 		List<WatchingReco> recoding = videoService.getAllRecord(member.getId());	//맴버 아이디로 시청기록을 가져온다.
 		List<Poster> poster = new ArrayList<Poster>();		// 시청기록에 맞는 포스터를 가져올 리스트를 만든다.
 		List<VideoInfo> videoInfo= new ArrayList<VideoInfo>();
-		List<Integer> season = new ArrayList<Integer>();
-		List<Integer> episode = new ArrayList<Integer>();
 		for (int i=0;i<recoding.size();i++){				// 시청기록 만큼 포스터 가져오는걸 반복한다.
 			int uniqueNo = recoding.get(i).getUniqueNo();	// 시청기록의 고유번호를 가져온다.
 			int titleSeq = uniqueNo/10000;					// 고유번호 중앞 5자리(영상제목)을 가져온다.
-			season.add((uniqueNo%10000)/100); 				// 고유번호 중 6,7번째 수(시즌)을 가져온다.
-			episode.add(uniqueNo%100);					// 고유번호 중 마지막 두자리(에피소드)를 가져온다.
 			poster.add(videoService.getPostByTitleSeason(titleSeq, (uniqueNo%10000)/100));	// 가져온 포스터를 리스트에 넣는다.
 			videoInfo.add(videoService.getVideo(uniqueNo));
 		}
-		model.addAttribute("season", season);
-		model.addAttribute("episode", episode);
 		model.addAttribute("videoInfo", videoInfo);
 		model.addAttribute("posters",poster);				// 모델로 포스터를 보내준다.
 		model.addAttribute("allRecord",recoding);			// 모델로 시청기록을 보내준다.
