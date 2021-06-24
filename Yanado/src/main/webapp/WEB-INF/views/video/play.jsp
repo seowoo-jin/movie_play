@@ -17,27 +17,44 @@
 .transcript::-webkit-scrollbar {
     display: none;
 }
+#selectSubtitle{
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+}
+
+.selectedSubtitle{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+video::-webkit-media-controls-fullscreen-button {
+    display: none;
+}
 
 
 
 </style>
 </head>
 <body style="margin: 0; background-color: #686260;">
-
-	<input type="checkbox" value="자막선택" id="selectSubtitle" onclick="selectSubtitleFcn()" style="z-index: 1000; width: 10px; height: 10px; position: absolute;">
+	
+	<input type="checkbox" id="selectSubtitle" onclick="selectSubtitleFcn()" style="z-index: 1000; width: 10px; height: 10px; position: absolute;">
+	<label for="selectSubtitle" style="z-index: 1111;">자막</label>
 	<div id="subtitleBox" style="display: none; z-index: 1000; width: 1000px; height: 30px; position: absolute;">
-		<input type="radio" name="selectedSubtitle" id="KorRadio" value="Kor" ><label for="KorRadio">한</label>
-		<input type="radio" name="selectedSubtitle" id="EngRadio" value="Eng"  ><label for="EngRadio">영</label>
-		<input type="radio" name="selectedSubtitle" id="MixRadio" value="Mix"  ><label for="MixRadio">한/영</label>
-		<input type="radio" name="selectedSubtitle" id="NonRadio" value="Non"  ><label for="NonRadio">자막 없음</label>
+		<input type="radio" class="selectedSubtitle" name="selectedSubtitle" id="KorRadio" value="Kor" ><label for="KorRadio">한</label>
+		<input type="radio" class="selectedSubtitle" name="selectedSubtitle" id="EngRadio" value="Eng"  ><label for="EngRadio">영</label>
+		<input type="radio" class="selectedSubtitle" name="selectedSubtitle" id="MixRadio" value="Mix"  ><label for="MixRadio">한/영</label>
+		<input type="radio" class="selectedSubtitle" name="selectedSubtitle" id="NonRadio" value="Non"  ><label for="NonRadio">자막 없음</label>
 	</div>
 	
 	<button id="RScript" name="RScript" value="script" style="z-index: 1000; left: 90%; position: absolute;">Script</button>
 	
-	<input type="button" value="back" id="videoBack"style="z-index: 1000; left: 10%; position: absolute;"><br>
+	<input type="button" value="fullscreen" id="fullscreen"style="z-index: 1000; left: 10%; position: absolute;"><br>
 	<form id="play" action="/video/play" method="get">
 		<div class="video-wrapper" style="relative: relative;  width: 100%; weight: 100vw; height: 100vh; weight-margin: 0; top: 0; left: 0; background-color: #686260;">
-			<video id="videoArea" crossorigin="anonymous" controls style="position: absolute; z-index: 10; width: 100%;  weight: 100vw; height: 100vh; margin: 0; top: 0; left: 0;">
+			<video id="videoArea" crossorigin="anonymous" controls style="position: absolute; z-index: 0; width: 100%;  weight: 100vw; height: 100vh; margin: 0; top: 0; left: 0;">
 				<source id="uniqueNo2" src="${newVid.link }" type="video/mp4"> 
 				<track id="trackTagEng"  src="${newVid.subEng } " kind="captions" >
 				<track id="trackTagKor"  src="${newVid.subKor } " kind="captions" >
@@ -94,6 +111,8 @@
 	
 
 	$(function() {
+		 
+         
 	    var videoWrapper = $('.video-wrapper');
 	    
 	    // 마지막 시청기록 부터 시작.
@@ -307,6 +326,44 @@
 			subtitleBox.style.display = "none";
 		}
 	};
+	
+	
+	// 전체 화면 클릭 
+	document.getElementById("fullscreen").addEventListener('click',function(event){
+		var docV = document.documentElement;
+		  if (!document.fullscreenElement &&    // alternative standard method
+			      !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+			    if (docV.requestFullscreen) {
+			    	docV.requestFullscreen();
+			    } else if (docV.msRequestFullscreen) {
+			    	docV.msRequestFullscreen();
+			    } else if (docV.mozRequestFullScreen) {
+			    	docV.mozRequestFullScreen();
+			    } else if (docV.webkitRequestFullscreen) {
+			    	docV.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+			    }
+			  } else {
+			    if (document.exitFullscreen) {
+			      document.exitFullscreen();
+			    } else if (document.msExitFullscreen) {
+			      document.msExitFullscreen();
+			    } else if (document.mozCancelFullScreen) {
+			      document.mozCancelFullScreen();
+			    } else if (document.webkitExitFullscreen) {
+			      document.webkitExitFullscreen();
+			    }
+			  }
+	});
+	
+	
+	
+	 
+        
+	
+	
+	
+	
+	
 	
 	// 자막 선택 라디오 버튼을 누르면 자막이 진행되는 코드.
 	document.getElementById("KorRadio").addEventListener('click',function(event){
