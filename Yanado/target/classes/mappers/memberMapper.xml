@@ -69,5 +69,17 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		update MEMINFO set LASTLOGINDATE=SYSDATE where id=#{id}
 	</update>
 	
+	<delete id="deleteQnaById" parameterType="String">
+		delete from Qna where id = #{id}
+	</delete>
+	
+	<delete id="deleteWatchingRecoById" parameterType="String">
+		delete from watchingReco where id = #{id}
+	</delete>
+	
+	<delete id="deleteBookmarkById" parameterType="String">
+		delete from bookmark where id = #{id}
+	</delete>
+	
 	
 </mapper>

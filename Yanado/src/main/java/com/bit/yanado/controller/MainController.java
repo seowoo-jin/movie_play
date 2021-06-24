@@ -61,7 +61,7 @@ public class MainController {
 		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
 		
 		if(member != null || admin!= null ) {
-			List<Poster> posters = videoService.getPost();
+			List<Poster> posters = videoService.getAllPost();
 			List<String> videoSeason = new ArrayList<String>();
 			String tempSeason;
 			for(int i=0;i<posters.size();i++) {

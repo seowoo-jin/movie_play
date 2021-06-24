@@ -3,10 +3,14 @@ package com.bit.yanado.controller;
 import java.io.File;
 
 
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +34,7 @@ import com.bit.yanado.model.dto.Teaser;
 import com.bit.yanado.model.dto.TagName;
 import com.bit.yanado.model.dto.VideoInfo;
 import com.bit.yanado.model.dto.VideoTitle;
+import com.bit.yanado.model.dto.WatchingReco;
 import com.bit.yanado.model.service.AdminService;
 import com.bit.yanado.model.service.AwsS3;
 import com.bit.yanado.model.service.MemberService;
@@ -53,7 +58,48 @@ public class AdminController {
 	VideoService videoService;
 
 	@RequestMapping(value="stat")
-	public String stat() {
+	public String stat(Model model) {
+		List<MemInfo> member = adminService.getAllMember();
+		
+		List<String> loginYears = adminService.getMemberLoginYear();
+		List<String> joinYears = adminService.getMemberJoinYear();
+		List<String> outYears = adminService.getMemberOutYear();
+		// Last 로그인 날짜 정보 가져오기.
+		LinkedHashMap<String, List<Integer>> memberLoginInfo = new LinkedHashMap<String, List<Integer>>();
+		for(int i=0; i< loginYears.size();i++) {
+			List<Integer> countMemberByMonth = new ArrayList<Integer>();
+			for(int j=1;j<13;j++) {
+				String month = String.format("%02d", j);
+				countMemberByMonth.add(j-1, adminService.getCountLoginMemberByDate(loginYears.get(i)+'/'+month+'%'));
+			}
+			memberLoginInfo.put(loginYears.get(i), countMemberByMonth);
+		}
+		model.addAttribute("memberLoginInfo",memberLoginInfo);
+		// 연도별로 탈퇴한 회원수 조회.
+		LinkedHashMap<String, List<Integer>> memberOutInfo = new LinkedHashMap<String, List<Integer>>();
+		for(int i=0; i< outYears.size();i++) {
+			List<Integer> countMemberByMonth = new ArrayList<Integer>();
+			for(int j=1;j<13;j++) {
+				String month = String.format("%02d", j);
+				countMemberByMonth.add(j-1, adminService.getCountOutMemberByDate(outYears.get(i)+'/'+month+'%'));
+			}
+			memberOutInfo.put(outYears.get(i), countMemberByMonth);
+		}
+		model.addAttribute("memberOutInfo",memberOutInfo);
+		// 연도별 가입자 수.
+		LinkedHashMap<String, List<Integer>> memberJoinInfo = new LinkedHashMap<String, List<Integer>>();
+		for(int i=0; i< joinYears.size();i++) {
+			List<Integer> countMemberByMonth = new ArrayList<Integer>();
+			for(int j=1;j<13;j++) {
+				String month = String.format("%02d", j);
+				countMemberByMonth.add(j-1, adminService.getCountJoinMemberByDate(joinYears.get(i)+'/'+month+'%'));
+			}
+			memberJoinInfo.put(joinYears.get(i), countMemberByMonth);
+		}
+		model.addAttribute("memberJoinInfo",memberJoinInfo);
+		model.addAttribute("totalMemberNumber", member.size());		// 총 회원수.
+		model.addAttribute("memberWithoutOut", adminService.getMemberWithoutOut());
+		model.addAttribute("tagInformation",adminService.getBestTag());
 		
 		return "admin/stat";
 	}
@@ -69,9 +115,9 @@ public class AdminController {
 	@RequestMapping(value="video/write")
 	public String write(Model model) {
 		// TAG NAME 가져와서 Model로 보내
-		model.addAttribute("tagName",adminService.getTag());
+		model.addAttribute("tagName",adminService.getAllTagName());
 		// 영화제목 가져와서 모델로 보내기
-		model.addAttribute("movieTitle",adminService.getTitle());
+		model.addAttribute("movieTitle",adminService.getAllVideoTitle());
 		
 		return "admin/video/write";
 	}
@@ -244,9 +290,9 @@ public class AdminController {
 		public String videoModifyForm(@Param("uniqueNo") int uniqueNo,Model model) {
 			System.out.println(uniqueNo);
 			// TAG NAME 가져와서 Model로 보내
-			model.addAttribute("tagName",adminService.getTag());
+			model.addAttribute("tagName",adminService.getAllTagName());
 			// 영화제목 가져와서 모델로 보내기
-			model.addAttribute("movieTitle",adminService.getTitle());
+			model.addAttribute("movieTitle",adminService.getAllVideoTitle());
 			VideoInfo selectedVideo=videoService.getVideo(uniqueNo);
 			selectedVideo.setSeason((selectedVideo.getUniqueNo()%10000)/100);	// 영상에 고유번호에서 시즌 정보 불러오
 			selectedVideo.setEpisode(selectedVideo.getUniqueNo()%100);
@@ -332,7 +378,7 @@ public class AdminController {
 			@RequestParam(value="members[]") List<String> id) {
 		System.out.println(id.get(0));
 		for(int i=0;i<id.size();i++)
-			adminService.memberDelete(id.get(i));
+			memberService.deleteMember(id.get(i));
 		return "admin/member";
 	}
 	

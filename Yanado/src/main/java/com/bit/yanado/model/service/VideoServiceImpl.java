@@ -19,9 +19,9 @@ public class VideoServiceImpl implements VideoService {
 	VideoMapper videoMapper;
 	
 	@Override
-	public List<Poster> getPost() {
+	public List<Poster> getAllPost() {
 		// TODO Auto-generated method stub
-		return videoMapper.getPost();
+		return videoMapper.getAllPost();
 	}
 
 	@Override

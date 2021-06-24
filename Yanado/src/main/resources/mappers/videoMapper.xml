@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 
 <mapper namespace="com.bit.yanado.model.dao.VideoMapper">
 	
-	<select id="getPost" resultType="com.bit.yanado.model.dto.Poster">
+	<select id="getAllPost" resultType="com.bit.yanado.model.dto.Poster">
 		select * from POSTER
 	</select>
 	

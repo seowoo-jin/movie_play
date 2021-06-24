@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bit.yanado.model.dao.AdminMapper;
+import com.bit.yanado.model.dao.MemberMapper;
 import com.bit.yanado.model.dao.VideoMapper;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Teaser;
@@ -17,6 +18,7 @@ import com.bit.yanado.model.dto.Tag;
 import com.bit.yanado.model.dto.TagName;
 import com.bit.yanado.model.dto.VideoInfo;
 import com.bit.yanado.model.dto.VideoTitle;
+import com.bit.yanado.model.dto.WatchingReco;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -27,6 +29,9 @@ public class AdminServiceImpl implements AdminService {
 	@Autowired
 	public VideoMapper videoMapper;
 	
+	@Autowired
+	public MemberMapper memberMapper;
+	
 	@Override
 	public AdminInfo login(String id, String pw) {
 		// TODO Auto-generated method stub
@@ -34,15 +39,15 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<TagName> getTag() {
+	public List<TagName> getAllTagName() {
 		// TODO Auto-generated method stub
-		return adminMapper.getTag();
+		return adminMapper.getAllTagName();
 	}
 
 	@Override
-	public List<VideoTitle> getTitle() {
+	public List<VideoTitle> getAllVideoTitle() {
 		// TODO Auto-generated method stub
-		return adminMapper.getTitle();
+		return adminMapper.getAllVideoTitle();
 	}
 
 	@Override
@@ -73,6 +78,7 @@ public class AdminServiceImpl implements AdminService {
 			tempNewTag.setUniqueNo(uniqueNo);					// 테그에 영상 고유번호를 넣는다.
 			tempNewTag.setTagNameSeq(getTagSeq(newTag.get(i)));	// 테그에 테그고유번호를 넣는다. 테그 고유번호가 없는 테그면 새로 생성해서 넣는다.
 			adminMapper.setTag(tempNewTag);					// 입력된 테그를 테그 테이블에 넣어준다.
+			adminMapper.setTagNameCount(tempNewTag);
 		}
 	}
 
@@ -112,11 +118,6 @@ public class AdminServiceImpl implements AdminService {
 		return adminMapper.getAllMember();
 	}
 
-	@Override
-	public void memberDelete(String id) {
-		// TODO Auto-generated method stub
-		adminMapper.memberDelete(id);
-	}
 
 	@Override
 	public void videoDelete(int uniqueNo) {
@@ -187,6 +188,66 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteTag(int uniqueNo) {
 		// TODO Auto-generated method stub
 		adminMapper.deleteTag(uniqueNo);
+	}
+
+	@Override
+	public List<WatchingReco> getAllWatchingRecord() {
+		// TODO Auto-generated method stub
+		return adminMapper.getAllWatchingRecord();
+	}
+
+	@Override
+	public int getCountLoginMemberByDate(String dateInfo) {
+		// TODO Auto-generated method stub
+		return adminMapper.getCountLoginMemberByDate(dateInfo);
+	}
+
+	@Override
+	public List<String> getMemberLoginYear() {
+		// TODO Auto-generated method stub
+		return adminMapper.getMemberLoginYear();
+	}
+
+	@Override
+	public List<String> getMemberJoinYear() {
+		// TODO Auto-generated method stub
+		return adminMapper.getMemberJoinYear();
+	}
+
+	@Override
+	public List<String> getMemberOutYear() {
+		// TODO Auto-generated method stub
+		return adminMapper.getMemberOutYear();
+	}
+
+	@Override
+	public List<String> getWatchingRecoDate() {
+		// TODO Auto-generated method stub
+		return adminMapper.getWatchingRecoDate();
+	}
+
+	@Override
+	public int getCountOutMemberByDate(String dateInfo) {
+		// TODO Auto-generated method stub
+		return adminMapper.getCountOutMemberByDate(dateInfo);
+	}
+
+	@Override
+	public int getCountJoinMemberByDate(String dateInfo) {
+		// TODO Auto-generated method stub
+		return adminMapper.getCountJoinMemberByDate(dateInfo);
+	}
+
+	@Override
+	public int getMemberWithoutOut() {
+		// TODO Auto-generated method stub
+		return adminMapper.getMemberWithoutOut();
+	}
+
+	@Override
+	public List<TagName> getBestTag() {
+		// TODO Auto-generated method stub
+		return adminMapper.getBestTag();
 	}
 
 }

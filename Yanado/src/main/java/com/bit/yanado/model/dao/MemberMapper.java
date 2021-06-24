@@ -28,4 +28,7 @@ public interface MemberMapper {
 	public void deleteMember(@Param("id") String id);
 	public List<BookMark> getAllBookmarks(@Param("id") String id);
 	public void updateLoginDate(@Param("id") String id);
+	public void deleteQnaById(@Param("id") String id);
+	public void deleteBookmarkById(@Param("id") String id);
+	public void deleteWatchingRecoById(@Param("id") String id);
 }

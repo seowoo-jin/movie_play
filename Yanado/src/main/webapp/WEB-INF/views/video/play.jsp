@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false"%>
 <%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
-<html>
+<html style="margin: 0;">
 <head>
 <title>Home</title>
 <link rel="shortcut icon" href="#">
@@ -14,37 +14,46 @@
 	-ms-overflow-style: none;  /* IE and Edge */
  	 scrollbar-width: none;  /* Firefox */
 }
+.transcript::-webkit-scrollbar {
+    display: none;
+}
+
+
 
 </style>
 </head>
-<body>
+<body style="margin: 0; background-color: #686260;">
 
-	<input type="checkbox" value="자막선택" id="selectSubtitle" onclick="selectSubtitleFcn()">
-	<div id="subtitleBox" style="display: none">
+	<input type="checkbox" value="자막선택" id="selectSubtitle" onclick="selectSubtitleFcn()" style="z-index: 1000; width: 10px; height: 10px; position: absolute;">
+	<div id="subtitleBox" style="display: none; z-index: 1000; width: 1000px; height: 30px; position: absolute;">
 		<input type="radio" name="selectedSubtitle" id="KorRadio" value="Kor" ><label for="KorRadio">한</label>
 		<input type="radio" name="selectedSubtitle" id="EngRadio" value="Eng"  ><label for="EngRadio">영</label>
 		<input type="radio" name="selectedSubtitle" id="MixRadio" value="Mix"  ><label for="MixRadio">한/영</label>
 		<input type="radio" name="selectedSubtitle" id="NonRadio" value="Non"  ><label for="NonRadio">자막 없음</label>
 	</div>
 	
-	<button id="RScript" name="RScript" value="script">Script</button>
+	<button id="RScript" name="RScript" value="script" style="z-index: 1000; left: 90%; position: absolute;">Script</button>
 	
-	<input type="button" value="back" id="videoBack"><br>
+	<input type="button" value="back" id="videoBack"style="z-index: 1000; left: 10%; position: absolute;"><br>
 	<form id="play" action="/video/play" method="get">
-		<div class="video-wrapper" style="border: 1px solid; position: relative;">
-			<video id="videoArea" crossorigin="anonymous" controls  width=70% >
+		<div class="video-wrapper" style="relative: relative;  width: 100%; weight: 100vw; height: 100vh; weight-margin: 0; top: 0; left: 0; background-color: #686260;">
+			<video id="videoArea" crossorigin="anonymous" controls style="position: absolute; z-index: 10; width: 100%;  weight: 100vw; height: 100vh; margin: 0; top: 0; left: 0;">
 				<source id="uniqueNo2" src="${newVid.link }" type="video/mp4"> 
 				<track id="trackTagEng"  src="${newVid.subEng } " kind="captions" >
 				<track id="trackTagKor"  src="${newVid.subKor } " kind="captions" >
 				<track id="trackTagMix"  src="${newVid.subMix } " kind="captions" >
+				
 			</video>
 			<p hidden="hidden"> </p>
-			<div id="engSubAreaR" class="transcript" style="display: none; border: 1px solid; color: black; height: 50px; font-size: 15px; left: 70%; width: 30%; top:1%; height: 98%; position: absolute; z-index: 9998; overflow-y: scroll; text-align: left"></div>
-			<div id="engSubArea" class="transcript" style="display: none; color: white; font-size: 25px; font-weight: 900;  height: 60px; bottom: 13%; left: 10%; width: 50%;  position: absolute; z-index:9998;  overflow-y:scroll; text-align: center"></div>
-			<div id="korSubAreaR" class="transcript" style="display: none; border: 1px solid; color: black; height: 50px; font-size: 15px; left: 70%; width: 30%; top:1%; height: 98%; position: absolute; z-index: 9998; overflow-y: scroll; text-align: left"></div>
-			<div id="korSubArea" class="transcript" style="display: none; color: white; font-size: 25px; font-weight: 900;  height: 60px; bottom: 13%; left: 10%; width: 50%;  position: absolute; z-index:9998;  overflow-y:scroll; text-align: center"></div>
-			<div id="mixSubAreaR" class="transcript" style="display: none; border: 1px solid; color: black; height: 50px; font-size: 15px; left: 70%; width: 30%; top:1%; height: 98%; position: absolute; z-index: 9998; overflow-y: scroll; text-align: left"></div>
-			<div id="mixSubArea" class="transcript" style="display: none; color: white; font-size: 25px; font-weight: 900;  height: 60px; bottom: 13%; left: 10%; width: 50%;  position: absolute; z-index:9998;  overflow-y:scroll; text-align: center"></div>
+			<div id="engSubAreaR" class="transcriptR" style="display: none; background-color: #686260; weight: 100vw; height: 100vh; color: #D0CFCF; height: 50px; font-size: 25px; left: 70%; width: 30%; top:1%; height: 98%; position: absolute; z-index: 2147483647; overflow-y: scroll; text-align: left"></div>
+			<div id="korSubAreaR" class="transcriptR" style="display: none; background-color: #686260; weight: 100vw; height: 100vh; color: #D0CFCF; height: 50px; font-size: 25px; left: 70%; width: 30%; top:1%; height: 98%; position: absolute; z-index: 2147483647; overflow-y: scroll; text-align: left"></div>
+			<div id="mixSubAreaR" class="transcripR" style="display: none; background-color: #686260; weight: 100vw; height: 100vh; color: #D0CFCF; height: 50px; font-size: 25px; left: 70%; width: 30%; top:1%; height: 98%; position: absolute; z-index: 2147483647; overflow-y: scroll; text-align: left"></div>
+			
+			<div id="subAreas" class="transcripts" style="bottom: 13%; height: 100px; left: 25%; width: 50%;  position: fixed; z-index: 2147483647;">
+				<div id="engSubArea" class="transcript" style="display: none;  color: white; font-size: 35px; font-weight: 800; weight: 100vw; height: 100%; bottom: 13%; left: 0; width: 100%; margin: 0; z-index: 2147483647;  overflow-y:scroll; text-align: center; "></div>
+				<div id="mixSubArea" class="transcript" style="display: none;  color: white; font-size: 35px; font-weight: 800; weight: 100vw; height: 100%; bottom: 13%; left: 0; width: 100%; margin: 0; z-index: 2147483647;  overflow-y:scroll; text-align: center; "></div>
+				<div id="korSubArea" class="transcript" style="display: none;  color: white; font-size: 35px; font-weight: 800; weight: 100vw; height: 100%; bottom: 13%; left: 0; width: 100%; margin: 0; z-index: 2147483647;  overflow-y:scroll; text-align: center; "></div>
+			</div>
 		</div>
 		
 		
@@ -78,38 +87,12 @@
 		bookmarkArray.push(existBookmarks[i].dataset.timestamp);
 	}
 	var currentSubtitle = "${defaultSubtitle }";							// 기본 자막.
-	console.log(currentSubtitle);
 	var isRightSubtitle = false;											// 오른쪽 스크립트를 사용하는지.
 	var mScrollHeight;														// 영상위에 스크롤 높이.
 	var rScrollHeight;														// 오른쪽 스크립트 스크롤 높이.
-	
-	
-	/* 좌우키 클릭 이벤트 */
-/* 	window.addEventListener("keydown", function(e){
-		if(e.keyCode == 37){
-			// left
-			console.log(subtitleKor.length);
-			for(var j=0;j<subtitleKor.length; j++){
-				if (video[0].currentTime > subtitleKor[j].startTime && video[0].currentTime <= subtitleKor[j].endTime){
-					video[0].currentTime = subtitleKor[j-1].startTime; 
-				}else if( video[0].currentTime > subtitleKor[j].endTime && video[0].currentTime <= subtitleKor[j+1].startTime){
-					video[0].currentTime = subtitleKor[j].startTime; 
-				}
-			} 
-		}else if(e.keyCode == 39){
-			// right
-			for(var j=0;j<subtitleKor.length; j++){
-				if (video[0].currentTime > subtitleKor[j].startTime && video[0].currentTime <= subtitleKor[j].endTime){
-					video[0].currentTime = subtitleKor[j+1].startTime; 
-				}else if( video[0].currentTime > subtitleKor[j].endTime && video[0].currentTime <= subtitleKor[j+1].startTime){
-					video[0].currentTime = subtitleKor[j+1].startTime; 
-				}
-			} 
-		} 
-	}) */
+	var isScrolling = 0;
 	
 
-	
 	$(function() {
 	    var videoWrapper = $('.video-wrapper');
 	    
@@ -136,8 +119,6 @@
 	            subtitleKor = document.getElementById("trackTagKor").track;	
 	            subtitleMix = document.getElementById("trackTagMix").track;
 	            
-	            
-	            
 	            var engSubHtml = '';				// 동적으로 자막과 이미지를 생성하기 위해 변수를 만들어준다.
 	            var korSubHtml = '';
 	            var mixSubHtml = '';
@@ -147,11 +128,11 @@
 	            
 	            setTimeout(function(){
 		        	for (var i=0; i<subtitleEng.cues.length; i++){				// 자막 길이만큼 반복실행하면서 자막과 이미지를 만든다.
-		        		var imgHtml = '<img id="bookmarkEngImg_'+subtitleEng.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px;"  onclick="bookmarks('+i+')" ></img>';
+		        		var imgHtml = '<img id="bookmarkEngImg_'+subtitleEng.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px; float: right;"  onclick="bookmarks('+i+')" ></img>';
 		        		var parHtml = '<p role="button" id="subTitle_eng'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
-		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
+		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 150px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
 		        		var parHtmlR = '<p role="button" id="subTitle_R_eng'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
-		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
+		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 50px;" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">&nbsp;&nbsp;' + subtitleEng.cues[i].text + '</p>';
 		        		engSubHtml += parHtml;
 		        		engSubHtmlR = engSubHtmlR + imgHtml + parHtmlR;	// 오른쪽 자막 구간에는 북마크 이미지까지 더해준다.
 		        	}
@@ -159,11 +140,11 @@
 		        	engSubAreaR.innerHTML = engSubHtmlR;
 		        	
 					for (var i=0; i<subtitleKor.cues.length; i++){
-						var imgHtml = '<img id="bookmarkKorImg_'+subtitleKor.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px;"  onclick="bookmarks('+i+')" ></img>';
+						var imgHtml = '<img id="bookmarkKorImg_'+subtitleKor.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px float: right;"  onclick="bookmarks('+i+')" ></img>';
 		        		var parHtml = '<p role="button" id="subTitle_kor'+subtitleKor.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleKor.cues[i].startTime+
-		        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">' + subtitleKor.cues[i].text + '</p>';
+		        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 150px" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">' + subtitleKor.cues[i].text + '</p>';
 		        		var parHtmlR = '<p role="button" id="subTitle_R_kor'+subtitleKor.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleKor.cues[i].startTime+
-		        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">' + subtitleKor.cues[i].text + '</p>';
+		        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 50px;" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">&nbsp;&nbsp;' + subtitleKor.cues[i].text + '</p>';
 		        		korSubHtml += parHtml;
 		        		korSubHtmlR = korSubHtmlR + imgHtml + parHtmlR;
 		        	}
@@ -171,11 +152,11 @@
 		        	korSubAreaR.innerHTML = korSubHtmlR;
 		        	
 					for (var i=0; i<subtitleMix.cues.length; i++){
-						var imgHtml = '<img id="bookmarkMixImg_'+subtitleMix.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px;"  onclick="bookmarks('+i+')" ></img>';
+						var imgHtml = '<img id="bookmarkMixImg_'+subtitleMix.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px; float: right;"  onclick="bookmarks('+i+')" ></img>';
 		        		var parHtml = '<p role="button" id="subTitle_mix'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleMix.cues[i].startTime+
-		        		'" data-end-time="'+subtitleMix.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleMix.cues[i].startTime+')">' + subtitleMix.cues[i].text + '</p>';
+		        		'" data-end-time="'+subtitleMix.cues[i].endTime+'" style="margin: 150px" onclick="subtitleClkEvnt('+subtitleMix.cues[i].startTime+')">' + subtitleMix.cues[i].text + '</p>';
 		        		var parHtmlR = '<p role="button" id="subTitle_R_mix'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
-		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 100px" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
+		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 50px;" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">&nbsp;&nbsp;' + subtitleEng.cues[i].text + '</p>';
 		        		mixSubHtml += parHtml;
 		        		mixSubHtmlR = mixSubHtmlR + imgHtml + parHtmlR;
 		        	}
@@ -189,44 +170,46 @@
 				    } 
 	        	}, 1000);
 	        	
-	        	
+	            
 	        	 // 자막이 변하는 이벤트. 자막이 변하면서 해당 자막의 offsetTop을 가져와서 scroll 위치를 그쪽으로 옮겨준다.
 	        	subtitleEng.oncuechange = function () {	
-	        		if(typeof subtitleKor.activeCues[0] !== "undefined"){
-	        			currentCue = subtitleKor.activeCues[0].startTime;
-		            	var pTag = document.getElementById('subTitle_'+currentSubtitle+currentCue).offsetTop;
-		            	var pTagR = document.getElementById('subTitle_R_'+currentSubtitle+currentCue).offsetTop;
-		            	document.getElementById(currentSubtitle + "SubArea").scrollTop = pTag;
-		            	document.getElementById(currentSubtitle + "SubAreaR").scrollTop = pTagR - 
-		            	document.getElementById(currentSubtitle + "SubAreaR").offsetHeight/2;
-	        		}else{
-	        			document.getElementById(currentSubtitle + "SubArea").scrollTop +=
-	        			document.getElementById(currentSubtitle + "SubArea").offsetHeight;
-	        		}
-	            	
+	        		 if(isScrolling == 0){
+	        			 if(typeof subtitleKor.activeCues[0] !== "undefined"){
+	 	        			document.getElementById(currentSubtitle + "SubArea").style.visibility = "visible";
+	 	        			currentCue = subtitleKor.activeCues[0].startTime;
+	 		            	var pTag = document.getElementById('subTitle_'+currentSubtitle+currentCue).offsetTop;
+	 		            	var pTagR = document.getElementById('subTitle_R_'+currentSubtitle+currentCue).offsetTop;
+	 		            	document.getElementById(currentSubtitle + "SubArea").scrollTop = pTag;
+	 		            	document.getElementById(currentSubtitle + "SubAreaR").scrollTop = pTagR - 
+	 		            	document.getElementById(currentSubtitle + "SubAreaR").offsetHeight/2;
+	 	        		 }else{
+	 	        			document.getElementById(currentSubtitle + "SubArea").style.visibility = "hidden";
+	 	        		 }
+	        		 }
 	            }
-	        	
-	            
+	        	 
 	        	changeSub();		// 저장된 자막 종류로 시작.
+	        	// 동영상이 재생되면서 실시간으로 시청 기록에 저장.
+	        	var termOfIterate=0;
+	        	document.getElementById('videoArea').ontimeupdate=function(){
+	        		termOfIterate += 1;
+	        		if (termOfIterate == 20){
+	        			var xhttp = new XMLHttpRequest();
+		        		var record = video[0].currentTime;
+		   				 xhttp.open("GET", "${pageContext.request.contextPath}/video/backToMain?trackId="+uniqueNo+"&record="+record, true);
+		   					xhttp.onreadystatechange = function() {
+		   						if(xhttp.readyState == 4 && xhttp.status == 200){		// 정상상태일때 한번만 실행시키게 해준다.
+		   							if (xhttp.responseText){									// 입력한 북마크 정보를 JavaScript에서 다루는 북마크 정보에 넣어준다.
+		   								console.log("success recoding");
+		   							}
+		   						}
+		   					};
+		   				xhttp.send();
+		   				termOfIterate=0;
+	        		}
+	    	    };
 	      	});
 	    });
-	    
-	    window.onpopstate = function() {
-	    	  if (window.history.length == lastHistoryLength)
-	    	      console.log("User used back button");
-	    	  lastHistoryLength = window.history.length;
-	    };
-	    
-	   // 뒤로가기 버튼 눌렀을때 현재 시청기록 저장.
-	   document.getElementById("videoBack").addEventListener('click',function(){
-		   window.history.back();
-		   /* var record = video[0].currentTime;
-	    	console.log(record);
-	    	var uniqueNo = "${newVid.uniqueNo}";
-	    	window.location.href="${pageContext.request.contextPath}/video/backToMain?trackId="+uniqueNo+"&record="+record; */
-	    })
-	    
-	    
 	});
 	
 	 
@@ -275,27 +258,38 @@
 	}
 	
 	
-	
+	// 자막 있는곳에 마우스 오버 하면 자막이 다시 보이게 된다. 
+	document.getElementById("subAreas").addEventListener('mouseover', function(){
+		document.getElementById(currentSubtitle + "SubArea").style.visibility = "visible";
+	})
 	
 	// div를 스크롤 했을 경우.
 	document.getElementById("korSubAreaR").addEventListener('scroll',function(){
 		rScrollHeight=document.getElementById("korSubAreaR").scrollTop;
+		isScrollingFcn();
 	});
 	document.getElementById("korSubArea").addEventListener('scroll',function(){
-		mScrollHeight=document.getElementById("korSubArea").scrollTop;
+		mScrollHeight=document.getElementById("korSubArea").scrollTop;isScrollingFcn();
 	})
 	document.getElementById("engSubAreaR").addEventListener('scroll',function(){
-		rScrollHeight=document.getElementById("engSubAreaR").scrollTop;
+		rScrollHeight=document.getElementById("engSubAreaR").scrollTop;isScrollingFcn();
 	});
 	document.getElementById("engSubArea").addEventListener('scroll',function(){
-		mScrollHeight=document.getElementById("engSubArea").scrollTop;
+		mScrollHeight=document.getElementById("engSubArea").scrollTop;isScrollingFcn();
 	})
 	document.getElementById("mixSubAreaR").addEventListener('scroll',function(){
-		rScrollHeight=document.getElementById("mixSubAreaR").scrollTop;
+		rScrollHeight=document.getElementById("mixSubAreaR").scrollTop;isScrollingFcn();
 	});
 	document.getElementById("mixSubArea").addEventListener('scroll',function(){
-		mScrollHeight=document.getElementById("mixSubArea").scrollTop;
+		mScrollHeight=document.getElementById("mixSubArea").scrollTop;isScrollingFcn();
 	});
+	
+	function isScrollingFcn(){
+		isScrolling=1;
+		setTimeout(function(){
+			isScrolling=0;
+		},3000);
+	}
 	
 	// 자막을 클랙했을 때 해당 자막으로 영상이 이동하는 함수.
 	function subtitleClkEvnt(startTime) {
@@ -341,6 +335,11 @@
 	// 오른쪽 자막 스크립트를 보이거나 보이지 않거나 하는 버튼.
 	document.getElementById("RScript").addEventListener('click',function(){
 		isRightSubtitle = (isRightSubtitle)?false:true;
+		video[0].style.width = (isRightSubtitle)?"70%":"100%";
+		if(currentSubtitle != 'non'){
+			document.getElementById("subAreas").style.left=(isRightSubtitle)?"10%":"25%";
+		}
+		
 		changeSub();
 	});
 	
@@ -352,6 +351,12 @@
 			engSubAreaR.style.display=(currentSubtitle == 'eng' && isRightSubtitle)?'block':'none';
 			mixSubArea.style.display=(currentSubtitle == 'mix')?'block':'none';
 			mixSubAreaR.style.display=(currentSubtitle == 'mix' && isRightSubtitle)?'block':'none';
+			if(currentSubtitle != 'non'){
+				document.getElementById(currentSubtitle + "SubArea").style.left=(isRightSubtitle)?"10%":"25%";
+			}
+			document.getElementById("selectSubtitle").checked = false;
+			selectSubtitleFcn();
+			
 			// 변경된 자막을 맴버 정보에 default 값으로 변경해 준다.
 			var xhttp = new XMLHttpRequest();
 			 xhttp.open("GET", "${pageContext.request.contextPath}/video/setDefaultCaption?caption="+currentSubtitle, true);

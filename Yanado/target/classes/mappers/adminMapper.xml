@@ -9,11 +9,11 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		select * from ADMININFO where adminid=#{id} and adminpw=#{pw}
 	</select>
 	
-	<select id="getTag" resultType="com.bit.yanado.model.dto.TagName">
-		select * from TAGNAME
+	<select id="getAllTagName" resultType="com.bit.yanado.model.dto.TagName">
+		select * from TAGNAME ORDER BY TAGCOUNT DESC 
 	</select>
 	
-	<select id="getTitle" resultType="com.bit.yanado.model.dto.VideoTitle">
+	<select id="getAllVideoTitle" resultType="com.bit.yanado.model.dto.VideoTitle">
 		select * from VIDEOTITLE
 	</select>
 	
@@ -60,11 +60,6 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		update qna set reply=#{reply}, isReply='Y', replyDate=SYSDATE, replyAdmin=#{adminWriter} where qnaseq=#{qnaSeq}
 	</update>
 
-	
-	<update id="memberDelete" parameterType="String">
-		update memINFO set isOUT='1' where id=#{id}
-	</update>
-	
 	<delete id="videoDelete" parameterType="Integer">
 		delete from videoInfo where uniqueNo=#{uniqueNo}
 	</delete>
@@ -97,5 +92,48 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		delete from Poster where titleseq=#{titleSeq} and season=#{season}
 	</delete>
 	
+	<update id="setTagNameCount" parameterType="com.bit.yanado.model.dto.Tag">
+		update tagname set tagCount=(select count(tagNameSeq) from tag where tagNameSeq = #{tagNameSeq}) where tagNameSeq=#{tagNameSeq}
+	</update>
+	
+	<select id="getAllWatchingRecord" resultType="com.bit.yanado.model.dto.WatchingReco">
+		select * from watchingReco
+	</select>
+	
+	<select id="getCountLoginMemberByDate" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMINFO WHERE TO_CHAR(LASTLOGINDATE,'YYYY/MM/DD') LIKE #{dateInfo}
+	</select>
+	
+	<select id="getCountOutMemberByDate" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMINFO WHERE TO_CHAR(OUTDATE,'YYYY/MM/DD') LIKE #{dateInfo}
+	</select>
+	
+	<select id="getCountJoinMemberByDate" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMINFO WHERE TO_CHAR(JOINDATE,'YYYY/MM/DD') LIKE #{dateInfo}
+	</select>
+	
+	<select id="getMemberLoginYear" resultType="String">
+		SELECT DISTINCT(SUBSTR(TO_CHAR(LASTLOGINDATE,'YYYY/MM/DD'),1,4) ) FROM MEMINFO ORDER BY (SUBSTR(TO_CHAR(LASTLOGINDATE,'YYYY/MM/DD'),1,4) ) ASC
+	</select>
+	
+	<select id="getMemberJoinYear" resultType="String">
+		SELECT DISTINCT(SUBSTR(TO_CHAR(JOINDATE,'YYYY/MM/DD'),1,4) ) FROM MEMINFO WHERE NOT (SUBSTR(TO_CHAR(JOINDATE,'YYYY/MM/DD'),1,4) ) IS NULL ORDER BY (SUBSTR(TO_CHAR(JOINDATE,'YYYY/MM/DD'),1,4) ) ASC
+	</select>
+	
+	<select id="getMemberOutYear" resultType="String">
+		SELECT DISTINCT(SUBSTR(TO_CHAR(OUTDATE,'YYYY/MM/DD'),1,4) ) FROM MEMINFO WHERE NOT (SUBSTR(TO_CHAR(OUTDATE,'YYYY/MM/DD'),1,4) ) IS NULL ORDER BY (SUBSTR(TO_CHAR(OUTDATE,'YYYY/MM/DD'),1,4) ) ASC
+	</select>
+	
+	<select id="getWatchingRecoDate" resultType="String">
+		SELECT DISTINCT(SUBSTR(TO_CHAR(RECENTTIME,'YYYY/MM/DD'),1,4) ) FROM WATCHINGRECO WHERE NOT (SUBSTR(TO_CHAR(RECENTTIME,'YYYY/MM/DD'),1,4) ) IS NULL ORDER BY (SUBSTR(TO_CHAR(RECENTTIME,'YYYY/MM/DD'),1,4) ) ASC
+	</select>
+	
+	<select id="getMemberWithoutOut" resultType="Integer">
+		SELECT COUNT(*) FROM MEMINFO WHERE ISOUT=0
+	</select>
+	
+	<select id="getBestTag" resultType="com.bit.yanado.model.dto.TagName">
+		SELECT TAGNAME ,count(*) AS tagcount FROM (SELECT * FROM TAG t, WATCHINGRECO w, TAGNAME t2 WHERE t.UNIQUENO = w.UNIQUENO AND t.TAGNAMESEQ = t2.TAGNAMESEQ) GROUP BY TAGNAME ORDER BY tagcount desc
+	</select>
 	
 </mapper>

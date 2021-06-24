@@ -13,7 +13,7 @@ import com.bit.yanado.model.dto.WatchingReco;
 
 public interface VideoMapper {
 	
-	public List<Poster> getPost();
+	public List<Poster> getAllPost();
 	public List<Teaser> getTeaserVid();
 	public String getTitleByTitleSeq(@Param("titleSeq") int titleSeq);
 	public List<String> getEpisode(@Param("titleSession") String titleSession);
