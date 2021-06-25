@@ -52,7 +52,9 @@
 	</div>
 
 <script>
-		
+		window.onload = function(){
+			loadDoc('reco');
+		}
 	
 		/* ajax를 javascript로 나타낸 것 */
 		function loadDoc(event) {											// 오른쪽 div에 띄울 jsp를 비동기형식으로 가져온다. 

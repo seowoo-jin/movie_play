@@ -36,22 +36,22 @@ video::-webkit-media-controls-fullscreen-button {
 
 
 
+
 </style>
 </head>
 <body style="margin: 0; background-color: #686260;">
 	
-	<input type="checkbox" id="selectSubtitle" onclick="selectSubtitleFcn()" style="z-index: 1000; width: 10px; height: 10px; position: absolute;">
-	<label for="selectSubtitle" style="z-index: 1111;">자막</label>
-	<div id="subtitleBox" style="display: none; z-index: 1000; width: 1000px; height: 30px; position: absolute;">
-		<input type="radio" class="selectedSubtitle" name="selectedSubtitle" id="KorRadio" value="Kor" ><label for="KorRadio">한</label>
+	<input type="checkbox" id="selectSubtitle" onclick="selectSubtitleFcn()" style="z-index: 1000; position: relative;">
+	<label for="selectSubtitle" style="z-index: 1111; left: 10px; top: 10px; color: white; position: absolute;">자막</label>
+	<div id="subtitleBox" style="display: none; left: 10px; top: 30px; z-index: 1000; width: 1000px; height: 30px; position: absolute; color: white;">
+		<input type="radio" class="selectedSubtitle" name="selectedSubtitle" id="KorRadio" value="Kor" ><label for="KorRadio" >한</label>
 		<input type="radio" class="selectedSubtitle" name="selectedSubtitle" id="EngRadio" value="Eng"  ><label for="EngRadio">영</label>
 		<input type="radio" class="selectedSubtitle" name="selectedSubtitle" id="MixRadio" value="Mix"  ><label for="MixRadio">한/영</label>
 		<input type="radio" class="selectedSubtitle" name="selectedSubtitle" id="NonRadio" value="Non"  ><label for="NonRadio">자막 없음</label>
 	</div>
 	
-	<button id="RScript" name="RScript" value="script" style="z-index: 1000; left: 90%; position: absolute;">Script</button>
-	
-	<input type="button" value="fullscreen" id="fullscreen"style="z-index: 1000; left: 10%; position: absolute;"><br>
+	<button id="RScript" name="RScript" value="script" style="z-index: 1000; left:97%; top: 0; position: absolute; background-color: Transparent; border: none; color: white;">Script</button>
+	<input type="button" value="fullscreen" id="fullscreen"style="z-index: 1000; left:96%; top: 20px; position: absolute; background-color: Transparent; border: none; color: white;">
 	<form id="play" action="/video/play" method="get">
 		<div class="video-wrapper" style="relative: relative;  width: 100%; weight: 100vw; height: 100vh; weight-margin: 0; top: 0; left: 0; background-color: #686260;">
 			<video id="videoArea" crossorigin="anonymous" controls style="position: absolute; z-index: 0; width: 100%;  weight: 100vw; height: 100vh; margin: 0; top: 0; left: 0;">
@@ -61,12 +61,11 @@ video::-webkit-media-controls-fullscreen-button {
 				<track id="trackTagMix"  src="${newVid.subMix } " kind="captions" >
 				
 			</video>
-			<p hidden="hidden"> </p>
 			<div id="engSubAreaR" class="transcriptR" style="display: none; background-color: #686260; weight: 100vw; height: 100vh; color: #D0CFCF; height: 50px; font-size: 25px; left: 70%; width: 30%; top:1%; height: 98%; position: absolute; z-index: 2147483647; overflow-y: scroll; text-align: left"></div>
 			<div id="korSubAreaR" class="transcriptR" style="display: none; background-color: #686260; weight: 100vw; height: 100vh; color: #D0CFCF; height: 50px; font-size: 25px; left: 70%; width: 30%; top:1%; height: 98%; position: absolute; z-index: 2147483647; overflow-y: scroll; text-align: left"></div>
 			<div id="mixSubAreaR" class="transcripR" style="display: none; background-color: #686260; weight: 100vw; height: 100vh; color: #D0CFCF; height: 50px; font-size: 25px; left: 70%; width: 30%; top:1%; height: 98%; position: absolute; z-index: 2147483647; overflow-y: scroll; text-align: left"></div>
 			
-			<div id="subAreas" class="transcripts" style="bottom: 13%; height: 100px; left: 25%; width: 50%;  position: fixed; z-index: 2147483647;">
+			<div id="subAreas" class="transcripts" style="bottom: 13%; height: 100px; left: 0; width: 100%;  position: fixed; z-index: 2147483647;">
 				<div id="engSubArea" class="transcript" style="display: none;  color: white; font-size: 35px; font-weight: 800; weight: 100vw; height: 100%; bottom: 13%; left: 0; width: 100%; margin: 0; z-index: 2147483647;  overflow-y:scroll; text-align: center; "></div>
 				<div id="mixSubArea" class="transcript" style="display: none;  color: white; font-size: 35px; font-weight: 800; weight: 100vw; height: 100%; bottom: 13%; left: 0; width: 100%; margin: 0; z-index: 2147483647;  overflow-y:scroll; text-align: center; "></div>
 				<div id="korSubArea" class="transcript" style="display: none;  color: white; font-size: 35px; font-weight: 800; weight: 100vw; height: 100%; bottom: 13%; left: 0; width: 100%; margin: 0; z-index: 2147483647;  overflow-y:scroll; text-align: center; "></div>
@@ -111,8 +110,6 @@ video::-webkit-media-controls-fullscreen-button {
 	
 
 	$(function() {
-		 
-         
 	    var videoWrapper = $('.video-wrapper');
 	    
 	    // 마지막 시청기록 부터 시작.
@@ -191,22 +188,11 @@ video::-webkit-media-controls-fullscreen-button {
 	        	
 	            
 	        	 // 자막이 변하는 이벤트. 자막이 변하면서 해당 자막의 offsetTop을 가져와서 scroll 위치를 그쪽으로 옮겨준다.
-	        	subtitleEng.oncuechange = function () {	
-	        		 if(isScrolling == 0){
-	        			 if(typeof subtitleKor.activeCues[0] !== "undefined"){
-	 	        			document.getElementById(currentSubtitle + "SubArea").style.visibility = "visible";
-	 	        			currentCue = subtitleKor.activeCues[0].startTime;
-	 		            	var pTag = document.getElementById('subTitle_'+currentSubtitle+currentCue).offsetTop;
-	 		            	var pTagR = document.getElementById('subTitle_R_'+currentSubtitle+currentCue).offsetTop;
-	 		            	document.getElementById(currentSubtitle + "SubArea").scrollTop = pTag;
-	 		            	document.getElementById(currentSubtitle + "SubAreaR").scrollTop = pTagR - 
-	 		            	document.getElementById(currentSubtitle + "SubAreaR").offsetHeight/2;
-	 	        		 }else{
-	 	        			document.getElementById(currentSubtitle + "SubArea").style.visibility = "hidden";
-	 	        		 }
-	        		 }
-	            }
-	        	 
+	        	subtitleEng.oncuechange = function(){
+	        		if(isScrolling == 0){
+	        			cueChanging(subtitleKor);
+	        		}
+	        	 }
 	        	changeSub();		// 저장된 자막 종류로 시작.
 	        	// 동영상이 재생되면서 실시간으로 시청 기록에 저장.
 	        	var termOfIterate=0;
@@ -284,8 +270,7 @@ video::-webkit-media-controls-fullscreen-button {
 	
 	// div를 스크롤 했을 경우.
 	document.getElementById("korSubAreaR").addEventListener('scroll',function(){
-		rScrollHeight=document.getElementById("korSubAreaR").scrollTop;
-		isScrollingFcn();
+		rScrollHeight=document.getElementById("korSubAreaR").scrollTop;isScrollingFcn();
 	});
 	document.getElementById("korSubArea").addEventListener('scroll',function(){
 		mScrollHeight=document.getElementById("korSubArea").scrollTop;isScrollingFcn();
@@ -304,15 +289,23 @@ video::-webkit-media-controls-fullscreen-button {
 	});
 	
 	function isScrollingFcn(){
-		isScrolling=1;
-		setTimeout(function(){
-			isScrolling=0;
-		},3000);
+		
 	}
-	
+	// 키보드로 좌우 눌렀을때 자막이 안보이고 시작해서 큐체인지 함수를 실행.
+	window.addEventListener("keydown", function(e){
+	if(e.keyCode == 37 || e.keyCode == 39){
+				document.getElementById(currentSubtitle + "SubArea").style.visibility = "hidden";
+				cueChanging(subtitleKor);
+			} 
+		})
+
+
 	// 자막을 클랙했을 때 해당 자막으로 영상이 이동하는 함수.
 	function subtitleClkEvnt(startTime) {
 	    video[0].currentTime=startTime;
+	    isScrolling=0;
+	    document.getElementById(currentSubtitle + "SubArea").style.visibility = "hidden";
+	    cueChanging(subtitleKor);
 	    /* 자막클릭했을경우 몇번쨰 자막인지 나타내는  */
 	    /* myFunction(0); */
 	};
@@ -357,8 +350,21 @@ video::-webkit-media-controls-fullscreen-button {
 	
 	
 	
-	 
-        
+	 // 자막이 바뀔 때 마다 실행되는 함수.
+	function cueChanging(event) {	
+		 
+			 if(typeof event.activeCues[0] !== "undefined"){
+    			document.getElementById(currentSubtitle + "SubArea").style.visibility = "visible";
+    			currentCue = event.activeCues[0].startTime;
+            	var pTag = document.getElementById('subTitle_'+currentSubtitle+currentCue).offsetTop;
+            	var pTagR = document.getElementById('subTitle_R_'+currentSubtitle+currentCue).offsetTop;
+            	document.getElementById(currentSubtitle + "SubArea").scrollTop = pTag;
+            	document.getElementById(currentSubtitle + "SubAreaR").scrollTop = pTagR - 
+            	document.getElementById(currentSubtitle + "SubAreaR").offsetHeight/2;
+    		 }else{
+    			document.getElementById(currentSubtitle + "SubArea").style.visibility = "hidden";
+    		 }
+   }
 	
 	
 	
@@ -393,8 +399,11 @@ video::-webkit-media-controls-fullscreen-button {
 	document.getElementById("RScript").addEventListener('click',function(){
 		isRightSubtitle = (isRightSubtitle)?false:true;
 		video[0].style.width = (isRightSubtitle)?"70%":"100%";
+		document.getElementById("RScript").style.left=(isRightSubtitle)?"67%":"97%";
+		document.getElementById("fullscreen").style.left=(isRightSubtitle)?"66%":"96%";
+		
 		if(currentSubtitle != 'non'){
-			document.getElementById("subAreas").style.left=(isRightSubtitle)?"10%":"25%";
+			document.getElementById("subAreas").style.width=(isRightSubtitle)?"70%":"100%";
 		}
 		
 		changeSub();

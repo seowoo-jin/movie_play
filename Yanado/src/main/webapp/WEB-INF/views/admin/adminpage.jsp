@@ -65,6 +65,9 @@
 
 
 	<script >
+		window.onload = function(){
+			loadDoc('qna');
+		}
 	/* ajax를 javascript로 나타낸 것 */
 		function loadDoc(event) {
 		console.log(event);
@@ -152,14 +155,27 @@
 				panel.style.display = "block";
 			} 
 		}
-		
+		// Q&A 게시판에서 답변 달기.
 		function reply(qnaSeq){
 			var reply = document.getElementById("replyString_"+qnaSeq).value;
 			console.log(reply);
 			loadDoc("reply?qnaSeq="+qnaSeq+"&reply="+reply);  //
 		}
 		
-		
+		// PDF 파일 생성 버튼.
+		document.getElementById("generatePDF").addEventListener('click', function(){
+			console.log("Aaa");
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if(xhttp.readyState == 4 && xhttp.status == 200){
+					if (xhttp.responseText){
+						alert("Success generating PDF.")
+					}
+				}
+			};
+			xhttp.open("GET", "${pageContext.request.contextPath}/admin/generatePDF", true);
+			xhttp.send();
+		})
 		
 		
 

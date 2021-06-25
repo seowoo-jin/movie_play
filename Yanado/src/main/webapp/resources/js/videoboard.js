@@ -13,7 +13,7 @@ console.log("videoboard");
 var grid = new tui.Grid({
 	el : document.getElementById('videoGrid'),
 			rowHeaders: ['checkbox'],
-		      bodyHeight: 500,
+		      bodyHeight: 400,
 		      treeColumnOptions: {
 		        name: 'id',
 		        useIcon: false,
@@ -45,6 +45,34 @@ var grid = new tui.Grid({
 		 }
 		      
 });
+
+tui.Grid.applyTheme('default', {
+  cell: {
+    normal: {
+      background: '#747474',
+      border: '#747474',
+      text: '#DFDEDE',
+    },
+    head: {
+      background: '#747474',
+      border: '#747474',
+      text: '#DFDEDE',
+    },
+    rowHead: {
+      border: ''
+    },
+    selectedHead: {
+      background: '#747474',
+    },
+    evenRow: {
+      background: '#747474',
+    },
+    oddRow: {
+      background: '#747474'
+    }
+  }
+});
+
 
 grid.on('dblclick', (ev) => {
 	 var uniqueNo = grid.getValue(ev.rowKey,"uniqueNo");

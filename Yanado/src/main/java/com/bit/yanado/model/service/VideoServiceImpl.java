@@ -40,8 +40,6 @@ public class VideoServiceImpl implements VideoService {
 	public VideoInfo getVideo(int uniqueNo) {
 		// TODO Auto-generated method stub
 		VideoInfo videoInfo = videoMapper.getVideo(uniqueNo);
-		videoInfo.setSeason(((uniqueNo%10000)/100));
-		videoInfo.setEpisode(uniqueNo%100);
 		return videoInfo;
 	}
 

@@ -24,7 +24,7 @@ public class AwsS3 {
     private AmazonS3 s3Client;
     final private String accessKey = "SSS";
 		//IAM management console에 들어가면 새 액세스 키 만들기하면 access key,비밀 액세스키 나와요
-    final private String secretKey = "ASSS";
+    final private String secretKey = "SSS";
     private Regions clientRegion = Regions.AP_NORTHEAST_2;
     private String bucket = "SSS"; //본인이 생성한 버킷 이름 
 

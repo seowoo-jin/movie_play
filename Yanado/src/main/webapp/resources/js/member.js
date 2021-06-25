@@ -10,11 +10,10 @@ $.ajax({
 	
 })
 
-console.log("dddd");
 var grid = new tui.Grid({
 	el : document.getElementById('memberGrid'),
 			rowHeaders: ['checkbox'],
-		      bodyHeight: 500,
+		      bodyHeight: 400,
 		      treeColumnOptions: {
 		        name: 'id',
 		        useIcon: false,
@@ -30,6 +29,8 @@ var grid = new tui.Grid({
 	},{
 		header : 'PassWord',
 		name : 'pw'
+		
+		
 	},{
 		header : 'Name',
 		name : 'name',
@@ -54,24 +55,53 @@ var grid = new tui.Grid({
 		sortable: true
 	},{
 		header : 'Last Login Date',
-		editOptions: {
-      					 type: 'text'
-    				 },
-    				 component: {
-      name: 'lastLoginDate',
-      options: {
-        format: 'yyyy-MM-dd'
-      }
-    },
+		name : 'lastLoginDate',
+		
+		format: 'yyyy-MM-dd',
+		component: {
+	      options: {
+	        format: 'yyyy-MM-dd'
+	      }
+	    },
+	    
 		sortable: true
 	}],
 	
 		 rowHeaders: ['rowNum','checkbox'],
+		 
 		 pageOptions: {
 		 useClient: true,
 		 perPage: 10
 		 }
-		      
+		
+});
+
+
+tui.Grid.applyTheme('default', {
+  cell: {
+    normal: {
+      background: '#747474',
+      border: '#747474',
+      text: '#DFDEDE',
+    },
+    head: {
+      background: '#747474',
+      border: '#747474',
+      text: '#DFDEDE',
+    },
+    rowHead: {
+      border: ''
+    },
+    selectedHead: {
+      background: '#747474',
+    },
+    evenRow: {
+      background: '#747474',
+    },
+    oddRow: {
+      background: '#747474'
+    }
+  }
 });
 
 var deleteMember=[];

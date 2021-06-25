@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	</select>
 	
 	<select id="getAllVideo" resultType="com.bit.yanado.model.dto.VideoInfo">
-		select * from VIDEOINFO
+		SELECT UNIQUENO, TITLE , link, uploaddate, people, synop, subeng, subkor, submix, SUBSTR(TO_CHAR(uniqueNo),6,2) AS season,SUBSTR(TO_CHAR(uniqueNo),8,2) AS episode FROM VIDEOINFO
 	</select>
 	
 	<select id="getEpisode" parameterType="String" resultType="String">
@@ -27,7 +27,7 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	</select>
 	
 	<select id="getVideo" parameterType="Integer" resultType="com.bit.yanado.model.dto.VideoInfo">
-		SELECT * FROM VIDEOINFO WHERE UNIQUENO=#{uniqueNo}
+		SELECT UNIQUENO, TITLE , link, uploaddate, people, synop, subeng, subkor, submix, SUBSTR(TO_CHAR(uniqueNo),6,2) AS season,SUBSTR(TO_CHAR(uniqueNo),8,2) AS episode FROM VIDEOINFO WHERE UNIQUENO=#{uniqueNo}
 	</select>
 	
 	<insert id="setRecord" parameterType="map">

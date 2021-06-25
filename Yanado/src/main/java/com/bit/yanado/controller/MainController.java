@@ -95,7 +95,6 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping(value="getEpisode", method=RequestMethod.POST)
 	public List<String> getEpisode(Model model, String titleSeason) {
-		System.out.println(videoService.getEpisode(titleSeason));
 		return videoService.getEpisode(titleSeason);
 	}
 	
@@ -129,8 +128,6 @@ public class MainController {
 	
 	@RequestMapping(value="logout", method=RequestMethod.POST)
 	public String logout(HttpSession session) {
-		System.out.println("logout");
-		System.out.println(session.getAttribute("member"));
 		session.removeAttribute("member");
 		session.removeAttribute("admin");
 		return "redirect:/";

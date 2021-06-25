@@ -1,9 +1,9 @@
 package com.bit.yanado.controller;
 
 import java.io.File;
-
-
-
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -14,10 +14,16 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.JFileChooser;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,10 +66,10 @@ public class AdminController {
 	@RequestMapping(value="stat")
 	public String stat(Model model) {
 		List<MemInfo> member = adminService.getAllMember();
-		
 		List<String> loginYears = adminService.getMemberLoginYear();
 		List<String> joinYears = adminService.getMemberJoinYear();
 		List<String> outYears = adminService.getMemberOutYear();
+		
 		// Last 로그인 날짜 정보 가져오기.
 		LinkedHashMap<String, List<Integer>> memberLoginInfo = new LinkedHashMap<String, List<Integer>>();
 		for(int i=0; i< loginYears.size();i++) {
@@ -75,6 +81,7 @@ public class AdminController {
 			memberLoginInfo.put(loginYears.get(i), countMemberByMonth);
 		}
 		model.addAttribute("memberLoginInfo",memberLoginInfo);
+		
 		// 연도별로 탈퇴한 회원수 조회.
 		LinkedHashMap<String, List<Integer>> memberOutInfo = new LinkedHashMap<String, List<Integer>>();
 		for(int i=0; i< outYears.size();i++) {
@@ -86,6 +93,7 @@ public class AdminController {
 			memberOutInfo.put(outYears.get(i), countMemberByMonth);
 		}
 		model.addAttribute("memberOutInfo",memberOutInfo);
+		
 		// 연도별 가입자 수.
 		LinkedHashMap<String, List<Integer>> memberJoinInfo = new LinkedHashMap<String, List<Integer>>();
 		for(int i=0; i< joinYears.size();i++) {
@@ -103,6 +111,32 @@ public class AdminController {
 		
 		return "admin/stat";
 	}
+	
+	@RequestMapping(value="generatePDF")
+	public String generatePDF(HttpServletResponse response) throws Exception {
+		response.setContentType("application/pdf");
+		String fileName = URLEncoder.encode("샘플PDF", "UTF-8");
+		response.setHeader("Content-Disposition", "inline; filename=" + fileName + ".pdf");
+
+
+
+		PDDocument doc = new PDDocument();
+		PDPage newPage = new PDPage(PDRectangle.A4);
+		PDPageContentStream newContent;
+		
+		newContent = new PDPageContentStream(doc, newPage);
+		newContent.beginText();
+		newContent.setFont(PDType1Font.HELVETICA, 10);
+		newContent.newLineAtOffset(100,700);
+		newContent.showText("aaaa");
+		newContent.endText();
+		newContent.close();
+		doc.addPage(newPage);
+		doc.save("/Users/jin/Desktop/test.pdf");
+		doc.close();
+		return "admin/stat";
+	}
+	
 	
 	@RequestMapping(value="adminpage")
 	public String adminpage() {
@@ -260,10 +294,6 @@ public class AdminController {
 	@RequestMapping(value="video/videoList")
 	public List<VideoInfo> videoList() {
 		List<VideoInfo> list = adminService.getAllVideo();					//영상 정보 다 불러오
-		for(int i=0; i<list.size();i++) {
-			list.get(i).setSeason((list.get(i).getUniqueNo()%10000)/100);	// 영상에 고유번호에서 시즌 정보 불러오
-			list.get(i).setEpisode(list.get(i).getUniqueNo()%100);			// 영상 고유번호에서 에피소드 가져오
-		}
 		return list;
 	}
 	
@@ -280,7 +310,6 @@ public class AdminController {
 	// 관리자 영상 하나 삭제 ---------------------------------------------------------------------
 		@RequestMapping(value="singleVideoDelete")
 		public String singleVideoDelete(@Param("uniqueNo") int uniqueNo) {
-			System.out.println(uniqueNo);
 			adminService.videoDelete(uniqueNo);
 			return "admin/adminpage";
 		}
