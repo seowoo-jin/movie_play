@@ -28,4 +28,7 @@ public interface VideoMapper {
 	public void setBookmark(BookMark newBookmark);
 	public void deleteBookmark(BookMark newBookmark);
 	public void setDefaultCap(@Param("caption") String caption, @Param("id") String id);
+	public List<Poster> getSearchMediaByTag(@Param("item") String item);
+	public List<Poster> getSearchMediaByTitle(@Param("item") String item);
+	public List<VideoInfo> getVideoByTitleSeason(@Param("TitleSeason") String TitleSeason );
 }

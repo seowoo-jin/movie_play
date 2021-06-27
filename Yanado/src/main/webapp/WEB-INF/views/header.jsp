@@ -14,8 +14,8 @@
 					<img src="${pageContext.request.contextPath}/resources/ci/ya.png"></a>
 				</td>
 				<td class="innerTable">
-					<input class="headSearch" type="text"> 
-					<input class="headBtn" type="button" value="Search">
+					<input class="headSearch" type="text" id="searchItem" name="searchItem"> 
+					<input class="headBtn" type="button" id="searchBtn" name="searchBtn" value="Search">
 				</td>
 				<td class="innerTable">
 					<c:if test="${isLogin eq 'N' }">
@@ -34,7 +34,10 @@
 	</form>
 
 	<script type="text/javascript">
-		
+		document.getElementById("searchBtn").addEventListener('click', function(){
+			var searchingItem = document.getElementById("searchItem").value;
+			window.location.href="${pageContext.request.contextPath}/search?searchingItem="+searchingItem;
+		})
 	</script>
 
 </body>

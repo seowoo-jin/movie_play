@@ -9,7 +9,6 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		select * from POSTER
 	</select>
 	
-	
 	<select id="getTeaserVid" resultType="com.bit.yanado.model.dto.Teaser">
 		SELECT * FROM TEASER 
 	</select>
@@ -68,5 +67,17 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 		update meminfo set defaultcap=#{caption} where id=#{id}
 	</update>
 	
+	<select id="getSearchMediaByTitle" parameterType="String" resultType="com.bit.yanado.model.dto.Poster">
+		select * from poster where titleSeq in (select titleSeq from videotitle where REGEXP_LIKE(title, #{item}))
+	</select>
+	
+	<select id="getSearchMediaByTag" parameterType="String" resultType="com.bit.yanado.model.dto.Poster">
+		select * from poster where titleSeq IN (SELECT DISTINCT TO_Number(SUBSTR(TO_CHAR(t1.UNIQUENO),1,5)) titleSeq 
+		FROM tag t1 WHERE t1.TAGNAMESEQ IN (SELECT t.TAGNAMESEQ FROM TAGNAME t WHERE REGEXP_LIKE(t.TAGNAME, #{item})))
+	</select>
+	
+	<select id="getVideoByTitleSeason" parameterType="String" resultType="com.bit.yanado.model.dto.VideoInfo">
+		select * from videoInfo where substr(TO_CHAR(uniqueNo),1,7) = ${TitleSeason}
+	</select>
 	
 </mapper>

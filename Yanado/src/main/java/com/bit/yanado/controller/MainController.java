@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ import com.bit.yanado.model.dao.MemberMapper;
 import com.bit.yanado.model.dto.EmailDTO;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Teaser;
+import com.bit.yanado.model.dto.VideoInfo;
 import com.bit.yanado.model.dto.AdminInfo;
 import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.service.AdminService;
@@ -61,17 +63,22 @@ public class MainController {
 		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
 		
 		if(member != null || admin!= null ) {
+			// 포스터들 가져와서 시즌하고 같이 보내주는 곳, 모델로는 vidSeason, posters 두개 보내준다.
 			List<Poster> posters = videoService.getAllPost();
 			List<String> videoSeason = new ArrayList<String>();
+			List<VideoInfo> videoInfos = new ArrayList<VideoInfo>();
+			posters = (posters.size()<=15)?posters:posters.subList(1, 15);
 			String tempSeason;
 			for(int i=0;i<posters.size();i++) {
 				tempSeason = posters.get(i).getTitleSeq()+String.format("%02d", posters.get(i).getSeason());
 				videoSeason.add(tempSeason); 
+				videoInfos.add(videoService.getVideoByTitleSeason(tempSeason));
 			}
 			model.addAttribute("vidSeason",videoSeason);
 			model.addAttribute("posters", posters);
+			model.addAttribute("videoInfo", videoInfos);
 			
-			
+			// 예고편 가져와서 모델로 보내주는 곳.
 			List<Teaser> teaserVids = videoService.getTeaserVid();		// 메인에 올릴 예고편 가져온다.
 			Teaser teaserVid = teaserVids.get(0);						// 일단 첫번째 예고편을 가져온다. 
 			model.addAttribute("teaserVid", teaserVid);					// 모델을 이용해서 뷰로 보낸다. 
@@ -258,7 +265,36 @@ public class MainController {
 		}
 	}
 	
-	
+	// 미디어 서치/찾기  -----------------------------------------------------------------------
+		@RequestMapping(value="search")
+		public String search(@Param("searchingItem") String searchingItem,
+				HttpSession session, Model model) {
+			MemInfo member = (MemInfo) session.getAttribute("member");
+			AdminInfo admin = (AdminInfo) session.getAttribute("admin");
+			if(member != null || admin!= null ) {
+				model.addAttribute("isLogin",(member != null)?"Y":((admin == null)?"":"A"));
+				
+				List<Poster> posters = videoService.getSearchMdeia(searchingItem);
+				List<String> videoSeason = new ArrayList<String>();
+				List<VideoInfo> videoInfos = new ArrayList<VideoInfo>();
+				
+				String tempSeason;
+				for(int i=0;i<posters.size();i++) {
+					tempSeason = posters.get(i).getTitleSeq()+String.format("%02d", posters.get(i).getSeason());
+					videoSeason.add(tempSeason); 
+					videoInfos.add(videoService.getVideoByTitleSeason(tempSeason));
+				}
+				model.addAttribute("vidSeason",videoSeason);
+				model.addAttribute("posters", posters);
+				model.addAttribute("videoInfo", videoInfos);
+				
+				
+				
+				
+				return "search";
+			}
+			return "redirect:/";
+		}
 
 	
 	

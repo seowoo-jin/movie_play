@@ -52,8 +52,6 @@ public class VideoController {
 			}
 			return "video/play";
 		}
-		
-		
 		return "redirect:/";
 	}
 	

@@ -24,4 +24,7 @@ public interface VideoService {
 	public void setBookmark(BookMark newBookmark);
 	public void deleteBookmark(BookMark newBookmark);
 	public void setDefaultCap(String caption, String id);
+	public List<Poster> getSearchMdeia(String item);
+	public VideoInfo getVideoByTitleSeason(String TitleSeason );
+	
 }

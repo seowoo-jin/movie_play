@@ -26,31 +26,50 @@
 <!--sideBar CSS soojung_0625 -->
    <nav class="main-menu">
       <ul>
-         <li class="has-subnav"><a href="javascript:void(0);"
-            onClick="loadDoc('reco');return false;"> <i
-               class="fa fa-list fa-2x"></i> <span class="nav-text"> 시청기록 </span>
-         </a></li>
-         <li class="has-subnav"><a href="javascript:void(0);" onClick="loadDoc('bookmark');return false;"> <i
-               class="fa fa-folder-open fa-2x"></i> <span class="nav-text">
-                  북마크 </span>
-         </a></li>
-         <li onclick="dis()"><a href="#"> <i class="fa fa-font fa-2x"></i>
-               <span class="nav-text"> Q&A </span>
-         </a></li>
+         <li class="has-subnav">
+         	<a href="javascript:void(0);" onClick="loadDoc('reco');return false;"> 
+		         <i class="fa fa-list fa-2x"></i> 
+		         <span class="nav-text"> 시청기록 </span>
+	         </a>
+         </li>
+         <li class="has-subnav">
+	         <a href="javascript:void(0);" onClick="loadDoc('bookmark');return false;"> 
+		         <i  class="fa fa-folder-open fa-2x"></i> 
+		         <span class="nav-text">북마크 </span>
+	         </a>
+         </li>
+         <li onclick="dis()">
+	         <a href="#"> 
+		         <i class="fa fa-font fa-2x"></i>
+		         <span class="nav-text"> Q&A </span>
+	         </a>
+         </li>
          <div id="submenu">
-            <li class="has-subnav"><a href="javascript:void(0);" onClick="loadDoc('qna/board');return false;"> <i class="slidedown">
-               </i> <span class="nav-text"> - Q&A 게시판 </span>
-            </a></li>
-            <li class="has-subnav"><a href="javascript:void(0);" onClick="loadDoc('qna/myqna');return false;"> <i class="slidedown">
-               </i> <span class="nav-text"> - 내글보기 </span>
-            </a></li>
-            <li class="has-subnav"><a href="javascript:void(0);" onClick="loadDoc('qna/write');return false;"> <i class="slidedown">
-               </i> <span class="nav-text"> - 글쓰기 </span>
-            </a></li>
+            <li class="has-subnav">
+	            <a href="javascript:void(0);" onClick="loadDoc('qna/board');return false;"> 
+		            <i class="slidedown"></i> 
+		            <span class="nav-text"> - Q&A 게시판 </span>
+	            </a>
+            </li>
+            <li class="has-subnav">
+	            <a href="javascript:void(0);" onClick="loadDoc('qna/myqna');return false;"> 
+		            <i class="slidedown"></i> 
+		            <span class="nav-text"> - 내글보기 </span>
+	            </a>
+            </li>
+            <li class="has-subnav">
+	            <a href="javascript:void(0);" onClick="loadDoc('qna/write');return false;"> 
+		            <i class="slidedown"></i> 
+		            <span class="nav-text"> - 글쓰기 </span>
+	            </a>
+            </li>
          </div>
-         <li><a href="javascript:void(0);" onClick="loadDoc('modify');return false;"> <i class="fa fa-info fa-2x"></i> <span
-               class="nav-text"> 개인정보수정 </span>
-         </a></li>
+         <li>
+	         <a href="javascript:void(0);" onClick="loadDoc('modify');return false;"> 
+		         <i class="fa fa-info fa-2x"></i> 
+		         <span class="nav-text"> 개인정보수정 </span>
+	         </a>
+         </li>
       </ul>
    </nav>
 

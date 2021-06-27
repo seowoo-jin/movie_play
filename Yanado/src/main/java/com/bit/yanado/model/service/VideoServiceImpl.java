@@ -1,5 +1,6 @@
 package com.bit.yanado.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +102,21 @@ public class VideoServiceImpl implements VideoService {
 	public void setDefaultCap(String caption, String id) {
 		// TODO Auto-generated method stub
 		videoMapper.setDefaultCap(caption,id);
+	}
+
+	@Override
+	public List<Poster> getSearchMdeia(String item) {
+		// TODO Auto-generated method stub
+		List<Poster> newPoster = new ArrayList<Poster>();
+		newPoster.addAll(videoMapper.getSearchMediaByTag(item));
+		newPoster.addAll(videoMapper.getSearchMediaByTitle(item));
+		return newPoster;
+	}
+
+	@Override
+	public VideoInfo getVideoByTitleSeason(String TitleSeason) {
+		// TODO Auto-generated method stub
+		return videoMapper.getVideoByTitleSeason(TitleSeason).get(0);
 	}
 
 }
