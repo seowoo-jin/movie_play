@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.yanado.model.dao.AdminMapper">
+	
+	<select id="login" parameterType="map" resultType="com.bit.yanado.model.dto.AdminInfo">
+		select * from ADMININFO where adminid=#{id} and adminpw=#{pw}
+	</select>
+	
+	<select id="getAllTagName" resultType="com.bit.yanado.model.dto.TagName">
+		select * from TAGNAME ORDER BY TAGCOUNT DESC 
+	</select>
+	
+	<select id="getAllVideoTitle" resultType="com.bit.yanado.model.dto.VideoTitle">
+		select * from VIDEOTITLE
+	</select>
+	
+	<select id="getAllMember" resultType="com.bit.yanado.model.dto.MemInfo">
+		select * from MEMINFO
+	</select>
+	
+	<insert id="insertNewTitle" parameterType="String">
+		insert into VIDEOTITLE (titleSeq, title) values (TITLE_SEQ.nextval,#{title })
+	</insert>
+	
+	<select id="newTitleSeq" parameterType="String" resultType="int">
+		select titleSeq from VIDEOTITLE where title=#{title}
+	</select>
+	
+	
+	<insert id="setTagSeq" parameterType="String">
+		insert into TAGNAME (tagnameSeq, tagName, tagCount) values (TAGNAME_SEQ.nextval, #{tag }, '0')
+	</insert>
+	
+	<select id="getTagSeq" parameterType="String" resultType="String">
+		select tagnameSeq from TAGNAME where tagName=#{tag}
+	</select>
+	
+	<insert id="setTag" parameterType="com.bit.yanado.model.dto.Tag">
+		insert into TAG (tagSeq, uniqueNo, tagNameSeq) values (TAG_SEQ.nextval, #{uniqueNo}, #{tagNameSeq})
+	</insert>
+	
+	<insert id="setPost" parameterType="com.bit.yanado.model.dto.Poster">
+		insert into POSTER (posterSeq, poster, titleSeq, season) values (POSTER_SEQ.nextval, #{poster}, #{titleSeq}, #{season})
+	</insert>
+	
+	<insert id="setVideo" parameterType="com.bit.yanado.model.dto.VideoInfo">
+		insert into videoinfo (uniqueNo, title, link, uploadDate, people, synop, subEng, subKor, subMix) 
+		values (#{uniqueNo},#{title},#{link} ,SYSDATE,#{people},#{synop},#{subEng},#{subKor},#{subMix})
+	</insert>
+	
+	<insert id="setTeaser" parameterType="com.bit.yanado.model.dto.Teaser">
+		insert into TEASER (teaserseq, titleseq, teaserlink, uploadDate)
+		values (TEASER_SEQ.nextval, #{titleSeq}, #{teaserLink},SYSDATE)
+	</insert>
+	
+	<update id="setReply" parameterType="map">
+		update qna set reply=#{reply}, isReply='Y', replyDate=SYSDATE, replyAdmin=#{adminWriter} where qnaseq=#{qnaSeq}
+	</update>
+
+	<delete id="videoDelete" parameterType="Integer">
+		delete from videoInfo where uniqueNo=#{uniqueNo}
+	</delete>
+	
+	<update id="videoUpdate" parameterType="com.bit.yanado.model.dto.VideoInfo">
+		update VIDEOINFO set people=#{people}, synop=#{synop} where uniqueNO=#{uniqueNo}
+	</update>
+	
+	<select id="getTagByUniqueNo" parameterType="Integer" resultType="String">
+		select TAGNAME from TAGNAME where  TAGNAMESEQ IN (select TAGNAMESEQ from TAG where uniqueNo=#{uniqueNo})
+	</select>
+	
+	<delete id="teaserDelete" parameterType="Integer">
+		delete from TEASER where teaserSeq=#{teaserSeq}
+	</delete>
+	
+	<update id="teaserIsMainReset">
+		update Teaser set isMain='N' where isMain in (select isMain from teaser where isMain = 'Y')
+	</update>
+	
+	<update id="teaserToMain" parameterType="Integer">
+		update TEASER set isMain='Y' where teaserSeq=#{teaserSeq}
+	</update>
+	
+	<delete id="deleteTag" parameterType="Integer">
+		delete from tag where uniqueNo=#{uniqueNo}
+	</delete>
+	
+	<delete id="deletePoster" parameterType="map">
+		delete from Poster where titleseq=#{titleSeq} and season=#{season}
+	</delete>
+	
+	<update id="setTagNameCount" parameterType="com.bit.yanado.model.dto.Tag">
+		update tagname set tagCount=(select count(tagNameSeq) from tag where tagNameSeq = #{tagNameSeq}) where tagNameSeq=#{tagNameSeq}
+	</update>
+	
+	<select id="getAllWatchingRecord" resultType="com.bit.yanado.model.dto.WatchingReco">
+		select * from watchingReco
+	</select>
+	
+	<select id="getCountLoginMemberByDate" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMINFO WHERE TO_CHAR(LASTLOGINDATE,'YYYY/MM/DD') LIKE #{dateInfo}
+	</select>
+	
+	<select id="getCountOutMemberByDate" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMINFO WHERE TO_CHAR(OUTDATE,'YYYY/MM/DD') LIKE #{dateInfo}
+	</select>
+	
+	<select id="getCountJoinMemberByDate" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM MEMINFO WHERE TO_CHAR(JOINDATE,'YYYY/MM/DD') LIKE #{dateInfo}
+	</select>
+	
+	<select id="getMemberLoginYear" resultType="String">
+		SELECT DISTINCT(SUBSTR(TO_CHAR(LASTLOGINDATE,'YYYY/MM/DD'),1,4) ) FROM MEMINFO ORDER BY (SUBSTR(TO_CHAR(LASTLOGINDATE,'YYYY/MM/DD'),1,4) ) ASC
+	</select>
+	
+	<select id="getMemberJoinYear" resultType="String">
+		SELECT DISTINCT(SUBSTR(TO_CHAR(JOINDATE,'YYYY/MM/DD'),1,4) ) FROM MEMINFO WHERE NOT (SUBSTR(TO_CHAR(JOINDATE,'YYYY/MM/DD'),1,4) ) IS NULL ORDER BY (SUBSTR(TO_CHAR(JOINDATE,'YYYY/MM/DD'),1,4) ) ASC
+	</select>
+	
+	<select id="getMemberOutYear" resultType="String">
+		SELECT DISTINCT(SUBSTR(TO_CHAR(OUTDATE,'YYYY/MM/DD'),1,4) ) FROM MEMINFO WHERE NOT (SUBSTR(TO_CHAR(OUTDATE,'YYYY/MM/DD'),1,4) ) IS NULL ORDER BY (SUBSTR(TO_CHAR(OUTDATE,'YYYY/MM/DD'),1,4) ) ASC
+	</select>
+	
+	<select id="getWatchingRecoDate" resultType="String">
+		SELECT DISTINCT(SUBSTR(TO_CHAR(RECENTTIME,'YYYY/MM/DD'),1,4) ) FROM WATCHINGRECO WHERE NOT (SUBSTR(TO_CHAR(RECENTTIME,'YYYY/MM/DD'),1,4) ) IS NULL ORDER BY (SUBSTR(TO_CHAR(RECENTTIME,'YYYY/MM/DD'),1,4) ) ASC
+	</select>
+	
+	<select id="getMemberWithoutOut" resultType="Integer">
+		SELECT COUNT(*) FROM MEMINFO WHERE ISOUT=0
+	</select>
+	
+	<select id="getBestTag" resultType="com.bit.yanado.model.dto.TagName">
+		SELECT TAGNAME ,count(*) AS tagcount FROM (SELECT * FROM TAG t, WATCHINGRECO w, TAGNAME t2 WHERE t.UNIQUENO = w.UNIQUENO AND t.TAGNAMESEQ = t2.TAGNAMESEQ) GROUP BY TAGNAME ORDER BY tagcount desc
+	</select>
+	
+</mapper>

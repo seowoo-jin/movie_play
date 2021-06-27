@@ -6,17 +6,20 @@
 <html>
 <head>
 <title>Member</title>
+<link href="${pageContext.request.contextPath}/resources/css/qna.css" rel="stylesheet" type="text/css">
+
+<link href="${pageContext.request.contextPath}/resources/css/movieBoard.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 	<h1>Member </h1>
 
 
+	<button class="movieBoardBtn"  id="deleteMembers" name="deleteMembers"> 선택된 멤버 삭제 </button>
 	<div id="memberGrid">
 	
 	</div>
 	
-	<button id="deleteMembers" name="deleteMembers"> 선택된 멤버 삭제 </button>
 	
 <script >
 </script>

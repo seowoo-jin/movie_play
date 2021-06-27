@@ -1,0 +1,340 @@
+/* btnLoginS 鍮④컯諛뷀깢 濡쒓렇�� �묒� 踰꾪듉 硫붿씤�� */
+.btnLoginS {
+  text-indent:0px;
+  line-height:12px;
+  -webkit-border-radius: 4;
+  -moz-border-radius: 4;
+  border-radius: 4px;
+  text-align:center;
+  vertical-align:middle;
+  display:inline-block;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 15px;
+  background: #ff0000;
+  width:80px;
+  height:37px;
+  padding: 13px;
+  text-decoration: none;
+  text-shadow:#ffffff 2px 2px 25px;
+  border-color:#919191;
+  border-width:0px;
+  border-style:solid;
+}
+
+.btnLoginS:Active {
+	position:relative;
+	top:1px;
+	
+}
+
+ .btnLoginS:hover { 
+  text-decoration: none;
+}
+
+/* btnLoginL 鍮④컯諛뷀깢 濡쒓렇�� �� 踰꾪듉 濡쒓렇�명럹�댁��� */
+.btnLoginL {
+	font-weight:bold;
+	text-decoration:none;
+	font-family:Arial;
+	text-indent:0px;
+	line-height:24px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#ffffff;
+	background:#ff0000;
+	width:316px;
+	height:50px;
+	padding: 13px;
+	text-shadow:#ffffff 2px 2px 25px;
+	border-color:#919191;
+	border-width:0px;
+	border-style:solid;
+}
+
+.btnLoginL:active {
+	position:relative;
+	top:1px
+}
+
+.btnLoginL:hover {
+}
+
+/* btnKakaoLogin �몃옉諛뷀깢 移댁뭅�ㅻ줈洹몄씤 �� 踰꾪듉 濡쒓렇�명럹�댁��� */
+.btnKakaoLogin {
+	font-weight:bold;
+	text-decoration:none;
+	font-family:Arial;
+	text-indent:0px;
+	line-height:24px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#000000 85%;
+	background:#FEE500;
+	width:316px;
+	height:50px;
+	padding: 13px;
+	text-shadow:#ffffff 2px 2px 25px;
+	border-color:#919191;
+	border-width:0px;
+	border-style:solid;
+}
+
+.btnKakaoLogin:active {
+	position:relative;
+	top:1px
+}
+
+.btnKakaoLogin:hover {
+}
+
+/* btnJoin 鍮④컯諛뷀깢 �뚯썝媛��� 踰꾪듉 �뚯썝媛��� �섏씠吏��� */
+.btnJoin {
+	font-weight:bold;
+	text-decoration:none;
+	font-family:Arial;
+	text-indent:0px;
+	line-height:24px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#ffffff;
+	background:#ff0000;
+	width:316px;
+	height:50px;
+	padding: 13px;
+	text-shadow:#ffffff 2px 2px 25px;
+	border-color:#919191;
+	border-width:0px;
+	border-style:solid;
+}
+
+.btnJoin:active {
+	position:relative;
+	top:1px
+}
+
+.btnJoin:hover {
+	background: #ff1919;
+  	text-decoration: none;
+}
+
+/* btnUpdate �뚮옉諛뷀깢 �깅줉/�섏젙/����/��젣 踰꾪듉 �꾨Т�곕굹 �섏씠吏��� */
+.btnUpdate {
+	text-decoration:none;
+	font-family:Arial;
+	box-shadow:#878787 0px 1px 0px;
+	o-box-shadow:#878787 0px 1px 0px;
+	-moz-box-shadow:#878787 0px 1px 0px;
+	-webkit-box-shadow:#878787 0px 1px 0px;
+	text-indent:0px;
+	line-height:14px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:13px;
+	color:#ffffff;
+	background: #1b91e0;
+	width:90px;
+	height:37px;
+	padding:13px;
+	text-shadow:#ffffff 2px 2px 25px;
+	border-color:#999999;
+	border-width:0px;
+	border-style:solid;
+}
+
+.btnUpdate:active {
+	box-shadow:#878787 0px 0 0px;
+	o-box-shadow:#878787 0px 0 0px;
+	-moz-box-shadow:#878787 0px 0 0px;
+	-webkit-box-shadow:#878787 0px 0 0px;
+	position:relative;
+	top:1px
+}
+
+.btnUpdate:hover {
+	background: #3498db;
+}
+
+/* btnBack �뚯깋諛뷀깢 �ㅻ줈媛�湲�/媛곸쥌 �뚯씪 �낅줈��/�꾩씠�� 以묐났 泥댄겕 �깅벑 踰꾪듉 �꾨Т�곕굹 �섏씠吏��� */
+.btnBack {
+	text-decoration:none;
+	font-family:Arial;
+	box-shadow:#878787 0px 1px 0px;
+	o-box-shadow:#878787 0px 1px 0px;
+	-moz-box-shadow:#878787 0px 1px 0px;
+	-webkit-box-shadow:#878787 0px 1px 0px;
+	text-indent:0px;
+	line-height:14px;
+	-moz-border-radius:1px;
+	-webkit-border-radius:1px;
+	border-radius:1px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:13px;
+	color:#000000;
+	background: #e0e0e0;
+	width:96px;
+	height:37px;
+	padding:13px;
+	border-bottom: solid #c4c4c4 1px;
+	/* text-shadow:#ffffff 2px 2px 25px; */
+	border-color:#999999;
+	border-width:0px;
+	border-style:solid;
+}
+
+.btnBack:active {
+	box-shadow:#878787 0px 0 0px;
+	o-box-shadow:#878787 0px 0 0px;
+	-moz-box-shadow:#878787 0px 0 0px;
+	-webkit-box-shadow:#878787 0px 0 0px;
+	position:relative;
+	top:1px
+}
+
+.btnBack:hover {
+	background: #ebebeb;
+}
+
+/* btnList �뚮옉諛뷀깢 �ㅼ쓬/紐⑸줉�깅벑 踰꾪듉 �꾨Т�곕굹 �섏씠吏��� */
+.btnList {
+	text-decoration:none;
+	font-family:Arial;
+	box-shadow:#878787 0px 1px 0px;
+	o-box-shadow:#878787 0px 1px 0px;
+	-moz-box-shadow:#878787 0px 1px 0px;
+	-webkit-box-shadow:#878787 0px 1px 0px;
+	text-indent:0px;
+	line-height:14px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:13px;
+	color:#ffffff;
+	background: #017efa;
+	width:96px;
+	height:37px;
+	padding:13px;
+	border-bottom: solid #6e6e6e 1px;
+	/* text-shadow:#ffffff 2px 2px 25px; */
+	/* border-color:#999999; */
+	border-width:0px;
+	border-style:solid;
+}
+
+.btnList:active {
+	box-shadow:#878787 0px 0 0px;
+	o-box-shadow:#878787 0px 0 0px;
+	-moz-box-shadow:#878787 0px 0 0px;
+	-webkit-box-shadow:#878787 0px 0 0px;
+	position:relative;
+	top:1px
+}
+
+.btnList:hover {
+	background: #2d95f7;
+}
+
+/* btnMemberDel �뚯깋諛뷀깢 �덊눜 踰꾪듉 媛쒖씤�뺣낫 �섏씠吏��� */
+.btnMemberDel {
+	font-weight:bold; 
+	text-decoration:none;
+	font-family:Arial;
+	/* text-shadow: 1px 1px 0px #666666; */
+	box-shadow:#878787 0px 1px 0px;
+	o-box-shadow:#878787 0px 1px 0px;
+	-moz-box-shadow:#878787 0px 1px 0px;
+	-webkit-box-shadow:#878787 0px 1px 0px;
+	text-indent:0px;
+	line-height:14px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius:2px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:13px;
+	color: #000000;
+	background: #ccc8cc;
+	width:90px;
+	height:37px;
+	padding:13px;
+	/* text-shadow:#ffffff 2px 2px 25px; */
+	border-color:#999999;
+	border-width:0px;
+	border-style:solid;
+}
+
+.btnMemberDel:active {
+	box-shadow:#878787 0px 0 0px;
+	o-box-shadow:#878787 0px 0 0px;
+	-moz-box-shadow:#878787 0px 0 0px;
+	-webkit-box-shadow:#878787 0px 0 0px;
+	position:relative;
+	top:1px
+}
+
+.btnMemberDel:hover {
+	background: #d6d6d6;
+}
+
+/* btnEmailSend �뚮옉諛뷀깢 �대찓�쇰낫�닿린 踰꾪듉 �꾩씠��/鍮꾨쾲李얘린 �섏씠吏��� */
+.btnEmailSend {
+	font-weight:bold;
+	text-decoration:none;
+	font-family:Arial;
+	text-shadow: 1px 1px 0px #666666;
+	text-indent:0px;
+	line-height:24px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-size:16px;
+	color:#ffffff;
+	background: #1b91e0;
+	width:316px;
+	height:50px;
+	padding: 13px;
+	border-bottom: solid #666666 1px;
+	/* text-shadow:#ffffff 2px 2px 25px; */
+	border-color:#919191;
+	border-width:0px;
+	border-style:solid;
+}
+
+.btnEmailSend:active {
+	position:relative;
+	border-bottom: solid #666666 1px;
+	top:1px
+}
+
+.btnEmailSend:hover {
+	background: #3498db;
+  	text-decoration: none;
+}

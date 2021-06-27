@@ -5,6 +5,7 @@
 <html>
 <head>
 	<title>My Qna</title>
+	<link href="${pageContext.request.contextPath}/resources/css/qna.css" rel="stylesheet" type="text/css">	
 </head>
 <body>
 	<h1>My Q&A</h1>
@@ -19,16 +20,16 @@
 				</c:if>
 			</button>
 			<div class="panel" id="panel_${allQna.qnaSeq}" style="display: none">
-				<p>
-					${allQna.cont }
+				<p>${allQna.cont }
 				<c:if test="${allQna.isReply eq 'N' }">
-					<button type="button" id="btn" onclick="loadDoc('qna/selectQna?qnaSeq='+${allQna.qnaSeq })">수정</button>
+					<button type="button" id="btnModify" onclick="loadDoc('qna/selectQna?qnaSeq='+${allQna.qnaSeq })">수정</button>
 				</c:if>
-				<hr>
-				<c:if test="${allQna.isReply eq 'Y' }">
-					${allQna.replyDate}<br>
-					답변 : ${allQna.reply }<br>
-					작성자 : ${allQna.replyAdmin }
+				<p class="space"/>
+				<c:if test="${allQna.isReply eq 'Y' }">				
+				<div id="re">↳Re : </div> ${allQna.reply }
+					<fmt:formatDate var="date" value="${allQna.replyDate }" pattern="yyyy.MM.dd"/>
+					<div id="replyDate"> ${date }</div> <br>
+					<div id="replyAdmin"> ${allQna.replyAdmin }</div> <br>
 				</c:if>
 				<p>
 			</div>

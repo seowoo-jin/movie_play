@@ -6,13 +6,11 @@
 <html>
 <head>
 <title>QNA</title>
-
+<link href="${pageContext.request.contextPath}/resources/css/qna.css" rel="stylesheet" type="text/css">	
 </head>
 
 <body>
-	<h1>Q&A</h1>
-
-
+<h1>Q&A</h1>
 	<div class="all">
 		<c:forEach items="${allQna }" var="allQna" varStatus="status">
 			<button class="accordion" onclick="accordion('${allQna.qnaSeq}');">
@@ -26,14 +24,15 @@
 					${allQna.cont }
 					<c:if test="${allQna.isReply eq 'N' }">
 						<c:if test="${member.id eq allQna.id}">
-								<button type="button" id="btn" onclick="loadDoc('qna/selectQna?qnaSeq='+${allQna.qnaSeq })">수정</button>
+								<button type="button" id="btnModify" onclick="loadDoc('qna/selectQna?qnaSeq='+${allQna.qnaSeq })">수정</button>
 						</c:if>
-					</c:if>
-				<hr>
+					</c:if>				
+				<p class="space"/>
 				<c:if test="${allQna.isReply eq 'Y' }">
-					${allQna.replyDate}<br>
-					답변 : ${allQna.reply }<br>
-					작성자 : ${allQna.replyAdmin }
+					<div id="re">↳Re : </div> ${allQna.reply }
+					<fmt:formatDate var="date" value="${allQna.replyDate }" pattern="yyyy.MM.dd"/>
+					<div id="replyDate"> ${date }</div> <br>
+					<div id="replyAdmin"> ${allQna.replyAdmin }</div> <br>
 				</c:if>
 				<p>
 			</div>

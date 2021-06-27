@@ -4,32 +4,27 @@
 <head>
 	<title>Find</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link href="${pageContext.request.contextPath}/resources/css/find.css" rel="stylesheet" type="text/css">	
 </head>
 <body>
-<h1>
-	Find 
-</h1>
+<a href="/yanado/">
+<img src="${pageContext.request.contextPath}/resources/ci/ya.png">
+</a>
+<div id="findMessage"></div> <br>
 
-<table>
-	<tr>
-		<th> Find ID</th>
-		<th> Find PW</th>
-	</tr>
-	<tr>
-		<td>
-			<label>E-mail : </label> <input type="text" id="emailForId" name="emailForId"><br>
-			<input type = "button" id="searchID" name="searchID" value = "Send to Email">
-		</td>
-		
-		<td>
-			<label>ID : </label> <input type="text" id="id" name="id"><br>
-			<label>E-mail : </label> <input type="text" id="emailForPw" name="emailForPw"><br>
-			<input type = "button" id="searchPW" name="searchPW" value = "Send to Email">
-		</td>
-	</tr>
-</table>
+<div class="findID" >
+	<h2> Forgot ID ? </h2> <br><br>
+			<label>E-mail : </label> <input type="text" id="emailForId" name="emailForId" placeholder="name@example.com"><br>
+			<input type = "button" class="btnEmailSend" id="searchID" name="searchID" value = "Email Me">	
+</div>
 
-<div id="findMessage"></div>
+<div class="findPW">
+	<h2> Forgot Password ?</h2><br>
+			<label>ID : </label> <input type="text" id="id" name="id" placeholder="Your ID"><br>
+			<label>E-mail : </label> <input type="text" id="emailForPw" name="emailForPw" placeholder="name@example.com"><br>
+			<input type = "button" class="btnEmailSend" id="searchPW" name="searchPW" value = "Email Me">	
+</div>
+
 
 <script type="text/javascript">
 	$(document).ready(function(){

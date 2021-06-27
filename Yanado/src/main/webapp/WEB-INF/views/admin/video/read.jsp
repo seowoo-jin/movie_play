@@ -5,6 +5,13 @@
 <html>
 <head>
 	<title>Video Information</title>
+	<link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
+	
+<style>
+textarea{
+	height:50px;
+}
+</style>	
 </head>
 <body>
 <h1>
@@ -13,29 +20,21 @@
 
 <form action="singleVideoDelete" method="get">
 
-	<label>Title : </label> ${videoInfo.title }<br>
+	<label>Title :</label> <textarea>${videoInfo.title }</textarea><br>
 	<input type="hidden" id="uniqueNo" name="uniqueNo" value="${videoInfo.uniqueNo }">
-	<label>season : </label>${videoInfo.season }<br>
-	<label>episode : </label>${videoInfo.episode }<br>
-	<label>File : </label>${videoInfo.link }<br>
-	<label>Tag : </label>${tag }<br>
+	<label>season :</label><textarea>${videoInfo.season }</textarea><br>
+	<label>episode :</label><textarea>${videoInfo.episode }</textarea><br>
+	<label>File :</label><textarea>${videoInfo.link }</textarea><br>
+	<label>Tag :</label><textarea>${tag }</textarea><br>
 	
-	<label for="people">People : </label>${videoInfo.people }<br>
-	<label for="synop">Synop : </label>${videoInfo.synop }<br>
-	<label for="subEng">English Subtitle File :</label>${videoInfo.subEng }<br>
-	<label for="subKor">Korean Subtitle File :</label>${videoInfo.subKor }<br>
-	<label for="subMix">Mix Subtitle File :</label>${videoInfo.subMix }<br>
+	<label for="people">People :</label><textarea>${videoInfo.people }</textarea><br>
+	<label for="synop">Synop :</label><textarea style="height:70px;">${videoInfo.synop }</textarea><br>
+	<label for="subEng">English Subtitle File :</label><textarea>${videoInfo.subEng }</textarea><br>
+	<label for="subKor">Korean Subtitle File :</label><textarea>${videoInfo.subKor }</textarea><br>
+	<label for="subMix">Mix Subtitle File :</label><textarea>${videoInfo.subMix }</textarea><br>
 	
-	<input type="submit" value="삭제">
+	<input type="submit" id="delete" value="삭제">
+	<button id="modify" id="modify" name="modify" onclick="loadDoc('videoModifyForm?uniqueNo=${videoInfo.uniqueNo}');return false;">수정</button>	
 </form>
-
-<button id="modify" name="modify" onclick="loadDoc('videoModifyForm?uniqueNo=${videoInfo.uniqueNo}');return false;">수정</button>
-
-<script > 
-
-</script>
-
-
-
 </body>
 </html>

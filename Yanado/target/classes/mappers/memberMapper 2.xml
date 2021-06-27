@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bit.yanado.model.dao.MemberMapper">
+		
+	<select id="login"	parameterType="map"  resultType="com.bit.yanado.model.dto.MemInfo"	>
+		select * from MEMINFO where id=#{id} and pw=#{pw}
+	</select>
+	
+	<insert id="join"	parameterType="com.bit.yanado.model.dto.MemInfo"	>
+		INSERT INTO MEMINFO(id, pw, name, tel, email, joindate, lastlogindate,phAuthNum) 
+		VALUES(#{id},#{pw},#{name},#{tel},#{email},SYSDATE,SYSDATE,1234)
+	</insert>
+	
+	<select id="findId" parameterType="String" resultType="String">
+		select id from MEMINFO WHERE email=#{email}
+	</select>
+	
+	<update id="findPw" parameterType="map" >
+		update MEMINFO SET pw=#{pw} WHERE id=#{id}
+	</update>
+	
+	<select id="checkId" parameterType="String" resultType="String">
+		select 	id from MEMINFO WHERE id=#{id}
+	
+	</select>
+	
+	<update id="updateMember" parameterType="com.bit.yanado.model.dto.MemInfo">
+		update MEMINFO SET pw=#{pw},isPay=#{isPay},tel=#{tel},email=#{email},
+		defaultCap=#{defaultCap}  WHERE id=#{id}
+	</update>
+	
+	<insert id="writeQuestion" parameterType="com.bit.yanado.model.dto.Qna">
+		insert into qna(qnaseq, title, writeDate, cont, id) 
+		values(qna_seq.nextval, #{title}, SYSDATE, #{cont}, #{id})
+	</insert>
+	
+	<select id="getAllQna" resultType="com.bit.yanado.model.dto.Qna">
+		select * from Qna
+	</select>
+	
+	<select id="getQna" parameterType="Integer" resultType="com.bit.yanado.model.dto.Qna">
+		select * from Qna where qnaseq=#{qnaSeq}
+	</select>
+	
+	<update id="updateQna" parameterType="com.bit.yanado.model.dto.Qna">
+		update Qna SET title=#{title}, cont=#{cont}, writeDate=SYSDATE where qnaSeq=#{qnaSeq}
+	</update>
+	
+	<delete id="deleteQna" parameterType="Integer">
+		delete from Qna where qnaseq=#{qnaSeq}
+	</delete>
+	
+	<select id="getQnaById" parameterType="String" resultType="com.bit.yanado.model.dto.Qna">
+		select * from Qna where id=#{id}
+	</select>
+	
+	<update id="deleteMember" parameterType="String">
+		update meminfo set isOut='1',OUTDATE=SYSDATE where id=#{id}
+	</update>
+	
+	<select id="getAllBookmarks" parameterType="String" resultType="com.bit.yanado.model.dto.BookMark">
+		select * from bookmark where id=#{id}
+	</select>
+	
+	<update id="updateLoginDate" parameterType="String">
+		update MEMINFO set LASTLOGINDATE=SYSDATE where id=#{id}
+	</update>
+	
+	<delete id="deleteQnaById" parameterType="String">
+		delete from Qna where id = #{id}
+	</delete>
+	
+	<delete id="deleteWatchingRecoById" parameterType="String">
+		delete from watchingReco where id = #{id}
+	</delete>
+	
+	<delete id="deleteBookmarkById" parameterType="String">
+		delete from bookmark where id = #{id}
+	</delete>
+	
+	
+</mapper>

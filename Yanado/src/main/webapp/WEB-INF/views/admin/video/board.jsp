@@ -6,17 +6,17 @@
 <html>
 <head>
 <title>Home</title>
+<link href="${pageContext.request.contextPath}/resources/css/movieBoard.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 	<h1>Video Board</h1>
 
-
+<button class="movieBoardBtn" id="deleteVideo" name="deleteVideo" > 선택 삭제 </button>
 	<div id="videoGrid">
 	
 	</div>
 	
-	<button id="deleteVideo" name="deleteVideo" > 선택 삭제 </button>
 	
 <script >
 </script>

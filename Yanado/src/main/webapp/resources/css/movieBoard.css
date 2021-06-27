@@ -1,0 +1,65 @@
+.all, h1 {
+	margin-left: 20%;
+	border-color: gray;
+}
+
+
+#deleteVideo{
+	width:100px;
+	height:30px;
+	font-size:14px;
+	margin: 20 0 5px 20px;
+}
+
+#deleteTeaser{
+	width:100px;
+	height:30px;
+	font-size:14px;
+	margin: 20 0 5px 20px;
+}
+
+#teaserToMain{
+	width:140px;
+	height:30px;
+	font-size:14px;
+	margin: 20 0 5px 20px;
+}
+#deleteMembers{
+	width:140px;
+	height:30px;
+	font-size:14px;
+	margin: 20 0 5px 20px;
+}
+.movieBoardBtn{
+	font-weight:bold;
+	text-decoration:none;
+	font-family:Arial;
+	text-indent:0px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	
+	color:#e0e0e0;
+	background: #404a4a;
+	padding: 8px;
+	border-bottom: solid #1a1a1a 1px;
+	/* text-shadow:#ffffff 2px 2px 25px; */
+	border-color:#b6b6b6;
+	border-width:0px;
+	border-style:solid;
+	
+}
+
+.movieBoardBtn:active {
+	position:relative;
+	border-bottom: solid #515151 1px;
+	top:1px
+}
+
+.movieBoardBtn:hover {
+	background: #515151;
+  	text-decoration: none;
+}

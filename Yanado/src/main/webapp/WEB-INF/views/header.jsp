@@ -11,7 +11,7 @@
 			<tr>
 				<td>
 					<a href="${pageContext.request.contextPath}/">
-					<img src="${pageContext.request.contextPath}/resources/ci/yanado_brand.png" align="left"></a>
+					<img src="${pageContext.request.contextPath}/resources/ci/ya.png"></a>
 				</td>
 				<td class="innerTable">
 					<input class="headSearch" type="text"> 

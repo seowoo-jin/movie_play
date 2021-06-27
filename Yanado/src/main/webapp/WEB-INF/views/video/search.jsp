@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>Search</title>
+<link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>

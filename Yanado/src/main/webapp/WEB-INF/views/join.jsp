@@ -1,46 +1,52 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page session="false" %>
 <html>
 <head>
 	<title>Join</title>
+	<link href="${pageContext.request.contextPath}/resources/css/join.css" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-	<h1>Join</h1> 
-	
-	
+<a href="/yanado/">
+<img src="${pageContext.request.contextPath}/resources/ci/ya.png">
+</a>	
+<div class="joinArea">	
+	<h1>회원가입 </h1>  
 	<br>
 	<form action="join" method="post">
-	  <label for="id" >ID : </label>					
-	  <input type="text" id = "id" name="id">
-	  <input type="button" id="idCheck" name="idCheck" value="ID check">
-	  <div id="message"></div><br>       
-	
-	  <label for="name" >Name : </label>				
-	  <input type="text" id = "name" name="name"><br>
-	
-	  <label for="pw" >Password : </label>			
-	  <input type="text" id = "pw" name = "pw"><br>
-	
-	  <label for="checkPw" >Check PW : </label>		
-	  <input type="text" id = "checkPw" name = "checkPw"><br>
-	  <div id="checkPwMsg"></div>
-	
-  	  <label for="email" >E-mail : </label>			
-	  <input type="text" id = "email" name = "email"> <br>
-	
-	  <label for="phoneNum" >Tel. : </label>			
-	  <input type="text" id = "tel" name = "tel">
-	  <input type="button" id="phoneCheck" name="phoneCheck" value="Send Number"><br>
-	  <div id="phoneMessage"></div>
-	
-	  <label for="checkNum" >Check Tel. : </label>	<input type="text" id = "checkNum" name = "checkNum">
-	  <input type="button" id="numberCheck" name="numberCheck" value="check Number"><br>
-	  <div id="checkMessage"></div>
-	
-	  <input type="submit" value="join" id="finalBtn" name="finalBtn" disabled="disabled">
+		<div id="message"></div>
+		<label for="id" >ID : </label>
+		<input type="text" id = "id" name="id">
+		<input type="button" id="idCheck" name="idCheck" value="ID check"><br>       
+	    <label for="name" >Name : </label>		
+		<input type="text" id = "name" name="name"><br>
+		
+		<label for="pw" >Password : </label>
+		<input type="password" id = "pw" name = "pw"><br>
+		
+		<label for="checkPw" >Check PW : </label>	
+		<input type="password" id = "checkPw" name = "checkPw"><br>
+		<div id="checkPwMsg"></div>
+		
+		<label for="email" >E-mail : </label>		
+		<input type="text" id = "email" name = "email"> <br>
+		
+		<label for="phoneNum" >Tel. : </label>	
+		<input type="text" id = "tel" name = "tel">
+		<input type="button" id="phoneCheck" name="phoneCheck" value="Send"><br>
+		<div id="phoneMessage"></div>
+		
+		<label for="checkNum" >Check Tel. : </label>
+		<input type="text" id = "checkNum" name = "checkNum">
+		<input type="button" id="numberCheck" name="numberCheck" value="Verify"><br>
+		<div id="checkMessage"></div> <br>
+		
+		<input type="submit" value="JOIN" id="finalBtn" name="finalBtn" disabled="disabled">
 	</form>
 	
+</div>	
 	<script>
 	$(document).ready(function(){
 		var isPossible = parseInt("0");
@@ -136,15 +142,6 @@
 		})
 	})
 	
-	
-	
-	
 	</script>
-	
-	
-	
-	
-	
-	
 </body>
 </html>

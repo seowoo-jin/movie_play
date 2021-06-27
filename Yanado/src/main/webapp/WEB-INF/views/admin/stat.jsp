@@ -4,6 +4,8 @@
 <html>
 <head>
 	<title>Stat</title>
+<link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/movieBoard.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<h1>
@@ -11,7 +13,7 @@
 		
 	</h1>
 	<form action="generatePDF" method="POST">
-		<input type="submit" id="generatePDF" name="generatePDF" >
+		<input  class="movieBoardBtn" type="submit" id="generatePDF" name="generatePDF" >
 	</form>
 	
 	<h2>

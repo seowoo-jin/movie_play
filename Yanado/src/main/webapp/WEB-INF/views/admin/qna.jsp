@@ -5,12 +5,10 @@
 <html>
 <head>
 	<title>Qna</title>
+	<link href="${pageContext.request.contextPath}/resources/css/qna.css" rel="stylesheet" type="text/css">	
 </head>
 <body>
-<h1>
-	Qna
-	
-</h1>
+<h1>Q&A	</h1>
 	<div class="all">
 		<c:forEach items="${allQna }" var="allQna" varStatus="status">
 			<button class="accordion" onclick="accordion('${allQna.qnaSeq}');">
@@ -22,21 +20,22 @@
 			<div class="panel" id="panel_${allQna.qnaSeq}" style="display: none">
 				<p>
 					${allQna.cont }
-				<button type="button" id="btn" onclick="loadDoc('qna/deleteQna?qnaSeq='+${allQna.qnaSeq })">삭제</button>
-					
-				<hr>
+				<button type="button" class="btnDel" id="btn" onclick="loadDoc('qna/deleteQna?qnaSeq='+${allQna.qnaSeq })">삭제</button>
+				<p class="space"/>
 				<c:if test="${allQna.isReply eq 'Y' }">
-					${allQna.replyDate}<br>
-					답변 : ${allQna.reply }<br>
-					작성자 : ${allQna.replyAdmin }
+					<div id="re">↳Re : </div> ${allQna.reply }
+					<fmt:formatDate var="date" value="${allQna.replyDate }" pattern="yyyy.MM.dd"/>
+					<div id="replyDate"> ${date }</div> <br>
+					<div id="replyAdmin"> ${allQna.replyAdmin }</div> <br>
 				</c:if><br>
-					<input type="text" id="replyString_${allQna.qnaSeq }" name="replyString_${allQna.qnaSeq }">
+					<input type="text" class="writeReply" id="replyString_${allQna.qnaSeq }" name="replyString_${allQna.qnaSeq }">
 					<button type="button" id="replyBtn" name="replyBtn" onclick="reply(${allQna.qnaSeq })"> 답변하기</button>
 				<p>
 				
 			</div>
 		</c:forEach>
 	</div>
+
 
 </body>
 </html>

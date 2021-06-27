@@ -3,21 +3,28 @@
 <html>
 <head>
 	<title>Login</title>
+	<link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>
-	Login 
-</h1>
+<a href="/yanado/">
+<img src="${pageContext.request.contextPath}/resources/ci/ya.png">
+</a>
+<div class="loginArea">
+<h1>Sign In</h1>
+
 <form action="CheckLogin" method="post">
-	<input type="text" name="id"><br>
-	<input type="password" name="pw"><br>
-	<input type="submit" value="login"><br>
-
-	<input type="button" value="Use Kakao Id">
-	<p>New around here?</p><a href="joinForm">Sign up</a><br>
-	<a href="find">Forgot Id / password</a> 
-</form>
+	<p class="space"/>
 	<p>${message }</p>
-
+	<input type="text" name="id" placeholder="Username"><br><br>
+	<input type="password" name="pw" placeholder="Password"><br><br>
+	<input type="submit" class="btnLoginL" value="LOGIN"><br>
+	<p id="line"></p>
+	<input type="button" class="btnKakaoLogin" value="Login with Kakao">
+	<p class="space"/>
+	New around here? <a href="joinForm">Sign up</a><br>
+	<a href="find">Forgot Id / password</a> 
+	
+</form>
+</div>
 </body>
 </html>

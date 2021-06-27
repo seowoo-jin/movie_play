@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="#">
 
 	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-
+<link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
 .transcript{

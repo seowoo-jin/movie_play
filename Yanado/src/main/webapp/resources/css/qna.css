@@ -1,0 +1,240 @@
+.all, h1 {
+	margin-left: 20%;
+	border-color: gray;
+	font-family: Arial;
+}
+
+hr {
+	width: 650px;
+	margin: 10 20 10 -50px;
+}
+.space{
+	margin-top: 50px;
+}
+#reply, #isReply { /* "답변완료" 문구 */
+	float: right;
+	text-align: right;
+	color: gray;
+	font-size: 15px;
+}
+#replyDate, #replyAdmin{  /* 답변 날짜, 관리자  */
+	display: inline-block;
+	float: right;
+	text-align: right;
+	margin-right: 10px;
+}
+#re{ /* "Re" 문구 */
+	display: inline-block;
+	color: #1b91e0;
+	font-size: 18px;
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.btnDel{ /*관리자 게시글 삭제 버튼 */ 
+	text-indent:0px;
+	line-height:12px;
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 13px;
+	background: #ff0000;
+	width:65px;
+	height:25px;
+	padding: 5px;
+	text-decoration: none;
+	text-shadow:#ffffff 2px 2px 25px;
+	border-color:#919191;
+	border-width:0px;
+	border-style:solid;
+	margin-right: 15px;
+	float: right;	  
+}
+.btnDel:active{
+	position:relative;
+	top:1px	
+}
+.btnDel:hover{
+	background: #cc0000;
+  	text-decoration: none;	
+}
+.accordion { /* qna 제목 부분  */
+	background-color: #262626;
+	color: white;
+	font-size: 18px;
+	cursor: pointer;
+	padding: 30px;
+	width: 80%;
+	text-align: left;
+	border: 5px solid #131313;
+	outline: none;
+	transition: 0.3s;
+}
+
+.active, .accordion:hover {
+	background-color: #ccc;
+}
+
+.panel {  /* qna 내용 및 답변 부분  */
+	width:665px;   /* 게시글, 답변 부분이 조금 삐뚤게 크게 나오면 width를 조절하시면 됩니다~! */
+	padding-left: 80px;
+	background-color: #262626; 
+	font-size: 15px;
+	color: white;
+	display: none;
+	overflow: hidden;
+	border: 5px solid #131313;
+}
+
+.writeReply{  /* 관리자 답변 작성(input)   */
+	width: 580px;
+	height:60px;
+	border : 3px solid gray;
+	background: #262626;
+	font-size: 10pt;
+	color: c1c1c1;
+	border-radius: 1px;
+	padding: 5px;
+}
+
+#replyBtn , #btnModify{ /* 관리자 "답변하기" 버튼,  멤버 QNA 수정 버튼    */
+	text-indent:0px;
+	line-height:12px;
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 13px;
+	background: #1b91e0;
+	width:65px;
+	height:25px;
+	padding: 5px;
+	text-decoration: none;
+	text-shadow:#ffffff 2px 2px 25px;
+	border-color:#919191;
+	border-width:0px;
+	border-style:solid;
+	margin: 15 15 0 0px;
+	float: right;	  
+}
+#replyBtn , #btnModify:active{
+	position:relative;
+	top:1px	
+}
+#replyBtn , #btnModify:hover{
+	background: #0099ff;
+  	text-decoration: none;	
+}
+
+/* =============memeber/qna/write 에 적용되는 css ===========> */
+
+
+#title{ /* qna 글쓰기 제목부분    */
+	width: 500px;
+	height:30px;
+	border : 1px solid #8C8C8C;
+	background: #262626;
+	font-size: 10pt;
+	color: c1c1c1;
+	border-radius: 1px;
+	padding: 5px;
+}
+.cont{  /* qna 글쓰기 내용 부분    */
+	margin: 15 0 15 0px;
+	resize: none;
+	height:250px;
+	width: 500px;	
+	background: #262626;
+	border : 1px solid #8C8C8C;
+	color: c1c1c1;
+
+}
+#title, .cont , .writeReply :focus {
+	outline:none;
+}
+label{   /* qna/write label    */
+	color: #8C8C8C;
+	display: inline-block;
+	width: 200px;
+	vertical-align: top;
+	text-align: center;
+	padding : 10px;
+	
+}
+
+
+#qnaWrite, #qnaMod{ /* 멤버 글쓰기 페이지 "글쓰기"버튼, 글수정 페이지 "수정" 버튼 */
+
+	text-indent:0px;
+	line-height:12px;
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 15px;
+	background: #1b91e0;
+	width:65px;
+	height:35px;
+	padding: 9px;
+	text-decoration: none;
+	text-shadow:#ffffff 2px 2px 25px;
+	border-color:#919191;
+	border-width:0px;
+	border-style:solid;
+
+}
+#qnaWrite, #qnaMod:active{
+	position:relative;
+	top:1px	
+}
+#qnaWrite, #qnaMod:hover{
+	background: #0099ff;
+  	text-decoration: none;	
+}
+
+#qnaDel{ /* 멤버  글수정 페이지 "삭제" 버튼    */
+	text-indent:0px;
+	line-height:12px;
+	-webkit-border-radius: 4;
+	-moz-border-radius: 4;
+	border-radius: 4px;
+	text-align:center;
+	vertical-align:middle;
+	display:inline-block;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 15px;
+	background: #ff0000;
+	width:65px;
+	height:35px;
+	padding: 9px;
+	text-decoration: none;
+	text-shadow:#ffffff 2px 2px 25px;
+	border-color:#919191;
+	border-width:0px;
+	border-style:solid;
+}
+#qnaDel:active{
+	position:relative;
+	top:1px	
+}
+#qnaDel:hover{
+	background: #cc0000;
+  	text-decoration: none;	
+}
+#qnaWrite, #qnaMod{
+	margin: 0 0 0 430px;
+}
