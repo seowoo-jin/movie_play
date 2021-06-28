@@ -1,3 +1,5 @@
+
+@charset "UTF-8";
 /* btnLoginS 빨강바탕 로그인 작은 버튼 메인용 */
 .btnLoginS {
   text-indent:0px;
@@ -344,5 +346,4 @@ div.buttonCenter{
    position: absolute; 
    left: 50%; 
    margin-left: -200px;
-
 }
