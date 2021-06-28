@@ -1,4 +1,5 @@
-/* btnLoginS 鍮④컯諛뷀깢 濡쒓렇�� �묒� 踰꾪듉 硫붿씤�� */
+@charset "UTF-8";
+/* btnLoginS 빨강바탕 로그인 작은 버튼 메인용 */
 .btnLoginS {
   text-indent:0px;
   line-height:12px;
@@ -32,7 +33,7 @@
   text-decoration: none;
 }
 
-/* btnLoginL 鍮④컯諛뷀깢 濡쒓렇�� �� 踰꾪듉 濡쒓렇�명럹�댁��� */
+/* btnLoginL 빨강바탕 로그인 큰 버튼 로그인페이지용 */
 .btnLoginL {
 	font-weight:bold;
 	text-decoration:none;
@@ -65,7 +66,7 @@
 .btnLoginL:hover {
 }
 
-/* btnKakaoLogin �몃옉諛뷀깢 移댁뭅�ㅻ줈洹몄씤 �� 踰꾪듉 濡쒓렇�명럹�댁��� */
+/* btnKakaoLogin 노랑바탕 카카오로그인 큰 버튼 로그인페이지용 */
 .btnKakaoLogin {
 	font-weight:bold;
 	text-decoration:none;
@@ -98,7 +99,7 @@
 .btnKakaoLogin:hover {
 }
 
-/* btnJoin 鍮④컯諛뷀깢 �뚯썝媛��� 踰꾪듉 �뚯썝媛��� �섏씠吏��� */
+/* btnJoin 빨강바탕 회원가입 버튼 회원가입 페이지용 */
 .btnJoin {
 	font-weight:bold;
 	text-decoration:none;
@@ -133,7 +134,7 @@
   	text-decoration: none;
 }
 
-/* btnUpdate �뚮옉諛뷀깢 �깅줉/�섏젙/����/��젣 踰꾪듉 �꾨Т�곕굹 �섏씠吏��� */
+/* btnUpdate 파랑바탕 등록/수정/저장/삭제 버튼 아무데나 페이지용 */
 .btnUpdate {
 	text-decoration:none;
 	font-family:Arial;
@@ -174,7 +175,7 @@
 	background: #3498db;
 }
 
-/* btnBack �뚯깋諛뷀깢 �ㅻ줈媛�湲�/媛곸쥌 �뚯씪 �낅줈��/�꾩씠�� 以묐났 泥댄겕 �깅벑 踰꾪듉 �꾨Т�곕굹 �섏씠吏��� */
+/* btnBack 회색바탕 뒤로가기/각종 파일 업로드/아이디 중복 체크 등등 버튼 아무데나 페이지용 */
 .btnBack {
 	text-decoration:none;
 	font-family:Arial;
@@ -216,7 +217,7 @@
 	background: #ebebeb;
 }
 
-/* btnList �뚮옉諛뷀깢 �ㅼ쓬/紐⑸줉�깅벑 踰꾪듉 �꾨Т�곕굹 �섏씠吏��� */
+/* btnList 파랑바탕 다음/목록등등 버튼 아무데나 페이지용 */
 .btnList {
 	text-decoration:none;
 	font-family:Arial;
@@ -258,7 +259,7 @@
 	background: #2d95f7;
 }
 
-/* btnMemberDel �뚯깋諛뷀깢 �덊눜 踰꾪듉 媛쒖씤�뺣낫 �섏씠吏��� */
+/* btnMemberDel 회색바탕 탈퇴 버튼 개인정보 페이지용 */
 .btnMemberDel {
 	font-weight:bold; 
 	text-decoration:none;
@@ -301,7 +302,7 @@
 	background: #d6d6d6;
 }
 
-/* btnEmailSend �뚮옉諛뷀깢 �대찓�쇰낫�닿린 踰꾪듉 �꾩씠��/鍮꾨쾲李얘린 �섏씠吏��� */
+/* btnEmailSend 파랑바탕 이메일보내기 버튼 아이디/비번찾기 페이지용 */
 .btnEmailSend {
 	font-weight:bold;
 	text-decoration:none;
@@ -337,4 +338,12 @@
 .btnEmailSend:hover {
 	background: #3498db;
   	text-decoration: none;
+}
+
+div.buttonCenter{
+   width: 400px; 
+   position: absolute; 
+   left: 50%; 
+   margin-left: -200px;
+
 }
