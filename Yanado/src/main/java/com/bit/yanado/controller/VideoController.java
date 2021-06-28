@@ -42,6 +42,7 @@ public class VideoController {
 				WatchingReco isRecord = videoService.getRecord(member.getId(), trackId);
 				String Record = (bookmarkTime.isEmpty())?((isRecord != null)?isRecord.getRecentPo():""):bookmarkTime;
 				model.addAttribute("record", Record);
+				System.out.println(Record);
 				// get Bookmarks
 				List<BookMark> bookmarks = videoService.getBookmarks(member.getId(), trackId);
 				String defaultSubtitle = member.getDefaultCap();
@@ -104,6 +105,7 @@ public class VideoController {
 		public String setDefaultCaption(@Param("caption") String caption, HttpSession session) {
 			MemInfo member = (MemInfo) session.getAttribute("member");
 			member.setDefaultCap(caption);
+			System.out.println(caption);
 			videoService.setDefaultCap(caption, member.getId());
 			
 			return "success";
