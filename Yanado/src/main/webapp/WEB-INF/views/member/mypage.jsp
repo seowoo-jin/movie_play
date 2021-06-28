@@ -1,7 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page session="false" %>
+   pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 
@@ -11,13 +11,11 @@
    
 <!-- Sidebar menu css -->
 <link href="${pageContext.request.contextPath}/resources/css/sidebar.css" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/member_main.css?ver=1" rel="stylesheet" type="text/css">
-<link href="${pageContext.request.contextPath}/resources/css/member_base.css?ver=1" rel="stylesheet" type="text/css">
+   
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <title>MyPage</title>
 </head>
 
-<<<<<<< HEAD
 <body>
    <div id="head">
       <jsp:include page="../header.jsp" flush="false">
@@ -106,89 +104,9 @@
          <jsp:param name="param1" value="" />
       </jsp:include>
    </div>
+   </div>
 
    <script>
-=======
-<body >
-
-<%@ include file="/WEB-INF/views/header.jsp" %>
-
-
-<main class="yanado_main" >
-       
-    
-            <!-- my page start  -->
-            <div class="s-content content">
-                <main class="row content__page">
-                    
-                    <section class="column large-full entry format-standard">
-                        <!-- 그냥 디자인 요소임_사진  -->
-                        <div class="media-wrap">
-                            <div>
-                                <img src="../resources/image/mypage.jpg.jpg"  sizes="(max-width: 2000px) 100vw, 2000px" alt="">
-                            </div>
-                        </div>
-    
-                        <div class="content__page-header">
-                            <h1 class="display-1" style="margin-bottom: 10px;">
-                                <!-- 세션에 저장된 회원 이름, 또는 아이디 불러오기  -->
-                                 ${member}
-                            Hello, ${member.name}님 !
-                            </h1>
-                               <p>
-                        YANDO와 함께 보다 유익한 일상을 보내고 계신가요 ? 
-                        <!-- 세션에 저장된 회원 이름, 또는 아이디 불러오기  -->
-                        <br>${member.name}님의 최근 접속 일자는 ${member.lastLoginDate}입니다.
-                        </p>
-                        </div> 
-                        <!-- end content__page-header -->
-                     
-
-                        <!-- 시청기록 a tag -->
-                        <a href="reco" ><input  name="button" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Watch History" type="submit"></a>
-                        <!-- 북마크 a tag -->
-                        <a href="bookmark"><input name="button" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="book mark" type="submit"></a>
-                         <!-- Q&A a tag -->
-                        <a href="qna/board""><input name="button" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="Q&A" type="submit"></a>
-                        <!-- 내 Q&A 보기 -->
-                        <a href="bookmark"> <input name="button" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="My Q&A" type="submit"></a>
-                        <!-- 내 정보 보기 -->
-                        <a href="modify"> <input name="button" id="submit" class="btn btn--primary btn-wide btn--large full-width" value="My information" type="submit"></a>
-        
-    
-    
-                    </section>
-    
-                </main>
-    
-            </div> 
-            
-            <!-- my page end -->
-    
-    
-            <!-- footer start -->
-            <footer class="s-footer footer">
-                <div class="row">
-                    <div class="column large-full footer__content">
-                        <div class="footer__copyright">
-                            <span>© Copyright YANADO_Bit 195</span> 
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="go-top">
-                    <a class="smoothscroll" title="Back to Top" href="#top"></a>
-                </div>
-            </footer>
-
-             <!-- footer end -->
-    
-        </div> 
-        <!-- s-wrap end -->
-</main>
-
- <script type="text/javascript">
->>>>>>> 531681a6ca717d813647aadc576216bd668af378
       /* Sidebar menu hide & show  */
       function dis() {
          if ($('#submenu').css('display') == 'none') {
@@ -292,5 +210,7 @@
          }
       }
    </script>
-    </body>
+
+</body>
+
 </html>

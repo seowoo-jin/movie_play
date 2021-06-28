@@ -19,9 +19,7 @@
 	<input type="password" name="pw" placeholder="Password"><br><br>
 	<input type="submit" class="btnLoginL" value="LOGIN"><br>
 	<p id="line"></p>
-	 <a href="https://kauth.kakao.com/oauth/authorize?client_id=bd66f03d70e74c8f9ade0bbb87d38df3&redirect_uri=http://localhost:8089/yanado/kakaologin&response_type=code">
 	<input type="button" class="btnKakaoLogin" value="Login with Kakao">
-	</a>
 	<p class="space"/>
 	New around here? <a href="joinForm">Sign up</a><br>
 	<a href="find">Forgot Id / password</a> 

@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +31,7 @@ import com.bit.yanado.model.dto.EmailDTO;
 import com.bit.yanado.model.dto.Poster;
 import com.bit.yanado.model.dto.Teaser;
 import com.bit.yanado.model.dto.VideoInfo;
+import com.bit.yanado.model.dto.WatchingReco;
 import com.bit.yanado.model.dto.AdminInfo;
 import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.service.AdminService;
@@ -63,7 +63,7 @@ public class MainController {
 		MemInfo member = (MemInfo) session.getAttribute("member");
 		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
 		
-		if(member != null || admin!= null ) {
+		if(member != null || admin != null ) {
 			// 포스터들 가져와서 시즌하고 같이 보내주는 곳, 모델로는 vidSeason, posters 두개 보내준다.
 			List<Poster> posters = videoService.getAllPost();
 			List<String> videoSeason = new ArrayList<String>();
@@ -75,25 +75,42 @@ public class MainController {
 				videoSeason.add(tempSeason); 
 				videoInfos.add(videoService.getVideoByTitleSeason(tempSeason));
 			}
-			model.addAttribute("vidSeason",videoSeason);
-			model.addAttribute("posters", posters);
-			model.addAttribute("videoInfo", videoInfos);
-			
+			model.addAttribute("vidSeason",videoSeason);					// 비디오 시즌 정보.
+			model.addAttribute("posters", posters);							// 포스터 정보.
+			model.addAttribute("videoInfo", videoInfos);					// 영상 정보.
 			// 예고편 가져와서 모델로 보내주는 곳.
 			List<Teaser> teaserVids = videoService.getTeaserVid();		// 메인에 올릴 예고편 가져온다.
 			Teaser teaserVid = teaserVids.get(0);						// 일단 첫번째 예고편을 가져온다. 
 			model.addAttribute("teaserVid", teaserVid);					// 모델을 이용해서 뷰로 보낸다. 
 			
+			// 시청중이 영상 정보 보내기.
+			if(member != null) {
+				List<WatchingReco> recoding = videoService.getAllRecord(member.getId());	//맴버 아이디로 시청기록을 가져온다.
+				List<Poster> posterReco = new ArrayList<Poster>();		// 시청기록에 맞는 포스터를 가져올 리스트를 만든다.
+				List<VideoInfo> videoInfoReco= new ArrayList<VideoInfo>();
+				for (int i=0;i<recoding.size();i++){				// 시청기록 만큼 포스터 가져오는걸 반복한다.
+					int uniqueNo = recoding.get(i).getUniqueNo();	// 시청기록의 고유번호를 가져온다.
+					int titleSeq = uniqueNo/10000;					// 고유번호 중앞 5자리(영상제목)을 가져온다.
+					posterReco.add(videoService.getPostByTitleSeason(titleSeq, (uniqueNo%10000)/100));	// 가져온 포스터를 리스트에 넣는다.
+					videoInfoReco.add(videoService.getVideo(uniqueNo));
+				}
+				model.addAttribute("videoInfoReco", videoInfoReco);
+				model.addAttribute("posterReco",posterReco);				// 모델로 포스터를 보내준다.
+				model.addAttribute("allRecord",recoding);			// 모델로 시청기록을 보내준다.
+			}
+			
+			
 			/*
 			  어떤 형식의 로그인을 했는지 확인.
 			 */
+			if(admin != null) {
+				model.addAttribute("isLogin","A");
+			}
 			if(member != null) {
 				model.addAttribute("isLogin","Y");
 				return (member.getIsPay().equals("Y"))?(member.getIsOut()==1?"redirect:login":"main"):"redirect:pay";
 			}
-			if(admin != null) {
-				model.addAttribute("isLogin","A");
-			}
+			
 		}else {
 			model.addAttribute("isLogin","N");
 		}
@@ -125,8 +142,6 @@ public class MainController {
 		}else {
 			if(member != null ) {
 				session.setAttribute("member", member);
-				model.addAttribute("member", member);
-				System.out.println(member);
 				memberService.updateLoginDate(member.getId());
 				return member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
 			}else {
@@ -141,62 +156,6 @@ public class MainController {
 		session.removeAttribute("member");
 		session.removeAttribute("admin");
 		return "redirect:/";
-	}
-	
-
-	//kakao login시, access token > userinfo로 저장
-	@RequestMapping(value = "/kakaologin")
-	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, Model model, MemInfo member) {
-		System.out.println("code" + code);
-		String access_Token = memberService.getAccessToken(code);
-		System.out.println("access_Token" + access_Token);
-		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
-	    System.out.println("kakako login information : " + userInfo);
-	    if (userInfo.get("id") != null) {
-	    	session.setAttribute("member" , userInfo);
-	        session.setAttribute("access_Token", access_Token);
-	        System.out.println("kakao : " + session);
-	        model.addAttribute("kakao", userInfo);
-	        return"kakao";
-	    }else {
-	    	
-		return"redirect:/";
-	}
-	}
-	
-	//kakao login 후 memberinfo check > 결제 정보 확인  > 결제 정보 없으면 payment.jsp
-	@RequestMapping(value = "/kakaoCheck", method = RequestMethod.POST)
-	public String kakaoJoin(MemInfo member , HttpSession session) {
-		System.out.println("kakao login info :"+ member);
-		String id = member.getId();
-		//String payment = member.getIsPay();
-		//System.out.println("kakao login information payment check result : "+ payment);
-		
-		//해당 정보로 로그인한 기록이 있을 경우
-		if (memberService.member_kakao(id) != null) {
-		
-			return "main";
-		//해당 정보로 로그인한 기록은 있는데, 결제 정보가 없을 경우
-	//	}  else{
-			// if (payment.equals("N")) {
-				// return "main/payment";
-		// 해당 정보로 로그인한 기록 없
-			 } else {
-					memberService.kakao_join(member);
-		return "main";
-	}	
-	}
-	
-	
-	//kakao log out시, kakao 측으로 요청을 보내서 계정 자체 로그 아웃이 필요함
-	@RequestMapping(value="/kakaologout")
-	public String kakaologout(HttpSession session) {
-		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
-	    session.removeAttribute("access_Token");
-	    session.removeAttribute("userId");
-	    session.removeAttribute("user");
-	    session.removeAttribute("member_All_info");
-	    return "main/main";
 	}
 	
 	

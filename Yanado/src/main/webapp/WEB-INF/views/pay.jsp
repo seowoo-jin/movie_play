@@ -17,7 +17,7 @@
 <body style="background-color: #2f2e2f;">
 
 
-	<div id="header"> <!-- style="border: 1px solid" -->
+	<div id="header" style="border: 1px solid">
 		<jsp:include page="header.jsp" flush="false">
 			<jsp:param name="param1" value="" />
 		</jsp:include>
