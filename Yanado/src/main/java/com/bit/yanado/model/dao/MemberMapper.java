@@ -31,4 +31,8 @@ public interface MemberMapper {
 	public void deleteQnaById(@Param("id") String id);
 	public void deleteBookmarkById(@Param("id") String id);
 	public void deleteWatchingRecoById(@Param("id") String id);
+	//kakaologin
+	public MemInfo member_kakao(String id);
+	//kakao 저장
+	public void kakao_join(MemInfo member);
 }

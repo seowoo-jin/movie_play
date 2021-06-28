@@ -1,5 +1,6 @@
 package com.bit.yanado.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -27,5 +28,17 @@ public interface MemberService {
 	public List<BookMark> getAllBookmarks(String id);
 	public void updateLoginDate(String id);
 	
-	
+	//kakao login 관련 service
+			//kakao login access token 가지고 오기
+			public String getAccessToken (String authorize_code);
+			//kakao login userinfo 가지고 오기
+			public HashMap<String, Object> getUserInfo (String access_Token);
+			//kakao login member information 조회
+			public MemInfo member_kakao(String id);
+			// kakao 저장
+			public void kakao_join(MemInfo member);
+			//kakao logout 
+			public void kakaoLogout(String access_Token);
+			
+		
 }

@@ -12,7 +12,6 @@
 	}
 	</style>
 	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/favicon-16x16.png">
-	<script defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
 	
 <link href="resources/css/poster.css" rel="stylesheet" type="text/css">
 </head>
@@ -32,6 +31,7 @@
 	<div id="mainContent" >
 		<c:if test="${isLogin eq 'Y' || isLogin eq 'A'}">
 			<div id="mainContents"> 
+				
 				<div class="teaserArea">
 					<video  class="teaser" crossorigin="anonymous" controls autoplay="autoplay" muted="muted">
 						<source src="${teaserVid.teaserLink}" type="video/mp4">
@@ -40,65 +40,29 @@
 				
 				<div id="testSel"></div>
 				
-				<p class="MediaTitle">실시간 인기 드라마</p>
-				<div class="totalMedia" >
-					<div class="leftSlideBtn" id="posterChangeLeft" > 
-						<img src="${pageContext.request.contextPath}/resources/image/left_arrow.png" class="arrowImg">
-					</div>
-					<div class="posterArea" id="posterArea" >
-						<c:forEach items="${posters }" var="posters" varStatus="status">
-							<div class="posterItem" id="posterIndex_${status.index }" >
-								<img src="${posters.poster }" class="posterImg"  >
-								<div class="selectEpDiv" id='${posters.titleSeq}${posters.season }' ></div>
-								<div class="videoInformation" onclick="getEpsoideFcn('${posters.titleSeq}' + '${posters.season }')">
-									<p class="infoText">제목 : ${videoInfo[status.index].title }</p>
-									<p class="infoText">감독 및 출연진 : ${videoInfo[status.index].people }</p>
-									<p class="infoText">줄거리 : ${videoInfo[status.index].synop }</p>
-								</div>
+				<p>실시간 인기 드라마</p>
+				
+				<div class="posterArea" id="posterArea">
+					<c:forEach items="${posters }" var="posters" varStatus="status">
+						<div class="posterItem" id="posterIndex_${status.index }" onclick="getEpsoideFcn('${posters.titleSeq}' + '${posters.season }')">
+							<img src="${posters.poster }" class="posterImg"  >
+							<div class="selectEpDiv" id='${posters.titleSeq}${posters.season }' ></div>
+							<div class="videoInformation" >
+								<p class="infoText">제목 : ${videoInfo[status.index].title }</p>
+								<p class="infoText">감독 및 출연진 : ${videoInfo[status.index].people }</p>
+								<p class="infoText">줄거리 : ${videoInfo[status.index].synop }</p>
 							</div>
-						</c:forEach>
-					</div>
-					<div class="rightSlideBtn" id="posterChangeRight"> 
-						<img src="${pageContext.request.contextPath}/resources/image/right_arrow.png" class="arrowImg">
-					</div>
+						</div>
+					</c:forEach>
 				</div>
-				
-				<c:if test="${isLogin eq 'Y'}">
-					<p class="MediaTitle">시청 중인 영상</p>
-					<div class="totalMedia">
-						<div class="leftSlideBtn" id="recoPosterChangeLeft"> 
-							<img src="${pageContext.request.contextPath}/resources/image/left_arrow.png" class="arrowImg">
-						</div>
-						<div class="posterArea" id="recoPosterArea">
-							
-							<c:forEach items="${posterReco }" var="posters" varStatus="status">
-								<div class="posterItem" id="recoPosterIndex_${status.index }">
-									<a class="posterImg" >
-										<img src="${posters.poster }" class="posterImg" id="posterClk">
-									</a>
-									<span class="recoInfo" onclick="location.href='${pageContext.request.contextPath}/video/play?trackId=${allRecord[status.index].uniqueNo }'">
-											<span class="infoText">제목 : ${videoInfoReco[status.index].title }<br>
-												<c:if test="${videoInfoReco[status.index].season  ne 0}" >
-													<p class="infoText">season : ${videoInfoReco[status.index].season }</p>
-													<p class="infoText">episode : ${videoInfoReco[status.index].episode }</p>
-												</c:if>
-											</span> 
-									</span>
-								</div>
-							</c:forEach>
-						</div>
-						<div class="rightSlideBtn" id="recoPosterChangeRight"> 
-							<img src="${pageContext.request.contextPath}/resources/image/right_arrow.png" class="arrowImg">
-						</div>
-					</div>
-				</c:if>
-				
+				<button id="posterChangeLeft"> 좌 </button>
+				<button id="posterChangeRight"> 우 </button>
 			</div>
 		</c:if>
 	</div>
 	<c:if test="${isLogin eq 'N' }">
 		Nothing on Main Page
 	</c:if> 
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mediaSelection.js" defer="defer"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mediaSelection.js"></script>
 </body>
 </html>
