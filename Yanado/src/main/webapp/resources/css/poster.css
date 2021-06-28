@@ -21,6 +21,9 @@
     overflow-y: hidden;
     height: 420px;
     white-space: nowrap;
+    width: 95%;
+    margin: auto;
+    scroll-behavior: smooth;
 }
 
 .posterItem{
@@ -39,7 +42,6 @@
 
 .posterImg{
 	width: inherit;
-	height: inherit;
 	height: inherit;
 	object-fit: cover;
 	z-index: 10;
@@ -86,13 +88,13 @@
 	position: absolute;
 	max-width: 100%;
 	max-height: 100%;
-	width: inherit;
+	width: 90%;
 	height: inherit;
 	display: none;
 	z-index: 10;
 	transition: display 0.3s;
-	border: 1px solid;
 	white-space: pre-wrap;
+	margin: 0px 10px 0px 10px;
 }
 
 
@@ -134,9 +136,64 @@
 	margin: 0px 0px 1px 0px;
 }
 
+.arrowImg{
+	width: 30px;
+	height: 30px;
+}
 
+.recoInfo{
+	position: absolute; 
+	display: none; 
+	top: 5%; 
+	color: #e5e5cb;
+	height: inherit;
+	width: inherit;
+	text-align: center;
+	white-space: pre-wrap;
+	opacity: 1;
+	z-index: 99990;
+}
 
+.posterItem:hover > .recoInfo{
+	display: block;
+	z-index: 10; 
+	opacity: 1;
+	color: #fdffe3;
+	
+}
 
+.leftSlideBtn{
+	position: absolute;
+	top: 50%;
+	height: inherit;
+	z-index: 999999;
+	opacity: 0.3;
+}
+
+.rightSlideBtn{
+	position: absolute;
+	top: 50%;
+	right: 0%;
+	z-index: 999999;
+	opacity: 0.3;
+}
+
+.totalMedia{
+	position: relative;
+}
+
+.rightSlideBtn:hover {
+	opacity: 1;
+}
+.leftSlideBtn:hover {
+	opacity: 1;
+}
+
+.MediaTitle{
+	color: #fdffe3;
+	border-width:1px; 
+	white-space: pre-wrap;
+}
 
 
 

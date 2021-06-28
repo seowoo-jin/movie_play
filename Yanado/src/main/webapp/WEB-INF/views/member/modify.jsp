@@ -5,7 +5,7 @@
 <html>
 <head>
 	<title>Edit</title>
-<link href="${pageContext.request.contextPath}/resources/css/movieBoard.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
 
 
@@ -36,11 +36,11 @@
 		
 		  <label for="phoneNum" >Tel. : </label>			
 		  <input type="text" id = "tel" name = "tel" value="${member.tel }">
-		  <input type="button" class="movieBoardBtn" id="phoneCheck" name="phoneCheck" value="Send Number" onclick="chekPhone()"><br>
+		  <input type="button" class="movieBoardBtn" id="phoneCheck" name="phoneCheck" value="번호 전송" onclick="chekPhone()"><br>
 		  <div id="phoneMessage"></div>
 		
 		  <label for="checkNum" >Check Tel. : </label>	<input type="text" id = "checkNum" name = "checkNum">
-		  <input type="button" class="movieBoardBtn" id="numberCheck" name="numberCheck" value="check Number" onclick="compareNum()"><br>
+		  <input type="button" class="movieBoardBtn" id="numberCheck" name="numberCheck" value="인증 확인" onclick="compareNum()"><br>
 		  <div id="checkMessage"></div>
 		  
 		  <input type="hidden" id="id" name="id" value="${member.id }">

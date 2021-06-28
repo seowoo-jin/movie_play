@@ -3,15 +3,38 @@
 var scrollingIndex = 0;
 document.getElementById("posterChangeRight").addEventListener('click',function(){
 	scrollingIndex += 1;
-	scrollingIndex = (scrollingIndex > document.getElementById("posterArea").childElementCount-5)?0:scrollingIndex;
-	document.getElementById("posterArea").scrollLeft = document.getElementById("posterIndex_"+String(scrollingIndex)).offsetLeft;
+	scrollingIndex = rightSlide("posterArea","posterIndex_",scrollingIndex);
 });
-
 document.getElementById("posterChangeLeft").addEventListener('click',function(){
 	scrollingIndex -= 1;
-	scrollingIndex = (scrollingIndex <0)?scrollingIndex=document.getElementById("posterArea").childElementCount-5:scrollingIndex;
-	document.getElementById("posterArea").scrollLeft = document.getElementById("posterIndex_"+String(scrollingIndex)).offsetLeft;
+	scrollingIndex = leftSlide("posterArea","posterIndex_",scrollingIndex);
 });
+
+var recoScrollingIndex = 0;
+document.getElementById("recoPosterChangeRight").addEventListener('click',function(){
+	recoScrollingIndex += 1;
+	recoScrollingIndex = rightSlide("recoPosterArea","recoPosterIndex_",recoScrollingIndex);
+});
+document.getElementById("recoPosterChangeLeft").addEventListener('click',function(){
+	recoScrollingIndex -= 1;
+	recoScrollingIndex = leftSlide("recoPosterArea","recoPosterIndex_",recoScrollingIndex);
+});
+
+
+function rightSlide(Area, IndexArea,index){
+	index = (index > document.getElementById(Area).childElementCount-6)?0:index;
+	console.log(index);
+	document.getElementById(Area).scrollLeft = document.getElementById(IndexArea+String(index)).offsetLeft - 70;
+	return index;
+}
+
+function leftSlide(Area, IndexArea,index){
+	index = (index<0)?document.getElementById(Area).childElementCount-6:index;
+	document.getElementById(Area).scrollLeft = document.getElementById(IndexArea+String(index)).offsetLeft - 70;
+	return index;
+}
+
+
 
 var beforeDiv;
 /* 포스터를 선택했을 때 해당 포스터(시즌)이 가지고 있는 에피소드를 가지고 오는 함수. */

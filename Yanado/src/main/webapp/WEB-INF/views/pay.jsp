@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #2f2e2f;">
 
 
 	<div id="header" style="border: 1px solid">

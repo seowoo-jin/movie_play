@@ -39,7 +39,7 @@ video::-webkit-media-controls-fullscreen-button {
 
 </style>
 </head>
-<body style="margin: 0; background-color: #686260;">
+<body style="margin: 0;  background-color: #2f2e2f;">
 	
 	<input type="checkbox" id="selectSubtitle" onclick="selectSubtitleFcn()" style="z-index: 1000; position: relative;">
 	<label for="selectSubtitle" style="z-index: 1111; left: 10px; top: 10px; color: white; position: absolute;">자막</label>

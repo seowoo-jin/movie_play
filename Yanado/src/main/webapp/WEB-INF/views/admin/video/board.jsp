@@ -9,7 +9,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/movieBoard.css" rel="stylesheet" type="text/css">
 </head>
 
-<body>
+<body style="background-color: #2f2e2f;">
 	<h1>Video Board</h1>
 
 <button class="movieBoardBtn" id="deleteVideo" name="deleteVideo" > 선택 삭제 </button>

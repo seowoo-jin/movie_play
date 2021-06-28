@@ -8,10 +8,10 @@
 }
 
 #article {
-	position: fixed;
+	float: left;
+	position: relative;
 	left: 210px;
 	display: block;
-	overflow: hidden;
 	width: 80%;
 }
 
@@ -30,12 +30,13 @@
 }
 
 .main-menu {
+	float: left;
 	background: #171717;
 	border-right: 1px solid rgb(0, 0, 0);
-	position: absolute;
-	top: 78; padding-top : 10;
+	position: relative;
+	top: 0; 
 	width: 170px;
-	height: 90%;
+	height: 100vh;
 	overflow: visible;
 	-webkit-transition: width .05s linear;
 	transition: width .05s linear;

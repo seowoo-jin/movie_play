@@ -46,7 +46,7 @@ select{
 }
 
 
-#linkFile, #posterFile, #teaserLinkFile, #subEngFile, #subKorFile, #subMixFile  { /*파일 업로드 버튼들 */
+#linkFile, #posterFile, #teaserLinkFile, #subEngFile, #subKorFile, #subMixFile, #phoneCheck, #numberCheck, #finalBtn, #deleteBtn { /*파일 업로드 버튼들 */
 	text-indent:0px;
 	line-height:12px;
 	-webkit-border-radius: 4;
@@ -73,7 +73,22 @@ select{
 	background: #0099ff;
   	text-decoration: none;	
 }
-
+#phoneCheck:hover {
+	background: #0099ff;
+  	text-decoration: none;	
+}
+#numberCheck:hover {
+	background: #0099ff;
+  	text-decoration: none;	
+}
+#finalBtn:hover {
+	background: #0099ff;
+  	text-decoration: none;	
+}
+#deleteBtn:hover {
+	background: #0099ff;
+  	text-decoration: none;	
+}
 #posterFile:hover {
 	background: #0099ff;
   	text-decoration: none;	

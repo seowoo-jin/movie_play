@@ -9,7 +9,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/qna.css" rel="stylesheet" type="text/css">	
 </head>
 
-<body>
+<body style="background-color: #2f2e2f;">
 <h1>Q&A</h1>
 	<div class="all">
 		<c:forEach items="${allQna }" var="allQna" varStatus="status">

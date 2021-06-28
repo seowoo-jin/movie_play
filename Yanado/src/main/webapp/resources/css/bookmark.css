@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.eachBookMarks{
+	white-space: pre; 
+	float: left; 
+	text-align: left; 
+	width: 400px; 
+	height: 200px; 
+	position: relative;
+	margin: 10px;
+	overflow-y: scroll;
+	align-items: center;
+	background-color: #494949;
+	border-radius: 40px ;
+	box-shadow: 2px 2px 2px 1px #5e5e5e;
+}
+
+#bookMarksArea{
+	overflow-y:scroll; 
+	height: 1000px;
+}
+
+.bookmark{
+	margin: 0;
+	color: #dbdbdb;
+	white-space: pre-line;
+	align-content: center;
+}
+.bookmarkInfo{
+	align-items: center;
+}

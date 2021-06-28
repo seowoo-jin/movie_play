@@ -106,7 +106,7 @@
       </div> -->
 	<!--사이드 메뉴 끝  -->
 
-	<div class="article" id="article">
+	<div class="article" id="article" style="background-color: #2f2e2f;">
 		<jsp:include page="stat.jsp" flush="false">
 			<jsp:param name="param1" value="" />
 		</jsp:include>

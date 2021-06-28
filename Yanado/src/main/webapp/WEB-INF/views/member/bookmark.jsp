@@ -4,24 +4,23 @@
 <html>
 <head>
 	<title>bookmark</title>
-<link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/bookmark.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>
 	bookmark
 </h1>
 
-<div id="bookMarksArea" style="overflow-y:scroll; height: 1000px; ">
+<div id="bookMarksArea" >
 	<c:forEach items="${allBookmarks }" var="allBookmarks">
-		<div class="eachBookMarks" style="white-space: pre; float: left; text-align: left; 
-		width: 400px; height: 200px; border: 1px solid; position: relative; margin: 10px;">
-			<a  href="${pageContext.request.contextPath}/video/play?trackId=${allBookmarks.uniqueNo }&bookmarkTime=${allBookmarks.subTimestamp}">
-				${allBookmarks.title}<br>
+		<div class="eachBookMarks">
+			<a class="bookmark" href="${pageContext.request.contextPath}/video/play?trackId=${allBookmarks.uniqueNo }&bookmarkTime=${allBookmarks.subTimestamp}">
+				<span class="bookmarkInfo">${allBookmarks.title}</span>
 				<c:if test="${allBookmarks.season ne 00 }">
-				<span>시즌 : </span>${allBookmarks.season}<br>
-				<span>에피소드 : </span>${allBookmarks.episode}<br>
+				<span class="bookmarkInfo">시즌 : ${allBookmarks.season}</span>
+				<span class="bookmarkInfo">에피소드 : ${allBookmarks.episode}</span>
 				</c:if>
-				<span>${allBookmarks.subtitle}</span><br>
+				<span class="bookmarkInfo">${allBookmarks.subtitle}</span>
 			</a>
 		</div>
 	</c:forEach>

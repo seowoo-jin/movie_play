@@ -7,7 +7,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
 <link href="resources/css/poster.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body style="background-color: #2f2e2f;">
    <div id="head">
       <jsp:include page="header.jsp" flush="false">
          <jsp:param name="param1" value="" />
