@@ -68,24 +68,16 @@
 }
 
 .header {
-<<<<<<< HEAD
   left: 0;
   top: 0;
   bottom: 0;
   width: 15em;
   background: #2f2e2f;
-=======
-	left: 0;
-	top: 0;
-	bottom: 0;
-	width: 15em;
-	background: #35302d;
 }
 
 body {
 	margin: 0px;
 	background-color: #171717;
->>>>>>> ea882ed8bcb20e3b052f1a46c9dbd8f14dface14
 }
 
 .logo {
