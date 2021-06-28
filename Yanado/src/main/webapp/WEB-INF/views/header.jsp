@@ -3,9 +3,9 @@
 <html>
 <head>
 <title>Header</title>
-<link href="${pageContext.request.contextPath}/resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/header.css?ver=1" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body >
 	<form action="${pageContext.request.contextPath}/login" method="post">
 		<table class="headerClass">
 			<tr>

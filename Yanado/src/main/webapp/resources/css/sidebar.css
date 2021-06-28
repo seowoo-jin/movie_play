@@ -9,11 +9,13 @@
 
 #article {
 	position: fixed;
-	left: 210px;
+	left: 170px;
 	display: block;
 	overflow: hidden;
-	width: 80%;
-	
+	width: 100%;
+	background-color: #171717;
+	top: 108px;
+	color: white;
 }
 
 .fa-2x {
@@ -34,9 +36,10 @@
 	background: #171717;
 	border-right: 1px solid rgb(0, 0, 0);
 	position: absolute;
-	top: 78; padding-top : 10;
+	top: 108;
+	padding-top : 10;
 	width: 170px;
-	height: 90%;
+	height: 85%;
 	overflow: visible;
 	-webkit-transition: width .05s linear;
 	transition: width .05s linear;
@@ -45,6 +48,8 @@
 	padding-top: 10;
 }
 
+
+
 .main-menu>ul {
 	margin: 7px 0;
 }
@@ -52,7 +57,7 @@
 .main-menu li {
 	position: relative;
 	display: block;
-	width: 200px;
+	width: 180px;
 }
 
 .main-menu li>a {
