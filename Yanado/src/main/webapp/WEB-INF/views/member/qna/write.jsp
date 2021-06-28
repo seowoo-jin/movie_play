@@ -4,7 +4,7 @@
 <html>
 <head>
 	<title>Write</title>
-<link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/qna.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <h1>
