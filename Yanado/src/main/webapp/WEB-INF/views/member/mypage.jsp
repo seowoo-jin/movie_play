@@ -104,7 +104,6 @@
          <jsp:param name="param1" value="" />
       </jsp:include>
    </div>
-   </div>
 
    <script>
       /* Sidebar menu hide & show  */

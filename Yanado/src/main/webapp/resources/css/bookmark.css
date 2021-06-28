@@ -29,7 +29,3 @@
 .bookmarkInfo{
 	align-items: center;
 }
-
-eachBookMarks:hover {
-	box-shadow: 5px 5px 5px 4px #8e8e8e;
-}
