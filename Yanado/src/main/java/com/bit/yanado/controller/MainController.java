@@ -245,7 +245,7 @@ public class MainController {
 	
 	//kakao login 후 memberinfo check > 결제 정보 확인  > 결제 정보 없으면 payment.jsp
 	@RequestMapping(value = "/kakaoCheck", method = RequestMethod.POST)
-	public String kakaoJoin(MemInfo member , HttpSession session) {
+	public String kakaoJoin(MemInfo member , HttpSession session, Model model) {
 		System.out.println("kakao login info :"+ member);
 		String id = member.getId();
 		MemInfo result = memberService.member_kakao(id);
@@ -255,6 +255,7 @@ public class MainController {
 			MemInfo kakao_member  = memberService.login(result.getId(), result.getPw());
 			session.setAttribute("member",  kakao_member);
 			memberService.updateLoginDate(kakao_member.getId());
+			model.addAttribute("isLogin","K");
 			return kakao_member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
 		
 		//해당 정보로 로그인한 기록이 없을 경우
@@ -264,6 +265,7 @@ public class MainController {
 					MemInfo kakao_member  = memberService.login(kakao.getId(), kakao.getPw());
 					session.setAttribute("member",  kakao_member);
 					memberService.updateLoginDate(kakao_member.getId());
+					model.addAttribute("isLogin","K");
 					return kakao_member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
 	}	
 	}
@@ -275,7 +277,7 @@ public class MainController {
 		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
 	    session.removeAttribute("access_Token");
 	    session.removeAttribute("member");
-	    return "main/main";
+	    return "main";
 	}
 	
 	
