@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -219,6 +220,65 @@ public class MainController {
 		}
 		return "redirect:/";
 	}
+	
+
+
+	//kakao login시, access token > userinfo로 저장
+	@RequestMapping(value = "/kakaologin")
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, Model model, MemInfo member) {
+		System.out.println("code" + code);
+		String access_Token = memberService.getAccessToken(code);
+		System.out.println("access_Token" + access_Token);
+		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+	    System.out.println("kakako login information : " + userInfo);
+	    if (userInfo.get("id") != null) {
+	    	session.setAttribute("member" , userInfo);
+	        session.setAttribute("access_Token", access_Token);
+	        System.out.println("kakao : " + session);
+	        model.addAttribute("kakao", userInfo);
+	        return"kakao";
+	    }else {
+	    	
+		return"redirect:/";
+	}
+	}
+	
+	//kakao login 후 memberinfo check > 결제 정보 확인  > 결제 정보 없으면 payment.jsp
+	@RequestMapping(value = "/kakaoCheck", method = RequestMethod.POST)
+	public String kakaoJoin(MemInfo member , HttpSession session) {
+		System.out.println("kakao login info :"+ member);
+		String id = member.getId();
+		//String payment = member.getIsPay();
+		//System.out.println("kakao login information payment check result : "+ payment);
+		
+		//해당 정보로 로그인한 기록이 있을 경우
+		if (memberService.member_kakao(id) != null) {
+		
+			return "main";
+		//해당 정보로 로그인한 기록은 있는데, 결제 정보가 없을 경우
+	//	}  else{
+			// if (payment.equals("N")) {
+				// return "main/payment";
+		// 해당 정보로 로그인한 기록 없
+			 } else {
+					memberService.kakao_join(member);
+		return "main";
+	}	
+	}
+	
+	
+	//kakao log out시, kakao 측으로 요청을 보내서 계정 자체 로그 아웃이 필요함
+	@RequestMapping(value="/kakaologout")
+	public String kakaologout(HttpSession session) {
+		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
+	    session.removeAttribute("access_Token");
+	    session.removeAttribute("userId");
+	    session.removeAttribute("user");
+	    session.removeAttribute("member_All_info");
+	    return "main/main";
+	}
+	
+	
 	
 	
 	// 아이디 비밀번호 찾기  -----------------------------------------------------------------------
