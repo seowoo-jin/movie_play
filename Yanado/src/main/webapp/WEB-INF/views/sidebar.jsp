@@ -18,17 +18,14 @@
    
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <title>MyPage</title>
+
+
 </head>
 
 <body>
-   <div id="head">
-      <jsp:include page="../header.jsp" flush="false">
-         <jsp:param name="param1" value="" />
-      </jsp:include>
-   </div>
 
 <!--sideBar CSS soojung_0625 -->
-   <nav class="main-menu">
+   <nav class="main-menu" style="height: 100%;">
       <ul>
          <li class="has-subnav"><a href="javascript:void(0);"
             onClick="loadDoc('reco');return false;"> <i
@@ -84,13 +81,8 @@
       </div> -->
    <!--사이드 메뉴 끝  -->
 
-   <div class="article" id="article">
-      <jsp:include page="reco.jsp" flush="false">
-         <jsp:param name="param1" value="" />
-      </jsp:include>
-   </div>
-   </div>
-
+ 
+ 
    <script>
       /* Sidebar menu hide & show  */
       function dis() {

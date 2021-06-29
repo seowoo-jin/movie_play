@@ -17,7 +17,7 @@
 
 </style>
 </head>
-<body style="margin: 0;  background-color: #2f2e2f;">
+<body style="margin: 0;  background-color: #2f2e2f; overflow: hidden;">
 	
 	<input type="checkbox" id="selectSubtitle" onclick="selectSubtitleFcn()" >
 	<label for="selectSubtitle" class="chooseSubtitle">
@@ -58,7 +58,6 @@
 		<input type="hidden" class="bookmarks" data-timestamp = "${bookmarks.subTimestamp }">
 	</c:forEach>
 	<input type="hidden" id="recordTime" value="${record }">
-	${record }
 	<input type="hidden" id="currentSubtitle" value="${defaultSubtitle }">
 	<input type="hidden" id="uniqueNo" value="${newVid.uniqueNo}">
 	

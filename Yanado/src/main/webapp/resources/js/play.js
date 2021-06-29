@@ -62,8 +62,8 @@
 	            setTimeout(function(){
 		        	for (var i=0; i<subtitleEng.cues.length; i++){				// 자막 길이만큼 반복실행하면서 자막과 이미지를 만든다.
 		        		var imgHtml = '<div style="margin: 100px 0px 30px 0px;"><img id="bookmarkEngImg_'+subtitleEng.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px; float: left;"  onclick="bookmarks('+i+')" ></img>';
-		        		var parHtml = '<p role="button" id="subTitle_eng'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
-		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 10px 0px 10px 0px;" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p>';
+		        		var parHtml = '<div style="margin: 100px 0px 0px 0px;"><p role="button" id="subTitle_eng'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
+		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="margin: 10px 0px 10px 0px;" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">' + subtitleEng.cues[i].text + '</p></div>';
 		        		var parHtmlR = '<p role="button" id="subTitle_R_eng'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
 		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="display:inline; margin: 10px 0px 10px 0px;" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">&nbsp;&nbsp;' + subtitleEng.cues[i].text + '</p></div>';
 		        		engSubHtml += parHtml;
@@ -74,8 +74,8 @@
 		        	
 					for (var i=0; i<subtitleKor.cues.length; i++){
 						var imgHtml = '<div style="margin: 100px 0px 30px 0px;"><img id="bookmarkKorImg_'+subtitleKor.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px float: left;"  onclick="bookmarks('+i+')" ></img>';
-		        		var parHtml = '<p role="button" id="subTitle_kor'+subtitleKor.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleKor.cues[i].startTime+
-		        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 10px 0px 10px 0px;" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">' + subtitleKor.cues[i].text + '</p>';
+		        		var parHtml = '<div style="margin: 100px 0px 0px 0px;"><p role="button" id="subTitle_kor'+subtitleKor.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleKor.cues[i].startTime+
+		        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="margin: 10px 0px 10px 0px;" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">' + subtitleKor.cues[i].text + '</p></div>';
 		        		var parHtmlR = '<p role="button" id="subTitle_R_kor'+subtitleKor.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleKor.cues[i].startTime+
 		        		'" data-end-time="'+subtitleKor.cues[i].endTime+'" style="display:inline; margin: 10px 0px 10px 0px;;" onclick="subtitleClkEvnt('+subtitleKor.cues[i].startTime+')">&nbsp;&nbsp;' + subtitleKor.cues[i].text + '</p></div>';
 		        		korSubHtml += parHtml;
@@ -86,8 +86,8 @@
 		        	
 					for (var i=0; i<subtitleMix.cues.length; i++){
 						var imgHtml = '<div style="margin: 100px 0px 30px 0px;"><img id="bookmarkMixImg_'+subtitleMix.cues[i].startTime+'" src = "../resources/image/before_bookmark.png" style="cursor: pointer;  width: 20px; height: 20px; float: left;"  onclick="bookmarks('+i+')" ></img>';
-		        		var parHtml = '<p role="button" id="subTitle_mix'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleMix.cues[i].startTime+
-		        		'" data-end-time="'+subtitleMix.cues[i].endTime+'" style="margin: 10px 0px 10px 0px;" onclick="subtitleClkEvnt('+subtitleMix.cues[i].startTime+')">' + subtitleMix.cues[i].text + '</p>';
+		        		var parHtml = '<div style="margin: 100px 0px 0px 0px;"><p role="button" id="subTitle_mix'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleMix.cues[i].startTime+
+		        		'" data-end-time="'+subtitleMix.cues[i].endTime+'" style="margin: 10px 0px 10px 0px;" onclick="subtitleClkEvnt('+subtitleMix.cues[i].startTime+')">' + subtitleMix.cues[i].text + '</p></div>';
 		        		var parHtmlR = '<p role="button" id="subTitle_R_mix'+subtitleEng.cues[i].startTime+'" tabindex="0" class="cuePoint" name="cuePoint_'+i+'" data-id="'+i+'" data-start-time="'+subtitleEng.cues[i].startTime+
 		        		'" data-end-time="'+subtitleEng.cues[i].endTime+'" style="display:inline; margin: 10px 0px 10px 0px;;" onclick="subtitleClkEvnt('+subtitleEng.cues[i].startTime+')">&nbsp;&nbsp;' + subtitleEng.cues[i].text + '</p></div>';
 		        		mixSubHtml += parHtml;

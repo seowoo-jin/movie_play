@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public class MainController {
 			String tempSeason;
 			for(int i=0;i<posters.size();i++) {
 				tempSeason = posters.get(i).getTitleSeq()+String.format("%02d", posters.get(i).getSeason());
-				videoSeason.add(tempSeason); 
+//				videoSeason.add(tempSeason); 
 				videoInfos.add(videoService.getVideoByTitleSeason(tempSeason));
 			}
 			model.addAttribute("vidSeason",videoSeason);					// 비디오 시즌 정보.
@@ -220,6 +221,68 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+
+
+	//kakao login시, access token > userinfo로 저장
+	@RequestMapping(value = "/kakaologin")
+	public String kakaoLogin(@RequestParam("code") String code, HttpSession session, Model model, MemInfo member) {
+		System.out.println("code" + code);
+		String access_Token = memberService.getAccessToken(code);
+		System.out.println("access_Token" + access_Token);
+		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
+	    System.out.println("kakako login information : " + userInfo);
+	    if (userInfo.get("id") != null) {
+	    	session.setAttribute("member" , userInfo);
+	        session.setAttribute("access_Token", access_Token);
+	        System.out.println("kakao : " + session);
+	        model.addAttribute("kakao", userInfo);
+	        return"kakao";
+	    }else {
+	    	
+		return"redirect:/";
+	}
+	}
+	
+	//kakao login 후 memberinfo check > 결제 정보 확인  > 결제 정보 없으면 payment.jsp
+	//??
+	@RequestMapping(value = "/kakaoCheck", method = RequestMethod.POST)
+	public String kakaoJoin(MemInfo member , HttpSession session, Model model) {
+		System.out.println("kakao login info :"+ member);
+		String id = member.getId();
+		MemInfo result = memberService.member_kakao(id);
+		
+		//해당 정보로 로그인한 기록이 있을 경우
+		if (result != null) {
+			MemInfo kakao_member  = memberService.login(result.getId(), result.getPw());
+			session.setAttribute("member",  kakao_member);
+			memberService.updateLoginDate(kakao_member.getId());
+			model.addAttribute("isLogin","K");
+			return kakao_member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
+		
+		//해당 정보로 로그인한 기록이 없을 경우
+			 } else {
+					memberService.kakao_join(member);
+					MemInfo kakao = memberService.member_kakao(member.getId());
+					MemInfo kakao_member  = memberService.login(kakao.getId(), kakao.getPw());
+					session.setAttribute("member",  kakao_member);
+					memberService.updateLoginDate(kakao_member.getId());
+					model.addAttribute("isLogin","K");
+					return kakao_member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
+	}	
+	}
+	
+	
+	//kakao log out시, kakao 측으로 요청을 보내서 계정 자체 로그 아웃이 필요함
+	@RequestMapping(value="/kakaologout")
+	public String kakaologout(HttpSession session) {
+		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
+	    session.removeAttribute("access_Token");
+	    session.removeAttribute("member");
+	    return "main";
+	}
+	
+	
+	
 	
 	// 아이디 비밀번호 찾기  -----------------------------------------------------------------------
 	@RequestMapping(value="find")
@@ -237,7 +300,7 @@ public class MainController {
 			try {
 	        	// dto로 저장
 		        dto.setReceiveMail(email);
-		        dto.setSubject("[Yanado] 귀하의 아이디를 보내드립니다.");
+//		        dto.setSubject("[Yanado] 귀하의 아이디를 보내드립니다.");
 		        dto.setMessage("Your ID is "+ id + ". Don't forget it.");
 		        dto.setSenderName("Yanado Admin");
 		        dto.setSenderMail("ibjin1010@gmail.com");
