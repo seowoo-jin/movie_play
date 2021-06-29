@@ -12,7 +12,7 @@
 <body style="background-color: #2f2e2f;">
 	<h1>Video Board</h1>
 
-<button class="movieBoardBtn" id="deleteVideo" name="deleteVideo" > 선택 삭제 </button>
+<button class="movieBoardBtn" id="deleteVideo" name="deleteVideo" > Delete Selected </button>
 	<div id="videoGrid">
 	
 	</div>

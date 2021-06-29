@@ -14,8 +14,8 @@
 	<h1>Teaser </h1>
 	
 	
-	<button class="movieBoardBtn" id="deleteTeaser" name="deleteTeaser" > 선택 삭제 </button>
-	<button class="movieBoardBtn" id="teaserToMain" name="teaserToMain" > 메인 화면에 재생 </button>
+	<button class="movieBoardBtn" id="deleteTeaser" name="deleteTeaser" > Delete Selected</button>
+	<button class="movieBoardBtn" id="teaserToMain" name="teaserToMain" > Play on main </button>
 
 	<div id="grid">
 	

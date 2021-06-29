@@ -15,7 +15,7 @@
 				</td>
 				<td class="innerTable">
 					<input class="headSearch" type="text" id="searchItem" name="searchItem"> 
-					<input class="headBtn" type="button" id="searchBtn" name="searchBtn" value="Search">
+					<input class="searchBtn" type="button" id="searchBtn" name="searchBtn" value="Search">
 				</td>
 				<td class="innerTable">
 					<c:if test="${isLogin eq 'N' }">
@@ -23,14 +23,14 @@
 					</c:if> 
 					
 					<c:if test="${isLogin eq 'Y' }">
-						<input class="headBtn" type="submit" value="myPage" formaction="${pageContext.request.contextPath}/member/mypage" />
+						<input class="headBtn" type="submit" value="MyPage" formaction="${pageContext.request.contextPath}/member/mypage" />
 					</c:if>
 					
 					<c:if test="${isLogin eq 'A' }">
-						<input class="headBtn" type="submit" value="admin" formaction="${pageContext.request.contextPath}/admin/adminpage" />
+						<input class="headBtn" type="submit" value="Admin" formaction="${pageContext.request.contextPath}/admin/adminpage" />
 					</c:if>
 					
-					<input class="headBtn" type="submit" value="log out" formaction="${pageContext.request.contextPath}/logout" />
+					<input class="headBtn" type="submit" value="Log out" formaction="${pageContext.request.contextPath}/logout" />
 				</td>
 			</tr>
 		</table>

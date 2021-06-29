@@ -5,7 +5,7 @@
 <html>
 <head>
 	<title>Edit</title>
-<link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/resources/css/memberModify.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript">
 		
 	</script>
@@ -33,11 +33,11 @@
 		
 		  <label for="phoneNum" >Tel. : </label>			
 		  <input type="text" id = "tel" name = "tel" value="${member.tel }">
-		  <input type="button" class="movieBoardBtn" id="phoneCheck" name="phoneCheck" value="번호 전송" onclick="chekPhone()"><br>
+		  <input type="button" class="movieBoardBtn" id="phoneCheck" name="phoneCheck" value="Send Number" onclick="chekPhone()"><br>
 		  <div id="phoneMessage"></div>
 		
 		  <label for="checkNum" >Check Tel. : </label>	<input type="text" id = "checkNum" name = "checkNum">
-		  <input type="button" class="movieBoardBtn" id="numberCheck" name="numberCheck" value="인증 확인" onclick="compareNum()"><br>
+		  <input type="button" class="movieBoardBtn" id="numberCheck" name="numberCheck" value="Verify" onclick="compareNum()"><br>
 		  <div id="checkMessage"></div>
 		  
 		  <input type="hidden" id="id" name="id" value="${member.id }">
@@ -45,7 +45,7 @@
 		  <input type="hidden" id="defaultCap" name="defaultCap" value="${member.defaultCap }">
 		  
 		  <input type="submit" class="movieBoardBtn" value="Edit" id="finalBtn" name="finalBtn" disabled="disabled">
-		  <input type="submit" class="movieBoardBtn" value="탈퇴" id="deleteBtn" name="deleteBtn" disabled="disabled" formaction="delete">
+		  <input type="submit" class="movieBoardBtn" value="Delete Account" id="deleteBtn" name="deleteBtn" disabled="disabled" formaction="delete">
 		</div>
 	  
 	

@@ -17,13 +17,13 @@
 			<button class="accordion" onclick="accordion('${allQna.qnaSeq}');">
 				${allQna.title }
 				<c:if test="${allQna.isReply eq 'Y' }">
-					<div id="reply">답변완료</div>
+					<div id="reply">Replied</div>
 				</c:if>
 			</button>
 			<div class="panel" id="panel_${allQna.qnaSeq}" style="display: none">
 				<p>${allQna.cont }
 				<c:if test="${allQna.isReply eq 'N' }">
-					<button type="button" id="btnModify" onclick="loadDoc('qna/selectQna?qnaSeq='+${allQna.qnaSeq })">수정</button>
+					<button type="button" id="btnModify" onclick="loadDoc('qna/selectQna?qnaSeq='+${allQna.qnaSeq })">Modify</button>
 				</c:if>
 				<p class="space"/>
 				<c:if test="${allQna.isReply eq 'Y' }">				

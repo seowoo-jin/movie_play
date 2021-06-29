@@ -5,14 +5,14 @@
 
 
 #deleteVideo{
-	width:100px;
+	width:140px;
 	height:30px;
 	font-size:14px;
 	margin: 20 0 5px 20px;
 }
 
 #deleteTeaser{
-	width:100px;
+	width:140px;
 	height:30px;
 	font-size:14px;
 	margin: 20 0 5px 20px;
@@ -41,7 +41,6 @@
 	text-align:center;
 	vertical-align:middle;
 	display:inline-block;
-	
 	color:#e0e0e0;
 	background: #404a4a;
 	padding: 8px;

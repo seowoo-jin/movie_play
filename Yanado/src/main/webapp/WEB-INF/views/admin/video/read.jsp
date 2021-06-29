@@ -33,8 +33,8 @@ textarea{
 	<label for="subKor">Korean Subtitle File :</label><textarea>${videoInfo.subKor }</textarea><br>
 	<label for="subMix">Mix Subtitle File :</label><textarea>${videoInfo.subMix }</textarea><br>
 	
-	<input type="submit" id="delete" value="삭제">
-	<button id="modify" id="modify" name="modify" onclick="loadDoc('videoModifyForm?uniqueNo=${videoInfo.uniqueNo}');return false;">수정</button>	
+	<input type="submit" id="delete" value="Delete">
+	<button id="modify" id="modify" name="modify" onclick="loadDoc('videoModifyForm?uniqueNo=${videoInfo.uniqueNo}');return false;">Modify</button>	
 </form>
 </body>
 </html>

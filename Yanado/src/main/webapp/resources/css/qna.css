@@ -71,7 +71,7 @@ hr {
 	padding: 30px;
 	width: 80%;
 	text-align: left;
-	border: 5px solid #131313;
+	border: 5px solid #171717;
 	outline: none;
 	transition: 0.3s;
 }
@@ -88,7 +88,7 @@ hr {
 	color: white;
 	display: none;
 	overflow: hidden;
-	border: 5px solid #131313;
+	border: 5px solid #171717;
 }
 
 .writeReply{  /* 관리자 답변 작성(input)   */

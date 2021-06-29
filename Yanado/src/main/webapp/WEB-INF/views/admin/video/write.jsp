@@ -18,7 +18,7 @@
 
 	<label for="title">Title :</label><input type="text" id="title" name="title" value="${videoInfo.title }" ${empty videoInfo ? '' : 'disabled' } placeholder="Title">
 	<select id="selectTitle" name="selectTitle" onchange="selectedTitle()" ${empty videoInfo ? '' : 'disabled' }>
-		<option value=0>제목 선택</option>
+		<option value=0>Select title</option>
 		<c:forEach items="${movieTitle }" var="movieTitle">
 			<option value="${movieTitle.titleSeq }">${movieTitle.title }</option>
 		</c:forEach>
@@ -40,11 +40,11 @@
 	
 	<label for="tag">Tag :</label><input type="text" id="tag" name="tag" value="${savedTagName }">
 	<select id="selectTag" name="selectTag" onchange="selectedTag()">
-		<option value=0>태그 입력</option>
+		<option value=0>Select tag</option>
 		<c:forEach items="${tagName }" var="tag">
 			<option value="${tag.tagNameSeq }">${tag.tagName }</option>
 		</c:forEach>
-		<option value=99999>직접 입력</option>
+		<option value=99999>Type new tag</option>
 	</select>
 	<br>
 	

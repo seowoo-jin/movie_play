@@ -15,7 +15,7 @@
 	<h1>Member </h1>
 
 
-	<button class="movieBoardBtn"  id="deleteMembers" name="deleteMembers"> 선택된 멤버 삭제 </button>
+	<button class="movieBoardBtn"  id="deleteMembers" name="deleteMembers"> Delete Selected </button>
 	<div id="memberGrid">
 	
 	</div>

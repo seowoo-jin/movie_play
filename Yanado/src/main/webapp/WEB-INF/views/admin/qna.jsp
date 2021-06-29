@@ -6,7 +6,7 @@
 <html>
 <head>
 	<title>Qna</title>
-	<link href="${pageContext.request.contextPath}/resources/css/qna.css" rel="stylesheet" type="text/css">	
+	<link href="${pageContext.request.contextPath}/resources/css/qna.css" rel="stylesheet" type="text/css">	 
 </head>
 <body>
 <h1>Q&A	</h1>
@@ -15,13 +15,13 @@
 			<button class="accordion" onclick="accordion('${allQna.qnaSeq}');">
 				${allQna.title }
 				<c:if test="${allQna.isReply eq 'Y' }">
-					<div id="isReply">답변완료</div>
+					<div id="isReply">Replied</div>
 				</c:if>
 			</button>
 			<div class="panel" id="panel_${allQna.qnaSeq}" style="display: none">
 				<p>
 					${allQna.cont }
-				<button type="button" class="btnDel" id="btn" onclick="loadDoc('qna/deleteQna?qnaSeq='+${allQna.qnaSeq })">삭제</button>
+				<button type="button" class="btnDel" id="btn" onclick="loadDoc('qna/deleteQna?qnaSeq='+${allQna.qnaSeq })">Delete</button>
 				<p class="space"/>
 				<c:if test="${allQna.isReply eq 'Y' }">
 					<div id="re">↳Re : </div> ${allQna.reply }
@@ -30,7 +30,7 @@
 					<div id="replyAdmin"> ${allQna.replyAdmin }</div> <br>
 				</c:if><br>
 					<input type="text" class="writeReply" id="replyString_${allQna.qnaSeq }" name="replyString_${allQna.qnaSeq }">
-					<button type="button" id="replyBtn" name="replyBtn" onclick="reply(${allQna.qnaSeq })"> 답변하기</button>
+					<button type="button" id="replyBtn" name="replyBtn" onclick="reply(${allQna.qnaSeq })"> Reply</button>
 				<p>
 				
 			</div>

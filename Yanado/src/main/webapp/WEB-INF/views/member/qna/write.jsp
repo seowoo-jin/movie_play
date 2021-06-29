@@ -9,10 +9,10 @@
 <body>
 <h1>
 	<c:if test="${qna.qnaSeq ne null}">
-		글 수정
+		Modify Q&A
 	</c:if>
 	<c:if test="${qna.qnaSeq eq null}">
-		글 쓰기 
+		Write Q&A
 	</c:if>
 	
 </h1>
@@ -25,11 +25,11 @@
 	
 	<c:if test="${qna.qnaSeq ne null}">
 		<input type="hidden" id="qnaSeq" name="qnaSeq" value="${qna.qnaSeq }">
-		<input type="submit" id="qnaMod" value="수정" formaction="${pageContext.request.contextPath}/member/qna/modifyQna">
-		<input type="submit" id="qnaDel" value="삭제" formaction="${pageContext.request.contextPath}/member/qna/deleteQna">
+		<input type="submit" id="qnaMod" value="Modify" formaction="${pageContext.request.contextPath}/member/qna/modifyQna">
+		<input type="submit" id="qnaDel" value="Delete" formaction="${pageContext.request.contextPath}/member/qna/deleteQna">
 	</c:if>
 	<c:if test="${qna.qnaSeq eq null}">
-		<input type="submit" id="qnaWrite" value="글쓰기">
+		<input type="submit" id="qnaWrite" value="Upload">
 	</c:if>
 	</form>
 	</div>
