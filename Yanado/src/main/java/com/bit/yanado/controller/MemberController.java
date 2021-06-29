@@ -59,6 +59,7 @@ public class MemberController {
 	@RequestMapping(value="reco")
 	public String reco(Model model, HttpSession session) {
 		MemInfo member = (MemInfo) session.getAttribute("member");   // session에서 로그인된 맴버를 가져온다.
+		
 		List<WatchingReco> recoding = videoService.getAllRecord(member.getId());	//맴버 아이디로 시청기록을 가져온다.
 		List<Poster> poster = new ArrayList<Poster>();		// 시청기록에 맞는 포스터를 가져올 리스트를 만든다.
 		List<VideoInfo> videoInfo= new ArrayList<VideoInfo>();
@@ -71,7 +72,7 @@ public class MemberController {
 		model.addAttribute("videoInfo", videoInfo);
 		model.addAttribute("posters",poster);				// 모델로 포스터를 보내준다.
 		model.addAttribute("allRecord",recoding);			// 모델로 시청기록을 보내준다.
-		
+		System.out.println(poster);
 		return "member/reco";
 	}
 	

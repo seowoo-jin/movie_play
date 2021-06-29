@@ -26,6 +26,13 @@
     scroll-behavior: smooth;
 }
 
+.recoArea{
+    overflow-y: scroll;
+    width: 95%;
+    margin: auto;
+    scroll-behavior: smooth;
+}
+
 .posterItem{
 	display: inline-block;
 	top: 0;
