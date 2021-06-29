@@ -19,7 +19,7 @@
 				</td>
 				<td class="innerTable">
 					<c:if test="${isLogin eq 'N' }">
-						<input class="headBtn" type="submit" value="Login"">
+						<input class="headBtn" type="submit" value="Login">
 					</c:if> 
 					
 					<c:if test="${isLogin eq 'Y' }">
@@ -29,11 +29,6 @@
 					<c:if test="${isLogin eq 'A' }">
 						<input class="headBtn" type="submit" value="admin" formaction="${pageContext.request.contextPath}/admin/adminpage" />
 					</c:if>
-					
-						<c:if test="${isLogin eq 'K' }">
-						<a href='https://kauth.kakao.com/oauth/logout?client_id=bd66f03d70e74c8f9ade0bbb87d38df3&logout_redirect_uri=http://localhost:8089/yanado/kakaologout'><input class="headBtn" type="button" value="kakao_logout" /></a>
-					</c:if>
-					<a href='https://kauth.kakao.com/oauth/logout?client_id=bd66f03d70e74c8f9ade0bbb87d38df3&logout_redirect_uri=http://localhost:8089/yanado/kakaologout'><input class="headBtn" type="button" value="kakao_logout" /></a>
 					
 					<input class="headBtn" type="submit" value="log out" formaction="${pageContext.request.contextPath}/logout" />
 				</td>

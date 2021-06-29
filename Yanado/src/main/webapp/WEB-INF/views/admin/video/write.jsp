@@ -7,7 +7,7 @@
 <link href="${pageContext.request.contextPath}/resources/css/uploadVideo.css" rel="stylesheet" type="text/css">
 	<title>Write</title>
 </head>
-<body>
+<body style="text-align: center; margin: 200px auto;">
 
 <h1>
 	${empty videoInfo ? "Video Write": "Video Edit" }

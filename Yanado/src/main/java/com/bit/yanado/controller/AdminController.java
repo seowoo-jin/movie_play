@@ -139,9 +139,19 @@ public class AdminController {
 	
 	
 	@RequestMapping(value="adminpage")
-	public String adminpage() {
-		
-		return "admin/adminpage";
+	public String adminpage(Model model, HttpSession session) {
+		MemInfo member = (MemInfo) session.getAttribute("member");
+		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
+		if(member != null) {
+			model.addAttribute("isLogin","Y");
+			return "admin/adminpage";
+		}else if(admin != null){
+			model.addAttribute("isLogin","A");
+			return "admin/adminpage";
+		}else {
+			model.addAttribute("isLogin","N");
+			return "redirect:/";
+		}
 	}
 	
 	

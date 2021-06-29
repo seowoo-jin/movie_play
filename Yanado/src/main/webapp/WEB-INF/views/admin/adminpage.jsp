@@ -116,6 +116,9 @@
 
 
 	<script>
+	window.onload=function(){
+		loadDoc('qna');
+	}
 		/*sidbar  */
 		function dis() {
 			if ($('#submenu').css('display') == 'none') {

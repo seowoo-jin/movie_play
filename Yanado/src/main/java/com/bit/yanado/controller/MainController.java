@@ -256,7 +256,7 @@ public class MainController {
 			MemInfo kakao_member  = memberService.login(result.getId(), result.getPw());
 			session.setAttribute("member",  kakao_member);
 			memberService.updateLoginDate(kakao_member.getId());
-			model.addAttribute("isLogin","K");
+			model.addAttribute("isLogin","Y");
 			return kakao_member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
 		
 		//해당 정보로 로그인한 기록이 없을 경우
@@ -266,7 +266,7 @@ public class MainController {
 					MemInfo kakao_member  = memberService.login(kakao.getId(), kakao.getPw());
 					session.setAttribute("member",  kakao_member);
 					memberService.updateLoginDate(kakao_member.getId());
-					model.addAttribute("isLogin","K");
+					model.addAttribute("isLogin","Y");
 					return kakao_member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
 	}	
 	}

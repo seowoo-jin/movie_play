@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bit.yanado.model.dto.AdminInfo;
 import com.bit.yanado.model.dto.BookMark;
 import com.bit.yanado.model.dto.MemInfo;
 import com.bit.yanado.model.dto.Poster;
@@ -36,13 +37,17 @@ public class MemberController {
 	@RequestMapping(value="mypage")
 	public String mypage(Model model, HttpSession session) {
 		MemInfo member = (MemInfo) session.getAttribute("member");
+		AdminInfo admin = (AdminInfo) session.getAttribute("admin");
 		if(member != null) {
-			System.out.println(member.getIsPay());
 			model.addAttribute("isLogin","Y");
+			return "member/mypage";
+		}else if(admin != null){
+			model.addAttribute("isLogin","A");
+			return "member/mypage";
 		}else {
 			model.addAttribute("isLogin","N");
+			return "redirect:/";
 		}
-		return "member/mypage";
 	}
 	// 북마크  ------------------------------------------------------------
 	@RequestMapping(value="bookmark")
