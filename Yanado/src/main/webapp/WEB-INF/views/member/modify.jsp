@@ -13,7 +13,7 @@
 </head>
     <body class="ss-bg-white">
     
-<%@ include file="/WEB-INF/views/sidebar.jsp" %>
+
     
         <div id="top" class="s-wrap site-wrapper">
     

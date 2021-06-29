@@ -73,7 +73,7 @@ public class MainController {
 			String tempSeason;
 			for(int i=0;i<posters.size();i++) {
 				tempSeason = posters.get(i).getTitleSeq()+String.format("%02d", posters.get(i).getSeason());
-				videoSeason.add(tempSeason); 
+//				videoSeason.add(tempSeason); 
 				videoInfos.add(videoService.getVideoByTitleSeason(tempSeason));
 			}
 			model.addAttribute("vidSeason",videoSeason);					// 비디오 시즌 정보.
@@ -244,6 +244,7 @@ public class MainController {
 	}
 	
 	//kakao login 후 memberinfo check > 결제 정보 확인  > 결제 정보 없으면 payment.jsp
+	//??
 	@RequestMapping(value = "/kakaoCheck", method = RequestMethod.POST)
 	public String kakaoJoin(MemInfo member , HttpSession session, Model model) {
 		System.out.println("kakao login info :"+ member);
@@ -299,7 +300,7 @@ public class MainController {
 			try {
 	        	// dto로 저장
 		        dto.setReceiveMail(email);
-		        dto.setSubject("[Yanado] 귀하의 아이디를 보내드립니다.");
+//		        dto.setSubject("[Yanado] 귀하의 아이디를 보내드립니다.");
 		        dto.setMessage("Your ID is "+ id + ". Don't forget it.");
 		        dto.setSenderName("Yanado Admin");
 		        dto.setSenderMail("ibjin1010@gmail.com");

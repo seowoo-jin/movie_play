@@ -11,8 +11,7 @@
 
 </head>
     <body >
-    <%@ include file="/WEB-INF/views/sidebar.jsp" %>
-    
+
         <main class="bookmark_main"  style="width: 80%; height: 100%; margin-left: 10%; margin-top: 5%;">
     
 
