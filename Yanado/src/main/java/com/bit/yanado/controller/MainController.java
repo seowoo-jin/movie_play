@@ -154,8 +154,14 @@ public class MainController {
 	
 	@RequestMapping(value="logout", method=RequestMethod.POST)
 	public String logout(HttpSession session) {
+		System.out.println(session.getAttribute("member"));
 		session.removeAttribute("member");
+		
 		session.removeAttribute("admin");
+		System.out.println((String)session.getAttribute("access_Token"));
+		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
+		
+	    session.removeAttribute("access_Token");
 		return "redirect:/";
 	}
 	

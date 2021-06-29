@@ -15,7 +15,20 @@
 	width: 88%; 
 	overflow: scroll;
 	height: 88%;
+	color: white;
+	background: #171717 !important;
 }
+
+.tui-pagination .tui-page-btn{
+	color : white !important;
+}
+.tui-next{
+	color: white!important;
+}
+.tui-last{
+	color : white!important;
+}
+
 
 .fa-2x {
 	font-size: 3em;

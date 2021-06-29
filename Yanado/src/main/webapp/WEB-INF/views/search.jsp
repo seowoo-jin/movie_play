@@ -14,21 +14,30 @@
       </jsp:include>
    </div>
 	<!-- Main Contents  -->
-	
-	<div id="posterArea">
-		<c:forEach items="${posters }" var="posters" varStatus="status">
-			<div class="posterItem" onclick="getEpsoideFcn('${posters.titleSeq}' + '${posters.season }')">
-				<img src="${posters.poster }" class="posterImg" id="posterClk" >
-				<div class="selectEpDiv" id='${posters.titleSeq}${posters.season }' ></div>
-				<div class="videoInformation" >
-					<p>제목 : ${videoInfo[status.index].title }</p>
-					<p>감독 및 출연진 : ${videoInfo[status.index].people }</p>
-					<p>줄거리 : ${videoInfo[status.index].synop }</p>
+				<p class="MediaTitle">검색 결과</p>
+				<div class="totalMedia" >
+					<div class="leftSlideBtn" id="posterChangeLeft" > 
+						<img src="${pageContext.request.contextPath}/resources/image/left_arrow.png" class="arrowImg">
+					</div>
+					<div class="resultPosterArea" id="resultPosterArea" >
+						<c:forEach items="${posters }" var="posters" varStatus="status">
+							<div class="posterItem" id="posterIndex_${status.index }" >
+								<img src="${posters.poster }" class="posterImg"  >
+								<div class="selectEpDiv" id='${posters.titleSeq}${posters.season }' ></div>
+								<div class="videoInformation" onclick="getEpsoideFcn('${posters.titleSeq}' + '${posters.season }')">
+									<p class="infoText">제목 : ${videoInfo[status.index].title }</p>
+									<p class="infoText">감독 및 출연진 : ${videoInfo[status.index].people }</p>
+									<p class="infoText">줄거리 : ${videoInfo[status.index].synop }</p>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+					<div class="rightSlideBtn" id="posterChangeRight"> 
+						<img src="${pageContext.request.contextPath}/resources/image/right_arrow.png" class="arrowImg">
+					</div>
 				</div>
-			</div>
-		</c:forEach>
-	</div>
 	
 </body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mediaSelection.js" defer="defer"></script>
 </html>
+

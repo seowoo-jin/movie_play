@@ -30,7 +30,14 @@
 			</div>
 		</div>
 		
-	연/월별 로그인한 맴버 수<br>
+			<c:forEach items="${years }" var="years">
+				<input type="checkbox" name="selectYear" value="${years }">${years }
+			</c:forEach>
+			<button id="sendYear" onClick="sendYear()">선택 연도 자료 보기</button>
+			<button id="generatePDF" onClick="reportGenerate()">레포트 생성</button>
+		
+		
+	<h3>연/월별 로그인한 맴버 수</h3>
 	<table>
 		<tr>
 			<td>연도</td><td>1월</td><td>2월</td><td>3월</td><td>4월</td><td>5월</td><td>6월</td><td>7월</td><td>8월</td>	<td>9월</td>	<td>10월</td><td>11월</td><td>12월</td>			
@@ -45,7 +52,7 @@
 		</c:forEach>
 	</table>
 	
-	연/월 별 가입자 수<br>
+	<h3>연/월 별 가입자 수</h3>
 	<table>
 		<tr>
 			<td>연도</td><td>1월</td><td>2월</td><td>3월</td><td>4월</td><td>5월</td><td>6월</td><td>7월</td><td>8월</td>	<td>9월</td>	<td>10월</td><td>11월</td><td>12월</td>			
@@ -60,7 +67,7 @@
 		</c:forEach>
 	</table>
 	
-	연/월 별 탈퇴한 맴버 수<br>
+	<h3>연/월 별 탈퇴한 맴버 수</h3>
 	<table>
 		<tr>
 			<td>연도</td><td>1월</td><td>2월</td><td>3월</td><td>4월</td><td>5월</td><td>6월</td><td>7월</td><td>8월</td>	<td>9월</td>	<td>10월</td><td>11월</td><td>12월</td>			
@@ -75,7 +82,5 @@
 		</c:forEach>
 	</table>
 		
-	
-	
 </body>
 </html>

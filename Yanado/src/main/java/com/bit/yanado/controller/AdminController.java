@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.JFileChooser;
@@ -69,42 +70,7 @@ public class AdminController {
 		List<String> loginYears = adminService.getMemberLoginYear();
 		List<String> joinYears = adminService.getMemberJoinYear();
 		List<String> outYears = adminService.getMemberOutYear();
-		
-		// Last 로그인 날짜 정보 가져오기.
-		LinkedHashMap<String, List<Integer>> memberLoginInfo = new LinkedHashMap<String, List<Integer>>();
-		for(int i=0; i< loginYears.size();i++) {
-			List<Integer> countMemberByMonth = new ArrayList<Integer>();
-			for(int j=1;j<13;j++) {
-				String month = String.format("%02d", j);
-				countMemberByMonth.add(j-1, adminService.getCountLoginMemberByDate(loginYears.get(i)+'/'+month+'%'));
-			}
-			memberLoginInfo.put(loginYears.get(i), countMemberByMonth);
-		}
-		model.addAttribute("memberLoginInfo",memberLoginInfo);
-		
-		// 연도별로 탈퇴한 회원수 조회.
-		LinkedHashMap<String, List<Integer>> memberOutInfo = new LinkedHashMap<String, List<Integer>>();
-		for(int i=0; i< outYears.size();i++) {
-			List<Integer> countMemberByMonth = new ArrayList<Integer>();
-			for(int j=1;j<13;j++) {
-				String month = String.format("%02d", j);
-				countMemberByMonth.add(j-1, adminService.getCountOutMemberByDate(outYears.get(i)+'/'+month+'%'));
-			}
-			memberOutInfo.put(outYears.get(i), countMemberByMonth);
-		}
-		model.addAttribute("memberOutInfo",memberOutInfo);
-		
-		// 연도별 가입자 수.
-		LinkedHashMap<String, List<Integer>> memberJoinInfo = new LinkedHashMap<String, List<Integer>>();
-		for(int i=0; i< joinYears.size();i++) {
-			List<Integer> countMemberByMonth = new ArrayList<Integer>();
-			for(int j=1;j<13;j++) {
-				String month = String.format("%02d", j);
-				countMemberByMonth.add(j-1, adminService.getCountJoinMemberByDate(joinYears.get(i)+'/'+month+'%'));
-			}
-			memberJoinInfo.put(joinYears.get(i), countMemberByMonth);
-		}
-		model.addAttribute("memberJoinInfo",memberJoinInfo);
+		model.addAttribute("years",loginYears);
 		model.addAttribute("totalMemberNumber", member.size());		// 총 회원수.
 		model.addAttribute("memberWithoutOut", adminService.getMemberWithoutOut());
 		model.addAttribute("tagInformation",adminService.getBestTag());
@@ -112,12 +78,84 @@ public class AdminController {
 		return "admin/stat";
 	}
 	
+	
+	@RequestMapping(value="genearteStat", method=RequestMethod.GET)
+	public String generateStat(@Param("years") String years,Model model) {
+		List<MemInfo> member = adminService.getAllMember();
+		List<String> loginYears = adminService.getMemberLoginYear();
+		
+		String[] year = years.split("\\*");
+		List<String> selectedYear = new ArrayList<String>();
+		for(int i = 0; i< year.length; i++) {				// 테그를 List로 옮겨준다. 
+			if(!year[i].isEmpty())						// 빈 테그가 있다면 스킵해준다.
+				selectedYear.add(year[i]);
+		}
+		LinkedHashMap<String, List<Integer>> memberLoginInfo = new LinkedHashMap<String, List<Integer>>();		// Last 로그인 날짜 정보 가져오기.
+		LinkedHashMap<String, List<Integer>> memberOutInfo = new LinkedHashMap<String, List<Integer>>();		// 연도별로 탈퇴한 회원수 조회.
+		LinkedHashMap<String, List<Integer>> memberJoinInfo = new LinkedHashMap<String, List<Integer>>();		// 연도별 가입자 수.
+		
+		for(int i=0;i<selectedYear.size();i++) {
+			List<Integer> countMemberLoginByMonth = new ArrayList<Integer>();
+			List<Integer> countMemberOutByMonth = new ArrayList<Integer>();
+			List<Integer> countMemberJoinByMonth = new ArrayList<Integer>();
+			for(int j=1;j<13;j++) {
+				String month = String.format("%02d", j);
+				countMemberLoginByMonth.add(j-1, adminService.getCountLoginMemberByDate(selectedYear.get(i)+'/'+month+'%'));
+				countMemberOutByMonth.add(j-1, adminService.getCountOutMemberByDate(selectedYear.get(i)+'/'+month+'%'));
+				countMemberJoinByMonth.add(j-1, adminService.getCountJoinMemberByDate(selectedYear.get(i)+'/'+month+'%'));
+			}
+			System.out.println(countMemberLoginByMonth);
+			memberLoginInfo.put(selectedYear.get(i), countMemberLoginByMonth);
+			memberOutInfo.put(selectedYear.get(i), countMemberOutByMonth);
+			memberJoinInfo.put(selectedYear.get(i), countMemberJoinByMonth);
+		}
+		model.addAttribute("memberLoginInfo",memberLoginInfo);
+		model.addAttribute("memberOutInfo",memberOutInfo);
+		model.addAttribute("memberJoinInfo",memberJoinInfo);
+		
+		model.addAttribute("years",loginYears);
+		model.addAttribute("totalMemberNumber", member.size());		// 총 회원수.
+		model.addAttribute("memberWithoutOut", adminService.getMemberWithoutOut());
+		model.addAttribute("tagInformation",adminService.getBestTag());
+		return "admin/stat";
+	}
+	
 	@RequestMapping(value="generatePDF")
-	public String generatePDF(HttpServletResponse response) throws Exception {
+	public String generatePDF(@Param("years") String years, HttpServletResponse response) throws Exception {
+		int totalMember = adminService.getAllMember().size();
+		List<String> loginYears = adminService.getMemberLoginYear();
+		
+		String[] year = years.split("\\*");
+		List<String> selectedYear = new ArrayList<String>();
+		for(int i = 0; i< year.length; i++) {				// 테그를 List로 옮겨준다. 
+			if(!year[i].isEmpty())						// 빈 테그가 있다면 스킵해준다.
+				selectedYear.add(year[i]);
+		}
+		LinkedHashMap<String, List<Integer>> memberLoginInfo = new LinkedHashMap<String, List<Integer>>();		// Last 로그인 날짜 정보 가져오기.
+		LinkedHashMap<String, List<Integer>> memberOutInfo = new LinkedHashMap<String, List<Integer>>();		// 연도별로 탈퇴한 회원수 조회.
+		LinkedHashMap<String, List<Integer>> memberJoinInfo = new LinkedHashMap<String, List<Integer>>();		// 연도별 가입자 수.
+		
+		for(int i=0;i<selectedYear.size();i++) {
+			List<Integer> countMemberLoginByMonth = new ArrayList<Integer>();
+			List<Integer> countMemberOutByMonth = new ArrayList<Integer>();
+			List<Integer> countMemberJoinByMonth = new ArrayList<Integer>();
+			for(int j=1;j<13;j++) {
+				String month = String.format("%02d", j);
+				countMemberLoginByMonth.add(j-1, adminService.getCountLoginMemberByDate(selectedYear.get(i)+'/'+month+'%'));
+				countMemberOutByMonth.add(j-1, adminService.getCountOutMemberByDate(selectedYear.get(i)+'/'+month+'%'));
+				countMemberJoinByMonth.add(j-1, adminService.getCountJoinMemberByDate(selectedYear.get(i)+'/'+month+'%'));
+			}
+			System.out.println(countMemberLoginByMonth);
+			memberLoginInfo.put(selectedYear.get(i), countMemberLoginByMonth);
+			memberOutInfo.put(selectedYear.get(i), countMemberOutByMonth);
+			memberJoinInfo.put(selectedYear.get(i), countMemberJoinByMonth);
+		}
+		
+		
+		
 		response.setContentType("application/pdf");
-		String fileName = URLEncoder.encode("샘플PDF", "UTF-8");
+		String fileName = URLEncoder.encode("REPORT", "UTF-8");
 		response.setHeader("Content-Disposition", "inline; filename=" + fileName + ".pdf");
-
 
 
 		PDDocument doc = new PDDocument();
@@ -125,19 +163,37 @@ public class AdminController {
 		PDPageContentStream newContent;
 		
 		newContent = new PDPageContentStream(doc, newPage);
-		newContent.beginText();
-		newContent.setFont(PDType1Font.HELVETICA, 10);
-		newContent.newLineAtOffset(100,700);
-		newContent.showText("aaaa");
-		newContent.endText();
+		
+		
+		
+		String report = "";
+		for(int i=0; i<selectedYear.size();i++) {
+			report = selectedYear.get(i);
+			newContent.beginText();
+			newContent.setFont(PDType1Font.HELVETICA, 10);
+			newContent.newLineAtOffset(100 ,700 - i*20);
+			for(int j=0;j<12;j++) {
+				
+				List<Integer> reportMonth = memberLoginInfo.get(selectedYear.get(i));
+				
+				report = report + String.valueOf(reportMonth.get(j));
+				
+			}
+			newContent.showText(report);
+			newContent.endText();
+			
+		}
+		
 		newContent.close();
 		doc.addPage(newPage);
-		doc.save("/Users/jin/Desktop/test.pdf");
+		
+		
+		doc.save("/Users/jin/Desktop/REPORT.pdf");
 		doc.close();
 		return "admin/stat";
 	}
 	
-	
+	// admin page open -------------------------------------------------------------------
 	@RequestMapping(value="adminpage")
 	public String adminpage(Model model, HttpSession session) {
 		MemInfo member = (MemInfo) session.getAttribute("member");

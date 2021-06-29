@@ -46,7 +46,7 @@ select{
 }
 
 
-#linkFile, #posterFile, #teaserLinkFile, #subEngFile, #subKorFile, #subMixFile, #phoneCheck, #numberCheck, #finalBtn, #deleteBtn { /*파일 업로드 버튼들 */
+#modify1, #linkFile, #posterFile, #teaserLinkFile, #subEngFile, #subKorFile, #subMixFile, #phoneCheck, #numberCheck, #finalBtn, #deleteBtn { /*파일 업로드 버튼들 */
 	text-indent:0px;
 	line-height:12px;
 	-webkit-border-radius: 4;
@@ -68,7 +68,10 @@ select{
 	border-width:0px;
 	border-style:solid;
 }
-
+#modify1:hover {
+	background: #0099ff;
+  	text-decoration: none;	
+}
 #linkFile:hover {
 	background: #0099ff;
   	text-decoration: none;	

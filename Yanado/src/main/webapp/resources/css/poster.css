@@ -25,7 +25,9 @@
     margin: auto;
     scroll-behavior: smooth;
 }
-
+.resultPosterArea{
+	margin: auto;
+}
 .recoArea{
     overflow-y: scroll;
     width: 95%;

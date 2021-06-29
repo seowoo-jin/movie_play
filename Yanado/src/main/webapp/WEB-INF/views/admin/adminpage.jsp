@@ -146,8 +146,7 @@
 					}
 				}
 			};
-			xhttp.open("GET", "${pageContext.request.contextPath}/admin/"
-					+ event, true);
+			xhttp.open("GET", "${pageContext.request.contextPath}/admin/" + event, true);
 			xhttp.send();
 		}
 
@@ -164,9 +163,7 @@
 			} else {
 				var head = document.getElementsByTagName('head')[0];
 				var scriptElement = document.createElement('script');
-				scriptElement.setAttribute('src',
-						'${pageContext.request.contextPath}/resources/js/'
-								+ filename + '.js');
+				scriptElement.setAttribute('src','${pageContext.request.contextPath}/resources/js/' + filename + '.js');
 				scriptElement.setAttribute('defer', '');
 				scriptElement.innerText = scripts;
 				head.appendChild(scriptElement);
@@ -179,10 +176,13 @@
 		function FilePath(event) {
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
-				document.getElementById(event).value = this.responseText;
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					if (xhttp.responseText) {
+						document.getElementById(event).value = this.responseText;
+					}
+				}
 			};
-			xhttp.open("GET",
-					"${pageContext.request.contextPath}/admin/filePath", true);
+			xhttp.open("GET", "${pageContext.request.contextPath}/admin/filePath", true);
 			xhttp.send();
 
 		}
@@ -225,11 +225,52 @@
 				panel.style.display = "block";
 			}
 		}
-
+		// 답글 달기.
 		function reply(qnaSeq) {
 			var reply = document.getElementById("replyString_" + qnaSeq).value;
 			console.log(reply);
 			loadDoc("reply?qnaSeq=" + qnaSeq + "&reply=" + reply); //
+		}
+		
+		function sendYear(){
+			var checkValue = document.getElementsByName("selectYear");
+			var years = '';
+			for(var i=0; i<checkValue.length;i++){
+				if(checkValue[i].checked){
+					years = years + '*' + checkValue[i].value;
+				}
+			}
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					if (xhttp.responseText) {
+						console.log("success");
+						document.getElementById("article").innerHTML = this.responseText;
+					}
+				}
+			};
+			xhttp.open("GET", "${pageContext.request.contextPath}/admin/genearteStat?years="+years, true);
+			xhttp.send();
+		}
+		
+		function reportGenerate(){
+			var checkValue = document.getElementsByName("selectYear");
+			var years = '';
+			for(var i=0; i<checkValue.length;i++){
+				if(checkValue[i].checked){
+					years = years + '*' + checkValue[i].value;
+				}
+			}
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+					if (xhttp.responseText) {
+						console.log("success");
+					}
+				}
+			};
+			xhttp.open("GET", "${pageContext.request.contextPath}/admin/generatePDF?years="+years, true);
+			xhttp.send();
 		}
 	</script>
 </body>
