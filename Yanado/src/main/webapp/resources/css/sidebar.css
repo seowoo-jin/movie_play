@@ -12,8 +12,9 @@
 	position: relative;
 	left: 30px;
 	display: block;
-	width: 85%;
+	width: 88%; 
 	overflow: scroll;
+	height: 88%;
 }
 
 .fa-2x {
@@ -35,9 +36,9 @@
 	background: #171717;
 	border-right: 1px solid rgb(0, 0, 0);
 	position: relative;
-	top: 0; 
+	top: 0;
 	width: 170px;
-	height: 100vh;
+	height: 80vh;
 	overflow: visible;
 	-webkit-transition: width .05s linear;
 	transition: width .05s linear;
@@ -45,8 +46,6 @@
 	z-index: 1000;
 	padding-top: 10;
 }
-
-
 
 .main-menu>ul {
 	margin: 7px 0;
