@@ -248,21 +248,23 @@ public class MainController {
 	public String kakaoJoin(MemInfo member , HttpSession session) {
 		System.out.println("kakao login info :"+ member);
 		String id = member.getId();
-		//String payment = member.getIsPay();
-		//System.out.println("kakao login information payment check result : "+ payment);
+		MemInfo result = memberService.member_kakao(id);
 		
 		//해당 정보로 로그인한 기록이 있을 경우
-		if (memberService.member_kakao(id) != null) {
+		if (result != null) {
+			MemInfo kakao_member  = memberService.login(result.getId(), result.getPw());
+			session.setAttribute("member",  kakao_member);
+			memberService.updateLoginDate(kakao_member.getId());
+			return kakao_member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
 		
-			return "main";
-		//해당 정보로 로그인한 기록은 있는데, 결제 정보가 없을 경우
-	//	}  else{
-			// if (payment.equals("N")) {
-				// return "main/payment";
-		// 해당 정보로 로그인한 기록 없
+		//해당 정보로 로그인한 기록이 없을 경우
 			 } else {
 					memberService.kakao_join(member);
-		return "main";
+					MemInfo kakao = memberService.member_kakao(member.getId());
+					MemInfo kakao_member  = memberService.login(kakao.getId(), kakao.getPw());
+					session.setAttribute("member",  kakao_member);
+					memberService.updateLoginDate(kakao_member.getId());
+					return kakao_member.getIsPay().equals("Y")?"redirect:/":"redirect:pay";
 	}	
 	}
 	
@@ -272,9 +274,7 @@ public class MainController {
 	public String kakaologout(HttpSession session) {
 		memberService.kakaoLogout((String)session.getAttribute("access_Token"));
 	    session.removeAttribute("access_Token");
-	    session.removeAttribute("userId");
-	    session.removeAttribute("user");
-	    session.removeAttribute("member_All_info");
+	    session.removeAttribute("member");
 	    return "main/main";
 	}
 	

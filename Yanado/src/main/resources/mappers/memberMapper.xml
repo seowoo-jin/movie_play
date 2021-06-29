@@ -8,6 +8,15 @@ PUBLIC "-//mybatis.org//DTDMapper3.0//EN"
 	<select id="login"	parameterType="map"  resultType="com.bit.yanado.model.dto.MemInfo"	>
 		select * from MEMINFO where id=#{id} and pw=#{pw}
 	</select>
+
+	<select id="member_kakao"	parameterType="map"  resultType="com.bit.yanado.model.dto.MemInfo"	>
+		select * from MEMINFO where id=#{id}
+	</select>
+
+<insert id="kakao_join"	parameterType="com.bit.yanado.model.dto.MemInfo"	>
+		INSERT INTO MEMINFO(id, pw, name,tel, email, joindate, lastlogindate,phAuthNum) 
+		VALUES(#{id},#{pw},#{name},'01000001111','tptk@112',SYSDATE,SYSDATE,1234)
+	</insert>
 	
 	<insert id="join"	parameterType="com.bit.yanado.model.dto.MemInfo"	>
 		INSERT INTO MEMINFO(id, pw, name, tel, email, joindate, lastlogindate,phAuthNum) 
