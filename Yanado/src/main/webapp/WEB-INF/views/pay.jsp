@@ -17,7 +17,7 @@
 <body style="background-color: #2f2e2f;">
 
 
-	<div id="header" style="border: 1px solid">
+	<div id="header"> <!-- style="border: 1px solid -->
 		<jsp:include page="header.jsp" flush="false">
 			<jsp:param name="param1" value="" />
 		</jsp:include>
@@ -25,9 +25,9 @@
 
 <!-- 멤버십 결제 선택 시작-->
 
-<p>30일간 무료 시청이 가능합니다!</p>
+<p>YANADO는 전면 회원제로 운영합니다!</p>
 <h1>멤버십 선택</h1>
-<h2>30일 무료 시청 이후 선택한 멤버십으로 서비스를 누릴 수 있습니다!&hellip;</h2>
+<h2>선택한 멤버십으로 서비스를 누릴 수 있습니다!&hellip;</h2>
 <section>
 <div>
   <input type="radio" id="control_01" name="select" value="100">
