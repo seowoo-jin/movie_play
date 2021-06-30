@@ -3,16 +3,16 @@
 .eachBookMarks{
 	white-space: pre; 
 	float: left; 
-	text-align: left; 
 	width: 400px; 
 	height: 200px; 
 	position: relative;
 	margin: 10px;
 	overflow-y: scroll;
-	align-items: center;
+	align-content: center;
 	background-color: #494949;
 	border-radius: 40px ;
 	box-shadow: 2px 2px 2px 1px #5e5e5e;
+	text-align: center;
 }
 
 #bookMarksArea{
@@ -21,15 +21,17 @@
 }
 
 .bookmark{
-	margin: 0;
+	text-align: center;
+	margin: auto;
 	color: #dbdbdb;
 	white-space: pre-line;
-	align-content: center;
 }
 .bookmarkInfo{
-	align-items: center;
+	border-left: 10px;
+	margin: auto;
+	left: 50%;
 }
 
-eachBookMarks:hover {
-	box-shadow: 5px 5px 5px 4px #b0b0b0;
+.eachBookMarks:hover {
+	box-shadow: 5px 5px 5px 4px #2f2e30;
 }

@@ -18,7 +18,7 @@
 					<img src="${posters.poster }" class="posterImg" id="posterClk">
 				</a>
 				<span class="recoInfo" onclick="location.href='${pageContext.request.contextPath}/video/play?trackId=${allRecord[status.index].uniqueNo }'">
-						<span class="infoText">제목 : ${videoInfo[status.index].title }
+						<span class="infoText">${videoInfo[status.index].title }
 							<c:if test="${videoInfo[status.index].season  ne 0}" >
 								<p class="infoText">season : ${videoInfo[status.index].season }</p>
 								<p class="infoText">episode : ${videoInfo[status.index].episode }</p>

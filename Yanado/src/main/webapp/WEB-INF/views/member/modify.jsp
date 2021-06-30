@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>
-	내 정보 수정
+	Edit Account Information
 	
 </h1>
 	<form action="edit" method="post">

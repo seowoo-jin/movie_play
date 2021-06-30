@@ -53,18 +53,6 @@ var grid = new tui.Grid({
 		header : 'Is Pay',
 		name : 'isPay',
 		sortable: true
-	},{
-		header : 'Last Login Date',
-		name : 'lastLoginDate',
-		
-		format: 'yyyy-MM-dd',
-		component: {
-	      options: {
-	        format: 'yyyy-MM-dd'
-	      }
-	    },
-	    
-		sortable: true
 	}],
 	
 		 rowHeaders: ['rowNum','checkbox'],

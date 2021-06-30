@@ -15,12 +15,12 @@
 	<c:forEach items="${allBookmarks }" var="allBookmarks">
 		<div class="eachBookMarks">
 			<a class="bookmark" href="${pageContext.request.contextPath}/video/play?trackId=${allBookmarks.uniqueNo }&bookmarkTime=${allBookmarks.subTimestamp}">
-				<span class="bookmarkInfo">${allBookmarks.title}</span>
+				${allBookmarks.title}
 				<c:if test="${allBookmarks.season ne 00 }">
-				<span class="bookmarkInfo">시즌 : ${allBookmarks.season}</span>
-				<span class="bookmarkInfo">에피소드 : ${allBookmarks.episode}</span>
+				시즌 : ${allBookmarks.season}
+				에피소드 : ${allBookmarks.episode}
 				</c:if>
-				<span class="bookmarkInfo">${allBookmarks.subtitle}</span>
+				${allBookmarks.subtitle}
 			</a>
 		</div>
 	</c:forEach>

@@ -97,7 +97,7 @@
 		</c:if>
 	</div>
 	<c:if test="${isLogin eq 'N' }">
-		<img src="${pageContext.request.contextPath}/resources/image/zzz.jpeg" style="opacity:0.4;">
+		<img src="${pageContext.request.contextPath}/resources/image/zzz.jpeg" style="opacity:0.4; width: 100%; height: 100%;">
 	</c:if> 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/mediaSelection.js" defer="defer"></script>
 </body>

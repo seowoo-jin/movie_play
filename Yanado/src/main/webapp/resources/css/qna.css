@@ -81,7 +81,7 @@ hr {
 }
 
 .panel {  /* qna 내용 및 답변 부분  */
-	width:665px;   /* 게시글, 답변 부분이 조금 삐뚤게 크게 나오면 width를 조절하시면 됩니다~! */
+	width:750px;   /* 게시글, 답변 부분이 조금 삐뚤게 크게 나오면 width를 조절하시면 됩니다~! */
 	padding-left: 80px;
 	background-color: #262626; 
 	font-size: 15px;

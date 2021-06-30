@@ -177,9 +177,7 @@
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
-					if (xhttp.responseText) {
 						document.getElementById(event).value = this.responseText;
-					}
 				}
 			};
 			xhttp.open("GET", "${pageContext.request.contextPath}/admin/filePath", true);
