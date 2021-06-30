@@ -369,7 +369,7 @@ public class MainController {
 				for(int i=0;i<posters.size();i++) {
 					tempSeason = posters.get(i).getTitleSeq()+String.format("%02d", posters.get(i).getSeason());
 					videoSeason.add(tempSeason); 
-//					videoInfos.add(videoService.getVideoByTitleSeason(tempSeason));
+					videoInfos.add(videoService.getVideoByTitleSeason(tempSeason));
 				}
 				model.addAttribute("vidSeason",videoSeason);
 				model.addAttribute("posters", posters);
