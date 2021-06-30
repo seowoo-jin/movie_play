@@ -112,7 +112,7 @@
 				console.log(rsp);
 				if (rsp.success) {
 					var msg = "" + rsp.paid_amount + "won, Success payment!" ;
-					window.location.href = "http://localhost:8085/yanado/successPay";
+					window.location.href = "${pageContext.request.contextPath}/successPay";
 				} else {
 					var msg = 'fail to pay.';
 					msg += 'error : ' + rsp.error_msg;

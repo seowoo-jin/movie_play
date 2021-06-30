@@ -246,6 +246,7 @@
 					if (xhttp.responseText) {
 						console.log("success");
 						document.getElementById("article").innerHTML = this.responseText;
+						document.getElementById("resultTables").style.display= 'block';
 					}
 				}
 			};
@@ -272,6 +273,10 @@
 			xhttp.open("GET", "${pageContext.request.contextPath}/admin/generatePDF?years="+years, true);
 			xhttp.send();
 		}
+		
+		
+		
+
 	</script>
 </body>
 </html>
