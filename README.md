@@ -14,7 +14,8 @@
 
 ## DB ERD설계 및 생성(Oracle)
 ![YANADO_ERD](https://user-images.githubusercontent.com/84821387/125220213-48283880-e301-11eb-865f-859157d8c87a.png)
-[webservice_20210703_41_51.txt](https://github.com/seowoo-jin/movie_play/files/6798683/webservice_20210703_41_51.txt)
+[ERD_SQL_QUERY.txt](https://github.com/seowoo-jin/movie_play/files/6798688/ERD_SQL_QUERY.txt)
+
 
 
 ## 구현 화면
