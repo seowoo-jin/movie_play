@@ -33,6 +33,11 @@
 ![동영상 재생_gif](https://user-images.githubusercontent.com/84821387/125233982-af061b80-e31a-11eb-9391-2982fb5f1e21.gif)
 ***
 ### 4. 관리자 페이지
+![관리자 페이지1](https://user-images.githubusercontent.com/84821387/125234425-ac57f600-e31b-11eb-8a73-b08e62374fea.jpg)
+![관리자 페이지2](https://user-images.githubusercontent.com/84821387/125234428-ae21b980-e31b-11eb-9ca0-2a233a350d4a.jpg)
+![관리자 페이지3](https://user-images.githubusercontent.com/84821387/125234431-af52e680-e31b-11eb-82c0-c494b132e9ef.jpg)
+![관리자 페이지4](https://user-images.githubusercontent.com/84821387/125234434-afeb7d00-e31b-11eb-857c-052131d68cd3.jpg)
+![관리자 페이지5](https://user-images.githubusercontent.com/84821387/125234435-b0841380-e31b-11eb-9173-be3ad776d8fc.jpg)
 ***
 ### 5. 유저 페이지
 ***
