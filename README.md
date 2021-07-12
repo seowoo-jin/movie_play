@@ -21,6 +21,8 @@
 ### 1. 로그인
 ***
 ### 2. 메인화면
+![메인화면_gif](https://user-images.githubusercontent.com/84821387/125229314-7f064a80-e311-11eb-9093-b22dcaed2456.gif)
+
 ***
 ### 3. 동영상 재새
 ***
