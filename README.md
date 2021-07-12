@@ -18,7 +18,8 @@
 
 ## 구현 화면
 
-### 1. 로그인
+### 1. 로그인 및 회원가입
+![회원가입_gif](https://user-images.githubusercontent.com/84821387/125231754-4fa60c80-e316-11eb-86d2-396cde8c8556.gif)
 ***
 ### 2. 메인화면
 ![메인화면_gif](https://user-images.githubusercontent.com/84821387/125229314-7f064a80-e311-11eb-9093-b22dcaed2456.gif)
