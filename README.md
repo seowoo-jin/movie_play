@@ -12,7 +12,7 @@
 - javascript
 
 ## DB ERD설계
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/51a4f59f-dfd3-42b8-b272-8ac1a21a691d/YANADO.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/51a4f59f-dfd3-42b8-b272-8ac1a21a691d/YANADO.png)
+![YANADO_ERD](https://user-images.githubusercontent.com/84821387/125220213-48283880-e301-11eb-865f-859157d8c87a.png)
 ## DB 생성(Oracle)
 
 
