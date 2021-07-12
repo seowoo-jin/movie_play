@@ -11,10 +11,8 @@
 - apache tomcat
 - javascript
 
-## DB ERD설계
+## DB ERD설계 및 생성(Oracle)
 ![YANADO_ERD](https://user-images.githubusercontent.com/84821387/125220213-48283880-e301-11eb-865f-859157d8c87a.png)
-## DB 생성(Oracle)
-
 
 
 ## 구현 화면
