@@ -3,7 +3,13 @@
 
 
 ## 개발환경
-
+- JAVA
+- Spring
+- JSP
+- AJAX
+- mybatis
+- apache tomcat
+- javascript
 
 ## DB ERD설계
 
