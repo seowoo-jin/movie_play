@@ -29,7 +29,8 @@
 ![메인화면_gif](https://user-images.githubusercontent.com/84821387/125229314-7f064a80-e311-11eb-9093-b22dcaed2456.gif)
 
 ***
-### 3. 동영상 재새
+### 3. 동영상 재생
+![동영상 재생_gif](https://user-images.githubusercontent.com/84821387/125233982-af061b80-e31a-11eb-9391-2982fb5f1e21.gif)
 ***
 ### 4. 관리자 페이지
 ***
